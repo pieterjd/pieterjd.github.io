@@ -27,8 +27,9 @@ github_username:  pieterjd
 # Build settings
 markdown: kramdown
 #theme: minima
-remote_theme: broccolini/swiss
-theme_color: yellow
+#remote_theme: broccolini/swiss
+#theme_color: yellow
+remote_theme: mmistakes/minimal-mistakes@4.14.2
 plugins:
   - jekyll-feed
 
