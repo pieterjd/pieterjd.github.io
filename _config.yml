@@ -105,8 +105,8 @@ analytics:
 # Site Author
 author:
   name             : "Pieter-Jan Drouillon"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "After spending more than a decade at the tutorial services of the engineering faculty of KU Leuven and a short-lived career in supplychain, I returned to my first love - software development."
+  avatar           : "/assets/images/pieterjd-avatar.png"
+  bio              : "Returning to my first love - software development."
   location         : "Leuven"
   email            :
   links:
@@ -115,7 +115,7 @@ author:
       # url: mailto:your.name@email.com
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      # url: "https://your-website.com"
+      url: "https://www.pieterjd.be"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       # url: "https://twitter.com/"
@@ -124,7 +124,7 @@ author:
       # url: "https://facebook.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url: "https://github.com/"
+      url: "https://github.com/pieterjd"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
@@ -140,7 +140,7 @@ footer:
       # url:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url:
+      url: "https://www.github.com/pieterjd"
     - label: "GitLab"
       icon: "fab fa-fw fa-gitlab"
       # url:
