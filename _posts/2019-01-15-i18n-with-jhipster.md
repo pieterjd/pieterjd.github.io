@@ -2,7 +2,9 @@
 layout: single
 title:  "I18N with Jhipster"
 date:   2019-01-15 19:24:21 +0100
-excerpt: "JHipster supports internationalization, but how does it work exactly?"
+excerpt: "JHipster supports internationalization, but how does it work exactly? And what about my custom messages?"
+categories: [tech]
+tags: [jhipster, I18N]
 ---
 I myself am a huge fan of generators - it saves a lot of time. That's why I love JHipster. JHipster not only uses my favourite frameworks such as Spring Boot and Angular, but it provides your with useful features out-of-the-box.
 
@@ -55,4 +57,4 @@ new MergeJsonWebpackPlugin({
 
 It contains a ``MergeJsonWebpackPlugin``, you supply it with a pattern of the files to merge and an output file. And this particular pattern is in case of Dutch ``./src/main/webapp/i18n/nl/*.json``. So it includes **all** json files in the directory. And that's why your new, custom translation is automatically available after a rebuild.
 
-Now go [translate](http://translate.google.com).
+Now go [translate](http://translate.google.com) 🙂.
