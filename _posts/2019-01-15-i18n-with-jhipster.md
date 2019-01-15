@@ -6,7 +6,7 @@ excerpt: "JHipster supports internationalization, but how does it work exactly? 
 categories: [tech]
 tags: [jhipster, I18N]
 ---
-I myself am a huge fan of generators - it saves a lot of time. That's why I love JHipster. JHipster not only uses my favourite frameworks such as Spring Boot and Angular, but it provides your with useful features out-of-the-box.
+I myself am a huge fan of generators - it saves a lot of time. That's why I love [JHipster](http://http://jhipster.tech). JHipster not only uses my favourite frameworks such as Spring Boot and Angular, but it provides you with useful features out-of-the-box.
 
 One of the questions of the wizard guiding you through the generation of your application, is which languages you want to support. For every selected language, all possible labels are generated.
 
