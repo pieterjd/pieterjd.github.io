@@ -1,10 +1,10 @@
 ---
 layout: single
-title:  "I18N with Jhipster"
+title:  "I18N with JHipster"
 date:   2019-01-15 19:24:21 +0100
 excerpt: "JHipster supports internationalization, but how does it work exactly? And what about my custom messages?"
 categories: [tech]
-tags: [jhipster, I18N]
+tags: [JHipster, I18N]
 ---
 I myself am a huge fan of generators - it saves a lot of time. That's why I love [JHipster](http://http://jhipster.tech). JHipster not only uses my favourite frameworks such as Spring Boot and Angular, but it provides you with useful features out-of-the-box.
 
