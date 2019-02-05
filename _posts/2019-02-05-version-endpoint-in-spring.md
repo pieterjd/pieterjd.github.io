@@ -62,17 +62,13 @@ public class BuildInfoController {
     private BuildProperties buildProperties;
 
     @GetMapping
-    public Properties getInfo(@RequestParam(required = false) Optional<Boolean> full) throws IOException {
-        Properties props = new Properties();
-        if(full.orElse(false)){
-            props.load(getClass().getResourceAsStream("/META-INF/build-info.properties"));
-        }
-        else{
-            buildProperties.forEach(
-                    entry -> props.put(entry.getKey(),entry.getValue())
-            );
-        }
-        return props;
+    public Properties getInfo() {
+        Properties prop = new Properties();
+        //need to explicitly loop over all entries, just returning the BuildProperties object only contains the specific fields (artificact, group, name, time and version)
+        buildProperties.forEach(entry -> prop.put(entry.getKey(),entry.getValue()));
+        //proper date formatting for time
+        prop.put("time", Instant.ofEpochMilli(Long.parseLong(prop.getProperty("time"))).toString());
+        return prop;
     }
 }
 ```
@@ -82,14 +78,6 @@ curl examples:
 c:\_dev\git>curl localhost:8080/version
 
 ```json
-{"name":"ta","java.version":"1.8","time":"1549363706256","application.description":"Demo project for Spring Boot","application.name":"ta","version":"0.0.1-SNAPSHOT","java.source":"
-1.8","group":"com.example.edev.ott","artifact":"ta"}
-```
-
-c:\_dev\git>curl localhost:8080/version?full=true
-
-```json
-{"build.artifact":"ta","build.name":"ta","build.version":"0.0.1-SNAPSHOT","build.time":"2019-02-05T10:48:26.256Z","build.group":"com.example.edev.ott","build.application.descriptio
-n":"Demo project for Spring Boot","build.java.version":"1.8","build.application.name":"ta","build.java.source":"1.8"}
+{"name":"ta","java.version":"1.8","time":"2019-02-05T13:13:48.282Z","application.description":"Demo project for Spring Boot","application.name":"ta","version":"0.0.1-SNAPSHOT","java.source":"1.8","group":"com.example.edev.ott","artifact":"ta"}
 ```
 
