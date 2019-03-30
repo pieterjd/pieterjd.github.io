@@ -9,7 +9,7 @@ published: true
 ---
 Streams are quite fun - in short: it's a different approach to writing loops. Suppose you have a List of Strings and you want to filter out the String starting with an 's' and put them in a new List.
 
-```Java
+```java
 List<String> sStrings = new ArrayList<>();
 for(int i = 0; i < strings.size(); i++){
     if(strings.get(i).startsWith('s')){
