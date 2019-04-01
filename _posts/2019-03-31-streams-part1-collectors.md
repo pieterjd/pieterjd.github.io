@@ -1,8 +1,8 @@
 ---
 layout: single
-title:  "Stream examples Part 1"
+title:  "Stream examples Part 1 - Collectors"
 date:   2019-03-30 12:34:19 +0100
-excerpt: "Streams are new since Java 8, but still a bit unknown. This is a handy overview with plenty of examples"
+excerpt: "Streams are new since Java 8, but still a bit unknown. This is a handy overview with plenty of examples."
 categories: [tech]
 tags: [Java, Streams]
 published: true
