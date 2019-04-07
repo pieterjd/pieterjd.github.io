@@ -30,7 +30,7 @@ Inside the filter method, you have a function - this has the same meaning as in 
 
 This filter generates a stream on its own, in this case a stream of Strings all starting with an 's'. You can collect the results, in this case a List.
 
-Besides filter you also have map, suppose you want the length of all Strings starting with an 's'. You can just add a map after the filter statement. map also takes a function, in this case a String as input, and it outputs a number, the length of the strings.
+Besides filter you also have map, suppose you want the length of all Strings starting with an 's'. You can just add a map after the filter statement. map also takes a function, in this case a String as input, and it outputs a number, the length of the strings. You can string filter and map calls as much as you want. There is a second map, turning an in into an Integer. It is not mandatory as such with [autoboxing](https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html) available, but it shows you can have as much maps as you want.
 
 ```java
 List<Integer> stringLengths = strings.stream()
