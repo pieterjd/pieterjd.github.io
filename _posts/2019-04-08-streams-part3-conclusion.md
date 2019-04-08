@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Stream examples Part 3 - conclusion"
+title:  "Stream examples Part 3 - Conclusion"
 date:   2019-04-08 20:14:53 +0100
 excerpt: "Streams are new since Java 8, but still a bit unknown. This is a handy overview with plenty of examples"
 categories: [tech]
