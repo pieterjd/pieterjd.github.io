@@ -2,7 +2,7 @@
 layout: single
 title:  "Stream examples Part 2 - Reducers"
 date:   2019-04-01 17:30:53 +0100
-excerpt: "Streams are new since Java 8, but still a bit unknown. This is a handy overview with plenty of examples"
+excerpt: "Next up: reducers! It seems hard in the beginning, but it does make sense, I promise :)"
 categories: [tech]
 tags: [Java, Streams]
 ---
