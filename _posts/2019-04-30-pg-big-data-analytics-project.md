@@ -1,12 +1,12 @@
 ---
 layout: single
-title:  "Postgraduate Big Data & Analytics"
+title:  "Postgraduate Studies in Big Data & Analytics in Business and Management"
 date:   2019-04-30 18:34:12 +0100
 excerpt: "Today I presented my project on car crashes, the conclusion of quite the journey"
 categories: [tech]
 tags: [Python, Big Data]
 ---
-A year ago, In enrolled in the "Postgraduate Studies in Big Data & Analytics in Business and Management" at KU Leuven. And today, the project I've been working on for the past 3 months came to a conclusion with the final presentation.
+A year ago, In enrolled in the "Postgraduate Studies in Big Data & Analytics in Business and Management" at [KU Leuven](https://feb.kuleuven.be/permanente-vorming/bigdataanalytics). And today, the project I've been working on for the past 3 months came to a conclusion with the final presentation.
 
 The dataset I've been working on was collected by The Belgian federal police  during 2014-2016 and contains over 52K car crashes. It has been enriched by Informatie Vlaanderen with additional information on weather conditions, road conditions and severity of the accident.
 
