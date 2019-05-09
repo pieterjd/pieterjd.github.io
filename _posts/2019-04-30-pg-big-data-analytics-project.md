@@ -10,7 +10,7 @@ A year ago, In enrolled in the "Postgraduate Studies in Big Data & Analytics in 
 
 The dataset I've been working on was collected by The Belgian federal police  during 2014-2016 and contains over 52K car crashes. It has been enriched by Informatie Vlaanderen with additional information on weather conditions, road conditions and severity of the accident.
 
- In this project I went through all stages of data cleaning, and I must admit: all rumours you have heart, are true. Data is perfect and complete at all, and it even makes no sense at all (Speed limit of 999 km/h, seriously?). Data cleaning does indeed take 80% of your available time.
+ In this project I went through all stages of data cleaning, and I must admit: all rumours you have heard, are true. Data is perfect and complete at all, and it even makes no sense at all (Speed limit of 999 km/h, seriously?). Data cleaning does indeed take 80% of your available time.
 
  I've used random forest (the ensemble variant of decision tree) to predict the severity of the car crash. The performance of this model was not at all accurate, because of the huge imbalance of the severity: over 95 percent of the car crashes only had "gewonden" (casualties). This is just great from a humanity point of view, not so much from a data perspective.
 
