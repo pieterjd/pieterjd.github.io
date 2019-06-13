@@ -34,7 +34,7 @@ public interface PersonRepository extends JpaRepository<Person,Long>{
 ```
 Now the method does return a boolean, but then again we now have this ugly case in the query. Is there a better way?
 
-Yes, there is - but it is very well hidden in [one appendices of the spring data docs](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repository-query-return-types). A query can in fact return a ``boolean``. As always,
+Yes, there is - but it is very well hidden in [one of the appendices of the spring data docs](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repository-query-return-types). A query can in fact return a ``boolean``. As always,
 there is a disclaimer stating 
 
 > consult the store-specific documentation for the exact list of supported return types, because some types listed here might not be supported in a particular store.
