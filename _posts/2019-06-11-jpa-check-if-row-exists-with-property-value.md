@@ -2,7 +2,7 @@
 layout: single
 title:  "How to check if a row with a specific column value exists in Spring Data"
 date:   2019-06-11 19:16:00 +0100
-excerpt: "Today I presented my project on car crashes, the conclusion of quite the journey"
+excerpt: "The big old question: looking for rows in a database where a column contains a specific value"
 categories: [tech]
 tags: [Spring Boot, Spring Data]
 published: true
