@@ -14,15 +14,15 @@ My mission was to add a product. There was a admin page where you could do this 
 
 You can do it the hard way and study and annoy your collegues with a lot of questions. Or you think for a while and you come up with a more creative solution, which was my approach.
 
-MySql offers a a feature called general log. As the name implies, it logs every single requested query. So I turned it on, added the product using the administrative interface and scraped the queries from the log. I cleaned the queries because all primary and foreign keys where hardcoded, and that's it - job well done.
+MySQL offers a a feature called general log. As the name implies, it logs every single requested query. So I turned it on, added the product using the administrative interface and scraped the queries from the log. I cleaned the queries because all primary and foreign keys where hardcoded, and that's it - job well done.
 
-For completeness, I add the configuration you need to enable general logging in MySql.
+For completeness, I add the configuration you need to enable general logging in MySQL.
 
 * Create your log file, eg `touch /tmp/mysql.log`
 * Open the configuration file, usually called `my.cnf`
-* Add the following lines to the `[MySqld]` section
+* Add the following lines to the `[mysqld]` section
   ```
   general_log = on
   general_log_file = /tmp/mysql.log
   ```
-* Restart MySql
+* Restart MySQL
