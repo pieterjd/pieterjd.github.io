@@ -3,5 +3,7 @@ main:
     url: /about
   - title: "Posts"
     url: /posts
+  - title: "Talks"
+    url: /talks
   - title: '<i class="fas fa-search"></i>'
     url: /search
