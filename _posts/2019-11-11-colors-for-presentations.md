@@ -18,10 +18,12 @@ In the end I found inspiration from the slideteam website, the ['Red and Grey' c
 * <span style='color: #E04556'>Red</span> : #E04556
 * <span style='color: #2B1515'>Darkred</span> : #2B1515
 
-These colors are then combined so there is contrast in the combination:
+These colors are then combined so there is contrast in the combination. Below you see a box with blue background and red dotted border for constrast with the used color combination:
 
-* <span style='color: #E04556; background=#EFEFEF'>Red on gray background</span>
-* <span style='color: #2B1515; background=#EFEFEF'>Darkred on gray background</span>
-* <span style='color: #7F7F7F; background=#EFEFEF'>Darkgray on gray background</span>
+<span style="background-color: blue;border-width: 5px;border-color: red;border-style: dashed;">
+  <span style='background-color: #EFEFEF;color: #7F7F7F'>Darkgray on gray background</span>
+  <span style='background-color: #EFEFEF;color: #E04556'>Red on gray background</span>
+  <span style='background-color: #EFEFEF;color: #2B1515'>Darkred on gray background</span>
+</span>
 
 It's hard to tell but the colors are a bit softer than in the first list without any background color.
