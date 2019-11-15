@@ -280,6 +280,9 @@ compress_html:
 collections:
   posts:
     output: true
+  talks:
+    output: true
+    permalink: /talks/:title/
 
 # Defaults
 defaults:
