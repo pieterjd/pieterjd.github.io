@@ -2,12 +2,13 @@
 layout: single
 title: 'Car Crash Analysis: Insights & issues'
 ---
-In this talk, I present the project I worked on during the postgraduate studies for big data. It is a journey-like presentation where I cronologically talk how I talked the issues and what new insights I acquired.
+In this talk, I present the project I worked on during the [postgraduate studies for big data]({% post_url 2019-04-30-pg-big-data-analytics-project %}). It is a journey-like presentation where I describe chronologically how I tackled the issues and what new insights I acquired.
 
 ## Data Science Leuven Meetup
 
 ### General info
 * date: 14 november 2019
+* Event information: available on [meetup](https://www.meetup.com/Data-Science-Leuven/events/264310676/)
 * format: 20 minutes presentation and 10 minutes Q & A
 * slides: [PDF](/assets/talks/carcrash-analysis/20191114-meetup-CarCrashAnalysisInsightIssues.pdf)
 
