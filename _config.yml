@@ -280,6 +280,7 @@ compress_html:
 collections:
   posts:
     output: true
+    permalink: /posts/:title/
   talks:
     output: true
     permalink: /talks/:title/
