@@ -17,3 +17,5 @@ The dataset I've been working on was collected by The Belgian federal police  du
  So to tackle this issue, I've been over- and undersampling the data. The accuracy improved a bit, but still a lot of room for improvement.
 
  After all, I enjoyed the program (even during the late evening classes) and although challenging, the project was fun to work on! The report itself is available on [github](https://github.com/pieterjd/pg-dissertation/blob/master/report/report.pdf).
+
+ I also presented my work at different occasions, please check the details [for this specific talk]({% link _talks/carcrash-analysis.md %}).
