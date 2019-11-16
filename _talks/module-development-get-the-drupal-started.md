@@ -21,5 +21,5 @@ Na een inleiding van concepten - arrays, hooks, ... - worden met demo's de tools
 ### General info
 * date: 25 & 26 May 2012
 * Event information: available on [the archived drupal Gent 2012 website](http://gent2012.drupalcamp.be/gent_2012/ghent2012.drupalcamp.be/nl.html)
-* format: 20 minutes presentation and 10 minutes Q & A
+* format: 40 minutes presentation and 10 minutes Q & A
 * slides: [PDF](/assets/talks/module-development-get-the-drupal-started/dcg2012.pdf)
