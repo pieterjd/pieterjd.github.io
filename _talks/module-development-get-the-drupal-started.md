@@ -1,5 +1,5 @@
 ---
-layout: single
+layout: talk
 title: 'Module Development - Get the drupal started'
 ---
 
