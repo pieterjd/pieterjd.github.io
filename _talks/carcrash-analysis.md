@@ -1,8 +1,11 @@
 ---
 layout: talk
 title: 'Car Crash Analysis: Insights & issues'
+toc: true
 ---
 In this talk, I present the project I worked on during the [postgraduate studies for big data]({% post_url 2019-04-30-pg-big-data-analytics-project %}). It is a journey-like presentation where I describe chronologically how I tackled the issues and what new insights I acquired.
+
+{{ toc }}
 
 ## Data Science Leuven Meetup
 
