@@ -5,8 +5,8 @@ permalink: /talks/
 ---
 Past talks will be added over time, future talks will be posted once the date has been confirmed.
 
-
-{% for talk  in site.talks %}
+{% assign ordered_talks = site.talks | sort:'last_date' | reverse  %}
+{% for talk  in ordered_talks %}
   <section id="{{ talk.title }}" class="taxonomy__section">
     <a href="{{ talk.url }}"><h2 class="archive__subtitle">{{ talk.title }}</h2></a>
     <a href="#{{page-title}}" class="back-to-top">{{ site.data.ui-text[site.locale].back_to_top | default: 'Back to Top' }} &uarr;</a>

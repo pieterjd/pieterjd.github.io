@@ -1,21 +1,22 @@
 ---
 layout: talk
 title: 'Car Crash Analysis: Insights & issues'
+last_date: 2019-11-14 20:30:00 +0100
 toc: true
 ---
 In this talk, I present the project I worked on during the [postgraduate studies for big data]({% post_url 2019-04-30-pg-big-data-analytics-project %}). It is a journey-like presentation where I describe chronologically how I tackled the issues and what new insights I acquired.
 
 {{ toc }}
 
-## Data Science Leuven Meetup
+# Data Science Leuven Meetup
 
-### General info
+## General info
 * date: 14 november 2019
 * Event information: available on [meetup](https://www.meetup.com/Data-Science-Leuven/events/264310676/)
 * format: 20 minutes presentation and 10 minutes Q & A
 * slides: [PDF](/assets/talks/carcrash-analysis/20191114-meetup-CarCrashAnalysisInsightIssues.pdf)
 
-### Mentions on social media
+## Mentions on social media
 
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Design Is Dead ... is the name of the company <a href="https://twitter.com/pjdrouillon?ref_src=twsrc%5Etfw">@pjdrouillon</a> works for. Now presenting at <a href="https://twitter.com/hashtag/dsleuven?src=hash&amp;ref_src=twsrc%5Etfw">#dsleuven</a> <a href="https://t.co/ZIYit0boRJ">pic.twitter.com/ZIYit0boRJ</a></p>&mdash; Data Science Leuven (@dsleuven) <a href="https://twitter.com/dsleuven/status/1195064066915602434?ref_src=twsrc%5Etfw">November 14, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
