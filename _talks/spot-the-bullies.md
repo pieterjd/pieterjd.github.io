@@ -7,9 +7,9 @@ Fraud detection, for instance with credit cards, is an application of statistics
 
 This talk was my 8th project in the Toastmasters competent communicator manual, get comfortable with visual aids.
 
-# Toastmasters Fonske Leuven meeting
+## Toastmasters Fonske Leuven meeting
 
-## General info
+### General info
 * date: 25 june 2015
 * Event information: available on [Easyspeak](https://tmclub.eu/view_meeting.php?t=53632) - only available to paying toastmasters members
 * format: speech between 5 and 7 minutes
