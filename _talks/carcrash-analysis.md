@@ -2,6 +2,7 @@
 layout: talk
 title: 'Car Crash Analysis: Insights & issues'
 last_date: 2019-11-14 20:30:00 +0100
+excerpt: A journey-like talk on how I tackled my graduation project.
 toc: true
 ---
 In this talk, I present the project I worked on during the [postgraduate studies for big data]({% post_url 2019-04-30-pg-big-data-analytics-project %}). It is a journey-like presentation where I describe chronologically how I tackled the issues and what new insights I acquired.
