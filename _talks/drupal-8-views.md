@@ -2,6 +2,7 @@
 layout: talk
 title: 'Views, the only thing you really need to know!'
 last_date: 2016-09-10 18:00:00 +0100
+toc: true
 ---
 {{ toc }}
 It is the number one deployed module for drupal 7 and it will be available in core for drupal 8. Off course, I'm talking about views!
