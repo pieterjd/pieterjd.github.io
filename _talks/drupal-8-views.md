@@ -3,6 +3,7 @@ layout: talk
 title: 'Views, the only thing you really need to know!'
 last_date: 2016-09-10 18:00:00 +0100
 ---
+{{ toc }}
 It is the number one deployed module for drupal 7 and it will be available in core for drupal 8. Off course, I'm talking about views!
 
 As it is a very valuable tool that makes everyone's life easier, you need to attend this session. I will walk you through views and cover following topics starting by a simple listing, over relationships, and filters - the whole shebang!
