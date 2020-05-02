@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on pieterjd.be</title>
-    <link>https://www.pieterjd.be/tags/python/</link>
+    <link>http://www.pieterjd.be/tags/python/</link>
     <description>Recent content in Python on pieterjd.be</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Tue, 30 Apr 2019 18:34:12 +0000</lastBuildDate>
     
-	<atom:link href="https://www.pieterjd.be/tags/python/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.pieterjd.be/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Postgraduate Studies in Big Data &amp; Analytics in Business and Management</title>
-      <link>https://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</link>
+      <link>http://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</link>
       <pubDate>Tue, 30 Apr 2019 18:34:12 +0000</pubDate>
       
-      <guid>https://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</guid>
+      <guid>http://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</guid>
       <description>A year ago, In enrolled in the &amp;ldquo;Postgraduate Studies in Big Data &amp;amp; Analytics in Business and Management&amp;rdquo; at KU Leuven. And today, the project I&amp;rsquo;ve been working on for the past 3 months came to a conclusion with the final presentation.
 The dataset I&amp;rsquo;ve been working on was collected by The Belgian federal police during 2014-2016 and contains over 52K car crashes. It has been enriched by Informatie Vlaanderen with additional information on weather conditions, road conditions and severity of the accident.</description>
     </item>
