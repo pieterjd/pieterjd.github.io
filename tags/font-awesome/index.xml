@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Font Awesome on pieterjd.be</title>
+    <link>https://www.pieterjd.be/tags/font-awesome/</link>
+    <description>Recent content in Font Awesome on pieterjd.be</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Mon, 21 Jan 2019 19:24:21 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.pieterjd.be/tags/font-awesome/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Font Awesome with JHipster</title>
+      <link>https://www.pieterjd.be/posts/2019-01-21-font-awesome-with-jhipster/</link>
+      <pubDate>Mon, 21 Jan 2019 19:24:21 +0000</pubDate>
+      
+      <guid>https://www.pieterjd.be/posts/2019-01-21-font-awesome-with-jhipster/</guid>
+      <description>Font Awesome offers vector icons and social logos. As it is one of the most popular icon sets, it is included with JHipster.
+Out of the box, only some icons are available for your angular front-end. And it&amp;rsquo;s a bit tricky to find out how these icons are loaded as all Angular components use the fa-icon directive, available in JHipster.
+In this particular use-case, I need to add the shopping basket icon.</description>
+    </item>
+    
+  </channel>
+</rss>

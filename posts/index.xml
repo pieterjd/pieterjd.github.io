@@ -1,0 +1,493 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Posts on pieterjd.be</title>
+		<link>https://www.pieterjd.be/posts/</link>
+		<description>Recent content in Posts on pieterjd.be</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en-us</language>
+		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+		<lastBuildDate>Fri, 01 May 2020 20:54:17 +0200</lastBuildDate>
+		<atom:link href="https://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Moving from Jekyll to Hugo</title>
+			<link>https://www.pieterjd.be/posts/moving-from-jekyll-to-hugo/</link>
+			<pubDate>Fri, 01 May 2020 20:54:17 +0200</pubDate>
+			
+			<guid>https://www.pieterjd.be/posts/moving-from-jekyll-to-hugo/</guid>
+			<description>I&amp;rsquo;ve been using Jekyll for a few years now. Main reason to use it, is its nice integration with Github Pages. However the frustrations now have outweighted the advantages.
+Not so cool What annoyed me tremendously is getting Jekyll to run. All the ruby issues were hard to solve for me.
+Next in line is how to structure the content. As long as you only want to blog, Jekyll is good enough.</description>
+			<content type="html"><![CDATA[<p>I&rsquo;ve been using Jekyll for a few years now. Main reason to use it, is its nice integration with Github Pages. However the frustrations now have outweighted the advantages.</p>
+<h2 id="not-so-cool">Not so cool</h2>
+<p>What annoyed me tremendously is getting Jekyll to run. All the ruby issues were hard to solve for me.</p>
+<p>Next in line is how to structure the content. As long as you only want to blog, Jekyll is good enough. If you need another kind of collection, then things get tedious. I took me a very long time to figure out how to get my talks organized and displayed just the way I want.</p>
+<p>Finally getting the layouts right is not that easy. It takes quite some tampering to make it right.</p>
+<h2 id="hugo-as-alternative">Hugo as alternative</h2>
+<p>I&rsquo;ve already read a lot about a Hugo. It seemed interesting, but never took the time to look more into it. Now the time has come, and so far all is good.</p>
+<p>I really like the exhaustive docs, and the very nice quickstart. Next is the built-in import from jekyll. And finally, no tampering to set up a collection of similar post (eg blogpost, talks, recipe, quote, &hellip;). The structure is completely file-based.</p>
+<h2 id="getting-my-hands-dirty">Getting my hands dirty</h2>
+<p>I basically followed the quickstart instructions.</p>
+<ol>
+<li>
+<p>Install hugo using brew</p>
+</li>
+<li>
+<p>Create the new site</p>
+</li>
+<li>
+<p>Add a theme - I chose the hermit theme as it&rsquo;s complete and fits my needs</p>
+</li>
+<li>
+<p>Import the jekyll post using the <a href="https://gohugo.io/commands/hugo_import_jekyll/#hugo-import-jekyll"><code>hugo import jekyll</code></a> command. The blog posts were wrongly copied in the <code>post</code> folder instead of the <code>posts</code> folder.</p>
+</li>
+<li>
+<p>The <code>import</code> command didn&rsquo;t import all content: my talks and pages weren&rsquo;t copied. I had to manually create the <code>talks</code> folder and the folders for the static pages such as the about page.</p>
+</li>
+<li>
+<p>On some pages I used css(<a href="https://www.pieterjd.be/posts/2019-11-11-colors-for-presentations/">colors for presentation</a> post) and javascript(linkedin badge on the <a href="/about">about</a> page). This wasn&rsquo;t rendered as both css and js in markdown is considered as a security issue. This was fixed by setting the unsafe <code>propety</code> of <code>[markup.goldmark.renderer]</code> to <code>true</code>.</p>
+</li>
+<li>
+<p>Next I wanted the same overview of my talks in descending order. I took some time to figure out, but it was easier than to get the same overview in Jekyll.</p>
+<p>In short, a theme provides a layouts. An overview of posts, talks, &hellip; is rendered using the list layout usually located at <code>themes/&lt;themename&gt;/layouts/_default</code>. You can override this by creating a <code>layout</code> folder next to your <code>content</code> folder. In my case a I create a subfolder <code>talks</code> (the content I want a custom overview for) and put my custom list template in there. The full path to the custom list template is <code>/layouts/talks/list.html</code>.</p>
+</li>
+<li>
+<p>Next I had to fix the internal links. That&rsquo;s an easy find and replace for <code>post_url</code> - the Jekyll syntax to link to other content- with <a href="https://gohugo.io/content-management/cross-references/">Hugo&rsquo;s specific link syntax</a>.</p>
+</li>
+<li>
+<p>On the talks pages there was a table of content in the sidebar. The Jekyll <code>{{toc}}</code> command is off course no longer rendered.</p>
+</li>
+<li>
+<p>Finally I had to check all static assets. Seems that they were properly imported with the <code>hugo import jekyll</code> command.</p>
+</li>
+</ol>
+<p>Only thing left to do, is how to get the generated files on github pages. To be continued.</p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>Colors for your presentations</title>
+			<link>https://www.pieterjd.be/posts/2019-11-11-colors-for-presentations/</link>
+			<pubDate>Mon, 11 Nov 2019 19:13:12 +0000</pubDate>
+			
+			<guid>https://www.pieterjd.be/posts/2019-11-11-colors-for-presentations/</guid>
+			<description>As I will be speaking at the Data Science Leuven meetup this Thursday, I&amp;rsquo;m preparing my slidedeck.
+To make it visually more attractive, I&amp;rsquo;ve been looking into color schemes. And this quote was quite interesting:
+ Limit yourself to maximum 4 different colors
+ In the end I found inspiration from the slideteam website, the &amp;lsquo;Red and Grey&amp;rsquo; color palette.
+ Gray : #EFEFEF Darkgray : #7F7F7F Red : #E04556 Darkred : #2B1515  These colors are then combined so there is contrast in the combination.</description>
+			<content type="html"><![CDATA[<p>As I will be speaking at the <a href="https://www.meetup.com/Data-Science-Leuven/events/264310676/">Data Science Leuven meetup</a> this Thursday, I&rsquo;m preparing my slidedeck.</p>
+<p>To make it visually more attractive, I&rsquo;ve been looking into color schemes. And this quote was quite interesting:</p>
+<blockquote>
+<p>Limit yourself to maximum 4 different colors</p>
+</blockquote>
+<p>In the end I found inspiration from the slideteam website, the <a href="https://www.slideteam.net/color-palette-for-presentation-red-and-grey.html">&lsquo;Red and Grey&rsquo; color palette</a>.</p>
+<ul>
+<li><span style='color: #EFEFEF'>Gray</span> : #EFEFEF</li>
+<li><span style='color: #7F7F7F'>Darkgray</span> : #7F7F7F</li>
+<li><span style='color: #E04556'>Red</span> : #E04556</li>
+<li><span style='color: #2B1515'>Darkred</span> : #2B1515</li>
+</ul>
+<p>These colors are then combined so there is contrast in the combination. Below you see a box with blue background and red dotted border for constrast with the used color combination:</p>
+<span style="background-color: blue;border-width: 5px;border-color: red;border-style: dashed;">
+  <span style='background-color: #EFEFEF;color: #7F7F7F'>Darkgray on gray background</span>
+  <span style='background-color: #EFEFEF;color: #E04556'>Red on gray background</span>
+  <span style='background-color: #EFEFEF;color: #2B1515'>Darkred on gray background</span>
+</span>
+<p>It&rsquo;s hard to tell but the colors are a bit softer than in the first list without any background color.</p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>Writing SQL for an unfamiliar PHP application</title>
+			<link>https://www.pieterjd.be/posts/2019-09-21-writing-sql-for-unfamiliar-php-application/</link>
+			<pubDate>Sat, 21 Sep 2019 10:33:12 +0000</pubDate>
+			
+			<guid>https://www.pieterjd.be/posts/2019-09-21-writing-sql-for-unfamiliar-php-application/</guid>
+			<description>As I&amp;rsquo;m currently working for a famous yellow telco with a huge legacy, I recently had to deal with a PHP application. Although there is a PHP dedicated team, we were forced asked to deal with the PHP part as well.
+I did have some past experiences with PHP (and to some extend Drupal), so I faced this old dud. Luckily I just needed to spin up a Vagrant box so that was quite easy.</description>
+			<content type="html"><![CDATA[<p>As I&rsquo;m currently working for a famous yellow telco with a huge legacy, I recently had to deal with a PHP application. Although there is a PHP dedicated team, we were <del>forced</del> asked to deal with the PHP part as well.</p>
+<p>I did have some past experiences with PHP (and to some extend Drupal), so I faced this old dud. Luckily I just needed to spin up a Vagrant box so that was quite easy.</p>
+<p>My mission was to add a product. There was a admin page where you could do this manually, but for CI/CD purposes we really needed the SQL. So how to tackle this when you application/database schema and business knowledge is limited?</p>
+<p>You can do it the hard way and study and annoy your collegues with a lot of questions. Or you think for a while and you come up with a more creative solution, which was my approach.</p>
+<p>MySQL offers a a feature called general log. As the name implies, it logs every single requested query. So I turned it on, added the product using the administrative interface and scraped the queries from the log. I cleaned the queries because all primary and foreign keys where hardcoded, and that&rsquo;s it - job well done.</p>
+<p>For completeness, I add the configuration you need to enable general logging in MySQL.</p>
+<ul>
+<li>Create your log file, eg <code>touch /tmp/mysql.log</code></li>
+<li>Open the configuration file, usually called <code>my.cnf</code></li>
+<li>Add the following lines to the <code>[mysqld]</code> section
+<pre><code>general_log = on
+general_log_file = /tmp/mysql.log
+</code></pre></li>
+<li>Restart MySQL</li>
+</ul>
+]]></content>
+		</item>
+		
+		<item>
+			<title>Custom property naming strategy with Jackson</title>
+			<link>https://www.pieterjd.be/posts/2019-08-11-property-naming-strategy-with-jackson/</link>
+			<pubDate>Sun, 11 Aug 2019 14:41:12 +0000</pubDate>
+			
+			<guid>https://www.pieterjd.be/posts/2019-08-11-property-naming-strategy-with-jackson/</guid>
+			<description>For a pet project of mine, I&amp;rsquo;m consuming a REST API. Unfortunately it&amp;rsquo;s probably not written with Spring (Boot), as the body of requests and response are not according to what you&amp;rsquo;re used to, UpperCamelCase instead of lowerCamelCase.
+{&amp;#34;SessionKey&amp;#34;:&amp;#34;7d38ec29-d1f3-42e9-b35f-91b505bf3206&amp;#34;, &amp;#34;Status&amp;#34;:&amp;#34;UpdatesComplete&amp;#34; } At first, I thought I could solve it with a @JsonProperty(&amp;quot;...&amp;quot;) annotation on every field, but there are so many of them :o
+This can easily be fixed with the property naming class annotation:</description>
+			<content type="html"><![CDATA[<p>For a pet project of mine, I&rsquo;m consuming a REST API. Unfortunately it&rsquo;s probably not written with Spring (Boot), as the body of requests and response are not according to what you&rsquo;re used to, UpperCamelCase instead of lowerCamelCase.</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span><span class="nt">&#34;SessionKey&#34;</span><span class="p">:</span><span class="s2">&#34;7d38ec29-d1f3-42e9-b35f-91b505bf3206&#34;</span><span class="p">,</span>
+<span class="nt">&#34;Status&#34;</span><span class="p">:</span><span class="s2">&#34;UpdatesComplete&#34;</span>
+<span class="p">}</span>
+</code></pre></div><p>At first, I thought I could solve it with a <code>@JsonProperty(&quot;...&quot;)</code> annotation on every field, but there are so many of them :o</p>
+<p>This can easily be fixed with the property naming class annotation:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@JsonNaming</span><span class="o">(</span><span class="n">PropertyNamingStrategy</span><span class="o">.</span><span class="na">UpperCamelCaseStrategy</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeClassName</span> <span class="o">{}</span>
+</code></pre></div>]]></content>
+		</item>
+		
+		<item>
+			<title>Spring boot without a web container</title>
+			<link>https://www.pieterjd.be/posts/2019-07-31-springboot-without-tomcat/</link>
+			<pubDate>Wed, 31 Jul 2019 18:34:12 +0000</pubDate>
+			
+			<guid>https://www.pieterjd.be/posts/2019-07-31-springboot-without-tomcat/</guid>
+			<description>I really like spring boot a lot - just throw in some dependencies and BAM it&amp;rsquo;s configured right out of the box.
+For a pet project of mine, I&amp;rsquo;m consuming a REST API. So I included the spring-boot-starter-web artificact.
+Not so surprisingly, the logs showed Tomcat was booting. In this particular project, I don&amp;rsquo;t need tomcat or any other web container for that matter. So how to exclude this?
+My first guess was the application properties, but there was nothing to turn the web container on or off.</description>
+			<content type="html"><![CDATA[<p>I really like spring boot a lot - just throw in some dependencies and <strong>BAM</strong> it&rsquo;s configured right out of the box.</p>
+<p>For a pet project of mine, I&rsquo;m consuming a REST API. So I included the <code>spring-boot-starter-web</code> artificact.</p>
+<p>Not so surprisingly, the logs showed Tomcat was booting. In this particular project,
+I don&rsquo;t need tomcat or any other web container for that matter. So how to exclude this?</p>
+<p>My first guess was the application properties, but there was nothing to turn the web container on or off. And then I remembered:</p>
+<blockquote>
+<p>Whatever is found in the classpath will be configured</p>
+</blockquote>
+<p><code>spring-boot-starter-web</code> depends on:</p>
+<ul>
+<li>Core spring</li>
+<li>Web MVC</li>
+<li>Jackson</li>
+<li>Validation</li>
+<li>Embedded container - tomcat</li>
+<li>Logging</li>
+</ul>
+<p>So disabling Tomcat comes down to excluding it in the pom file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;exclusions&gt;</span>
+      <span class="nt">&lt;exclusion&gt;</span>
+          <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+          <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-tomcat<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;/exclusion&gt;</span>
+  <span class="nt">&lt;/exclusions&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>]]></content>
+		</item>
+		
+		<item>
+			<title>How to check if a row with a specific column value exists in Spring Data</title>
+			<link>https://www.pieterjd.be/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</link>
+			<pubDate>Tue, 11 Jun 2019 19:16:00 +0000</pubDate>
+			
+			<guid>https://www.pieterjd.be/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</guid>
+			<description>Spring Data has a great declarative way of defining queries, called derived queries. Suppose you have a Person class with an email field. Then you can define the following method in a Repository interface:
+public interface PersonRepository extends JpaRepository&amp;lt;Person,Long&amp;gt;{ List&amp;lt;Person&amp;gt; findByEmail(String email); } Spring derives the query based on the method name, in this case a query to retrieve all persons with a given value for the email field.
+As you can see, the method returns a List.</description>
+			<content type="html"><![CDATA[<p>Spring Data has a great declarative way of defining queries, called derived queries. Suppose you have a Person class with an email field. Then you can define the following method in a
+Repository interface:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PersonRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">,</span><span class="n">Long</span><span class="o">&gt;{</span>
+  <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="nf">findByEmail</span><span class="o">(</span><span class="n">String</span> <span class="n">email</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div><p>Spring derives the query based on the method name, in this case a query to retrieve all persons with a given value for the email field.</p>
+<p>As you can see, the method returns a <code>List</code>. If you want to process all Persons, that is ok. But sometimes you want to know &lsquo;does a row with this particular value exist?'.</p>
+<p>One way to do this is as follows:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">if</span><span class="o">(!</span><span class="n">personRepository</span><span class="o">.</span><span class="na">findByEmail</span><span class="o">(</span><span class="s">&#34;test@mail.com&#34;</span><span class="o">).</span><span class="na">isEmpty</span><span class="o">()){</span>
+  <span class="c1">//do something if a person with the test email already exists in the repository
+</span><span class="c1"></span><span class="o">}</span>
+</code></pre></div><p>Personally, the additional call to the <code>isEmpty()</code> method is a bit too much for me. This can be solved as follows:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PersonRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">,</span><span class="n">Long</span><span class="o">&gt;{</span>
+  <span class="nd">@Query</span><span class="o">(</span><span class="s">&#34;SELECT CASE WHEN COUNT(c) &gt; 0 THEN true ELSE false END FROM Person p WHERE p.email = :email&#34;</span><span class="o">)</span>
+    <span class="kt">boolean</span> <span class="nf">existsByEmail</span><span class="o">(</span><span class="nd">@Param</span><span class="o">(</span><span class="s">&#34;email&#34;</span><span class="o">)</span> <span class="n">String</span> <span class="n">email</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div><p>Now the method does return a boolean, but then again we now have this ugly case in the query. Is there a better way?</p>
+<p>Yes, there is - but it is very well hidden in <a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repository-query-return-types">one of the appendices of the spring data docs</a>. A query can in fact return a <code>boolean</code>. As always,
+there is a disclaimer stating</p>
+<blockquote>
+<p>consult the store-specific documentation for the exact list of supported return types, because some types listed here might not be supported in a particular store.</p>
+</blockquote>
+<p>So we can just update the very first code snippet to:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PersonRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">,</span><span class="n">Long</span><span class="o">&gt;{</span>
+  <span class="kt">boolean</span> <span class="nf">findByEmail</span><span class="o">(</span><span class="n">String</span> <span class="n">email</span><span class="o">);</span> <span class="c1">//now returns a boolean instead of a List&lt;Person&gt;
+</span><span class="c1"></span><span class="o">}</span>
+</code></pre></div>]]></content>
+		</item>
+		
+		<item>
+			<title>Postgraduate Studies in Big Data &amp; Analytics in Business and Management</title>
+			<link>https://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</link>
+			<pubDate>Tue, 30 Apr 2019 18:34:12 +0000</pubDate>
+			
+			<guid>https://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</guid>
+			<description>A year ago, In enrolled in the &amp;ldquo;Postgraduate Studies in Big Data &amp;amp; Analytics in Business and Management&amp;rdquo; at KU Leuven. And today, the project I&amp;rsquo;ve been working on for the past 3 months came to a conclusion with the final presentation.
+The dataset I&amp;rsquo;ve been working on was collected by The Belgian federal police during 2014-2016 and contains over 52K car crashes. It has been enriched by Informatie Vlaanderen with additional information on weather conditions, road conditions and severity of the accident.</description>
+			<content type="html"><![CDATA[<p>A year ago, In enrolled in the &ldquo;Postgraduate Studies in Big Data &amp; Analytics in Business and Management&rdquo; at <a href="https://feb.kuleuven.be/permanente-vorming/bigdataanalytics">KU Leuven</a>. And today, the project I&rsquo;ve been working on for the past 3 months came to a conclusion with the final presentation.</p>
+<p>The dataset I&rsquo;ve been working on was collected by The Belgian federal police  during 2014-2016 and contains over 52K car crashes. It has been enriched by Informatie Vlaanderen with additional information on weather conditions, road conditions and severity of the accident.</p>
+<p>In this project I went through all stages of data cleaning, and I must admit: all rumours you have heard, are true. Data is <strong>not</strong> perfect and complete at all, and it doesn&rsquo;t even make sense at all (Speed limit of 999 km/h, seriously?). Data cleaning does take 80% of your available time.</p>
+<p>I&rsquo;ve used random forest (the ensemble variant of decision tree) to predict the severity of the car crash. The performance of this model was not at all accurate, because of the huge imbalance of the severity: over 95 percent of the car crashes only had &ldquo;gewonden&rdquo; (casualties). This is great from a humanity point of view, not so much from a data perspective.</p>
+<p>So to tackle this issue, I&rsquo;ve been over- and undersampling the data. The accuracy improved a bit, but still a lot of room for improvement.</p>
+<p>After all, I enjoyed the program (even during the late evening classes) and although challenging, the project was fun to work on! The report itself is available on <a href="https://github.com/pieterjd/pg-dissertation/blob/master/report/report.pdf">github</a>.</p>
+<p>I also presented my work at different occasions, please check the details [for this specific talk]({% link _talks/carcrash-analysis.md %}).</p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>Stream examples Part 3 - Conclusion</title>
+			<link>https://www.pieterjd.be/posts/2019-04-08-streams-part3-conclusion/</link>
+			<pubDate>Mon, 08 Apr 2019 20:14:53 +0000</pubDate>
+			
+			<guid>https://www.pieterjd.be/posts/2019-04-08-streams-part3-conclusion/</guid>
+			<description>I would like to wrap up with some snippets I use a lot!
+Collect to a map When you want to collect to a Map, you need a function for the key and a function for the value.
+Suppose you have a list of Person objects with a firstname and last name. If you want to map the firstname to the lastname, you would write something like this:
+Map&amp;lt;String, String&amp;gt; firstToLastMap = persons.</description>
+			<content type="html"><![CDATA[<p>I would like to wrap up with some snippets I use a lot!</p>
+<h1 id="collect-to-a-map">Collect to a map</h1>
+<p>When you want to collect to a Map, you need a function for the key and a function for the value.</p>
+<p>Suppose you have a list of Person objects with a firstname and last name. If you want to map the firstname to the lastname, you would write something like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">firstToLastMap</span> <span class="o">=</span> <span class="n">persons</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+<span class="o">.</span><span class="na">toMap</span><span class="o">(</span>
+ <span class="n">p</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">.</span><span class="na">getFirstname</span><span class="o">(),</span> <span class="c1">//key mapper function
+</span><span class="c1"></span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">.</span><span class="na">getLastname</span><span class="o">()</span>   <span class="c1">// value mapper function
+</span><span class="c1"></span><span class="o">);</span>
+</code></pre></div><h1 id="grouping">Grouping</h1>
+<p>Suppose you have a List of strings. Per possible length, you want to know which Strings have
+this particular length. Then you would group all Strings in the list by their length.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">&#34;one&#34;</span><span class="o">,</span><span class="s">&#34;two&#34;</span><span class="o">,</span><span class="s">&#34;three&#34;</span><span class="o">,</span><span class="s">&#34;four&#34;</span><span class="o">,</span><span class="s">&#34;five&#34;</span><span class="o">,</span><span class="s">&#34;six&#34;</span><span class="o">);</span>
+<span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">groupingBy</span><span class="o">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()));</span>
+<span class="c1">//output: {3=[one, two, six], 4=[four, five], 5=[three]}
+</span></code></pre></div><h1 id="sum-and-average">Sum and Average</h1>
+<p>You can also easily do different kinds of count, for instance sum (summingInt) and average (averageInt). In this example, the sum and average of string lengths are computed.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">&#34;one&#34;</span><span class="o">,</span><span class="s">&#34;two&#34;</span><span class="o">,</span><span class="s">&#34;three&#34;</span><span class="o">,</span><span class="s">&#34;four&#34;</span><span class="o">,</span><span class="s">&#34;five&#34;</span><span class="o">,</span><span class="s">&#34;six&#34;</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">summingInt</span><span class="o">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">())));</span>
+<span class="c1">//output: 22
+</span><span class="c1"></span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">averagingInt</span><span class="o">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">())));</span>
+<span class="c1">//output: 3.6666666666666665 -&gt; this equals 22/6
+</span></code></pre></div><p>If you want all the statistics (min, max, sum, count, average) in one go, then check out
+<a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html#summarizingInt-java.util.function.ToIntFunction-"><code>summarizingInt</code></a></p>
+<h1 id="partitioning">Partitioning</h1>
+<p>Partioning is also quite easy - in this case you are limited to a bi-partition, based on a predicate that is either <code>true</code> or <code>false</code>. In this example, String with length bigger than 3 are considered long Strings.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">&#34;one&#34;</span><span class="o">,</span><span class="s">&#34;two&#34;</span><span class="o">,</span><span class="s">&#34;three&#34;</span><span class="o">,</span><span class="s">&#34;four&#34;</span><span class="o">,</span><span class="s">&#34;five&#34;</span><span class="o">,</span><span class="s">&#34;six&#34;</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">partitioningBy</span><span class="o">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()&gt;</span><span class="n">3</span><span class="o">)));</span>
+<span class="c1">//{false=[one, two, six], true=[three, four, five]}
+</span><span class="c1"></span>
+</code></pre></div>]]></content>
+		</item>
+		
+		<item>
+			<title>Stream examples Part 2 - Reducers</title>
+			<link>https://www.pieterjd.be/posts/2019-04-01-streams-part2-reducers/</link>
+			<pubDate>Mon, 01 Apr 2019 17:30:53 +0000</pubDate>
+			
+			<guid>https://www.pieterjd.be/posts/2019-04-01-streams-part2-reducers/</guid>
+			<description>Next to collectors, Streams offer reducers as well. You can consider it as building a result, starting from a partial solution and building on top of that. It is actually comparable to how the result is built up when using recursion.
+As an example, let&amp;rsquo;s take the sum of all integers starting from 1 up until n. The trivial solution is 0 for the &amp;lsquo;empty case&amp;rsquo;, this is the value before you start looping.</description>
+			<content type="html"><![CDATA[<p>Next to collectors, Streams offer reducers as well. You can consider it as building a result, starting from a partial solution and building on top of that. It is actually comparable to how the result is built up when using recursion.</p>
+<p>As an example, let&rsquo;s take the sum of all integers starting from 1 up until n. The trivial solution is 0 for the &lsquo;empty case&rsquo;, this is the value before you start looping. This will be the initial value or IdentityValue in stream speak. We move to the next value in the range (1). We combine our intial value and current value by taking the sum. Now we have the sum of all integers 1 up until 1. Now take 2, and add it to the partial solution that we already have, and now we have the partial solution for all integers starting from 1 up until 2.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Integer</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">IntStream</span><span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="n">1</span><span class="o">,</span><span class="n">n</span><span class="o">+</span><span class="n">1</span><span class="o">)</span>
+<span class="o">.</span><span class="na">reduce</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="o">(</span><span class="n">partial_solution</span><span class="o">,</span> <span class="n">next</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">partial_solution</span> <span class="o">+</span> <span class="n">next</span><span class="o">);</span>
+</code></pre></div><p>Here we use the <code>reduce</code> method taking 2 arguments: the first one is the value of the &lsquo;empty case&rsquo;, the second is a function taking 2 inputs: the partial solution so far, and the next value of the stream you can use to extend the partial solution.</p>
+<p>Off course this reducer is over the top as you can use the <code>sum</code> method on an Integer Stream.</p>
+<p>A second example is joining a List of Strings by separating them by a comma.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span> <span class="n">commaSeparated</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+<span class="o">.</span><span class="na">reduce</span><span class="o">(</span><span class="s">&#34;&#34;</span><span class="o">,</span> <span class="o">(</span><span class="n">partial_solution</span><span class="o">,</span> <span class="n">nextString</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">partial_solution</span> <span class="o">+</span><span class="s">&#34;, &#34;</span> <span class="o">+</span> <span class="n">next</span><span class="o">);</span>
+</code></pre></div><p>An alternative is the collector variant:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span> <span class="n">commaSeparated</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+<span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">joining</span><span class="o">(</span><span class="s">&#34;,&#34;</span><span class="o">));</span>
+</code></pre></div><p>At first, streams can appear difficult to grasp, but once you get the hang of it, you&rsquo;ll really enjoy it!</p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>Stream examples Part 1 - Collectors</title>
+			<link>https://www.pieterjd.be/posts/2019-03-31-streams-part1-collectors/</link>
+			<pubDate>Sun, 31 Mar 2019 12:34:19 +0000</pubDate>
+			
+			<guid>https://www.pieterjd.be/posts/2019-03-31-streams-part1-collectors/</guid>
+			<description>Streams are quite fun - in short: it&amp;rsquo;s a different approach to writing loops. Suppose you have a List of Strings and you want to filter out the String starting with an &amp;lsquo;s&amp;rsquo; and put them in a new List.
+List&amp;lt;String&amp;gt; sStrings = new ArrayList&amp;lt;&amp;gt;(); for(int i = 0; i &amp;lt; strings.size(); i++){ if(strings.get(i).startsWith(&amp;#39;s&amp;#39;)){ //do something with strings starting with s  sStrings.add(strings.get(i)); } } Although still readable, there is a lot of redundant code: the for loop itself with the counter and condition, the if statement.</description>
+			<content type="html"><![CDATA[<p>Streams are quite fun - in short: it&rsquo;s a different approach to writing loops. Suppose you have a List of Strings and you want to filter out the String starting with an &lsquo;s&rsquo; and put them in a new List.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">sStrings</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">strings</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++){</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">strings</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">startsWith</span><span class="o">(</span><span class="sc">&#39;s&#39;</span><span class="o">)){</span>
+      <span class="c1">//do something with strings starting with s
+</span><span class="c1"></span>      <span class="n">sStrings</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">strings</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><p>Although still readable, there is a lot of redundant code: the for loop itself with the counter and condition, the if statement. With streams, it looks more readable.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">sStrings</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="sc">&#39;s&#39;</span><span class="o">))</span>
+  <span class="n">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+</code></pre></div><p>Inside the filter method, you have a function - this has the same meaning as in mathematics: you have some inputs, the functions does it magic and something different comes out. In this case, the function takes a String and outputs true when the String starts with an &lsquo;s&rsquo;.</p>
+<p>This filter generates a stream on its own, in this case a stream of Strings all starting with an &lsquo;s&rsquo;. You can collect the results, in this case a List.</p>
+<p>Besides filter you also have map, suppose you want the length of all Strings starting with an &lsquo;s&rsquo;. You can just add a map after the filter statement. map also takes a function, in this case a String as input, and it outputs a number, the length of the strings. You can string filter and map calls as much as you want. There is a second map, turning an in into an Integer. It is not mandatory as such with <a href="https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html">autoboxing</a> available, but it shows you can have as much maps as you want.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stringLengths</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="sc">&#39;s&#39;</span><span class="o">))</span>
+  <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">())</span>
+  <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
+  <span class="n">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+</code></pre></div>]]></content>
+		</item>
+		
+		<item>
+			<title>Version endpoint in Spring Boot</title>
+			<link>https://www.pieterjd.be/posts/2019-02-05-version-endpoint-in-spring/</link>
+			<pubDate>Tue, 05 Feb 2019 22:48:21 +0000</pubDate>
+			
+			<guid>https://www.pieterjd.be/posts/2019-02-05-version-endpoint-in-spring/</guid>
+			<description>When generating your Spring Boot project using Spring Initializr, you already have the spring-boot-maven-plugin plugin in your Maven pom.xmlfile.
+Generating build info is done by adding the build-info goal. This results in a /META-INF/build-info.properties file in your resulting package. By default this contains group id, artifact, buildtime and version of the project.
+Off course you can add additional properties in the additionalProperties element. Just like you define properties in any Maven section.</description>
+			<content type="html"><![CDATA[<p>When generating your Spring Boot project using <a href="https://start.spring.io/">Spring Initializr</a>, you already have the <code>spring-boot-maven-plugin</code> plugin in your Maven <code>pom.xml</code>file.</p>
+<p>Generating build info is done by adding the <code>build-info</code> goal. This results in a <code>/META-INF/build-info.properties</code> file in your resulting package. By default this contains group id, artifact, buildtime and version of the project.</p>
+<p>Off course you can add additional properties in the <code>additionalProperties</code> element. Just like you define properties in any Maven section.</p>
+<p>Below is the relevant snippet from a Spring Boot application. It contains</p>
+<ul>
+<li>the <code>spring-boot-maven-plugin</code>definition</li>
+<li>the <code>build-info</code>goal</li>
+<li>additional properties such as application name and application description. You can add as many as you like</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;build&gt;</span>
+   <span class="nt">&lt;plugins&gt;</span>
+      <span class="nt">&lt;plugin&gt;</span>
+         <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+         <span class="nt">&lt;artifactId&gt;</span>spring-boot-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+         <span class="nt">&lt;executions&gt;</span>
+            <span class="nt">&lt;execution&gt;</span>
+               <span class="nt">&lt;goals&gt;</span>
+                  <span class="nt">&lt;goal&gt;</span>build-info<span class="nt">&lt;/goal&gt;</span>
+               <span class="nt">&lt;/goals&gt;</span>
+               <span class="nt">&lt;configuration&gt;</span>
+                  <span class="nt">&lt;additionalProperties&gt;</span>
+                     <span class="nt">&lt;java.source&gt;</span>${maven.compiler.source}<span class="nt">&lt;/java.source&gt;</span>
+                     <span class="nt">&lt;java.version&gt;</span>${java.version}<span class="nt">&lt;/java.version&gt;</span>
+                     <span class="nt">&lt;application.name&gt;</span>${project.name}<span class="nt">&lt;/application.name&gt;</span>
+                     <span class="nt">&lt;application.description&gt;</span>${project.description}<span class="nt">&lt;/application.description&gt;</span>
+                  <span class="nt">&lt;/additionalProperties&gt;</span>
+               <span class="nt">&lt;/configuration&gt;</span>
+            <span class="nt">&lt;/execution&gt;</span>
+         <span class="nt">&lt;/executions&gt;</span>
+      <span class="nt">&lt;/plugin&gt;</span>
+   <span class="nt">&lt;/plugins&gt;</span>
+<span class="nt">&lt;/build&gt;</span>
+</code></pre></div><p>Next part is to read this properties file. Thank god for <a href="https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/info/BuildProperties.html"><code>BuildProperties</code></a> . Spring Boot also creates a Bean when starting an application, so you can just auto wire it to a field.</p>
+<p>Only downside is that this class is not related to the default <code>java.util.Properties</code>class. So you have to create an intermediate <code>Properties</code>object and copy all (key,value) pairs from the buildProperties to the property object you want to return. This is required as the <code>BuildProperties</code>class does not define getters for custom properties</p>
+<p>The <code>time</code>property had to be transformed to a String as the default <code>Instant</code>does not map properly to json.</p>
+<p>If you put all things together, you get the following controller.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;/version&#34;</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BuildInfoController</span> <span class="o">{</span>
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">BuildProperties</span> <span class="n">buildProperties</span><span class="o">;</span>
+
+    <span class="nd">@GetMapping</span>
+    <span class="kd">public</span> <span class="n">Properties</span> <span class="nf">getInfo</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">Properties</span> <span class="n">prop</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="o">();</span>
+        <span class="c1">//need to explicitly loop over all entries, just returning the BuildProperties object only contains the specific fields (artificact, group, name, time and version)
+</span><span class="c1"></span>        <span class="n">buildProperties</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">entry</span> <span class="o">-&gt;</span> <span class="n">prop</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">entry</span><span class="o">.</span><span class="na">getKey</span><span class="o">(),</span><span class="n">entry</span><span class="o">.</span><span class="na">getValue</span><span class="o">()));</span>
+        <span class="c1">//proper date formatting for time
+</span><span class="c1"></span>        <span class="n">prop</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;time&#34;</span><span class="o">,</span> <span class="n">Instant</span><span class="o">.</span><span class="na">ofEpochMilli</span><span class="o">(</span><span class="n">Long</span><span class="o">.</span><span class="na">parseLong</span><span class="o">(</span><span class="n">prop</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&#34;time&#34;</span><span class="o">))).</span><span class="na">toString</span><span class="o">());</span>
+        <span class="k">return</span> <span class="n">prop</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><p>Now you can run the application and do a request for <code>localhost:8080/version</code>, and this results in the following json:</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>  
+   <span class="nt">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;ta&#34;</span><span class="p">,</span>
+   <span class="nt">&#34;java.version&#34;</span><span class="p">:</span><span class="s2">&#34;1.8&#34;</span><span class="p">,</span>
+   <span class="nt">&#34;time&#34;</span><span class="p">:</span><span class="s2">&#34;2019-02-05T13:13:48.282Z&#34;</span><span class="p">,</span>
+   <span class="nt">&#34;application.description&#34;</span><span class="p">:</span><span class="s2">&#34;Demo project for Spring Boot&#34;</span><span class="p">,</span>
+   <span class="nt">&#34;application.name&#34;</span><span class="p">:</span><span class="s2">&#34;ta&#34;</span><span class="p">,</span>
+   <span class="nt">&#34;version&#34;</span><span class="p">:</span><span class="s2">&#34;0.0.1-SNAPSHOT&#34;</span><span class="p">,</span>
+   <span class="nt">&#34;java.source&#34;</span><span class="p">:</span><span class="s2">&#34;1.8&#34;</span><span class="p">,</span>
+   <span class="nt">&#34;group&#34;</span><span class="p">:</span><span class="s2">&#34;com.example.edev.ott&#34;</span><span class="p">,</span>
+   <span class="nt">&#34;artifact&#34;</span><span class="p">:</span><span class="s2">&#34;ta&#34;</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="summary">Summary</h2>
+<p>To conclude: only two steps required for a version endpoint:</p>
+<ol>
+<li>configure Maven and add your custom properties if required</li>
+<li>create a RestController, auto-wire BuildProperties and transform it to <code>java.util.properties</code> , <code>Map</code> or whatever you want</li>
+</ol>
+]]></content>
+		</item>
+		
+		<item>
+			<title>Font Awesome with JHipster</title>
+			<link>https://www.pieterjd.be/posts/2019-01-21-font-awesome-with-jhipster/</link>
+			<pubDate>Mon, 21 Jan 2019 19:24:21 +0000</pubDate>
+			
+			<guid>https://www.pieterjd.be/posts/2019-01-21-font-awesome-with-jhipster/</guid>
+			<description>Font Awesome offers vector icons and social logos. As it is one of the most popular icon sets, it is included with JHipster.
+Out of the box, only some icons are available for your angular front-end. And it&amp;rsquo;s a bit tricky to find out how these icons are loaded as all Angular components use the fa-icon directive, available in JHipster.
+In this particular use-case, I need to add the shopping basket icon.</description>
+			<content type="html"><![CDATA[<p><a href="https://fontawesome.com/">Font Awesome</a> offers vector icons and social logos. As it is one of the most popular icon sets, it is included with JHipster.</p>
+<p>Out of the box, only some icons are available for your angular front-end. And it&rsquo;s a bit tricky to find out how these icons are loaded as all Angular components use the <code>fa-icon</code> directive, available in JHipster.</p>
+<p>In this particular use-case, I need to add the shopping basket icon. After some searching around, I found out all <del>Font</del> <a href="https://fortawesome.com/">Fort Awesome</a> icons are loaded in <code>src/main/webapp/app/vendor.ts</code>. So you just load in the icon of your choice:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">import</span> <span class="p">{</span>
+    <span class="nx">faUser</span><span class="p">,</span>
+    <span class="nx">faSort</span><span class="p">,</span>
+    <span class="c1">//snip
+</span><span class="c1"></span>    <span class="nx">faShoppingBasket</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@fortawesome/free-solid-svg-icons&#39;</span><span class="p">;</span>
+<span class="c1">//snip
+</span><span class="c1"></span><span class="nx">library</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">faShoppingBasket</span><span class="p">);</span>
+</code></pre></div><p>Finally in your component&rsquo;s template, you can include the icon with <code>&lt;fa-icon icon=&quot;shopping-basket&quot;&gt;&lt;/fa-icon&gt;</code>.</p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>I18N with JHipster</title>
+			<link>https://www.pieterjd.be/posts/2019-01-15-i18n-with-jhipster/</link>
+			<pubDate>Tue, 15 Jan 2019 19:24:21 +0000</pubDate>
+			
+			<guid>https://www.pieterjd.be/posts/2019-01-15-i18n-with-jhipster/</guid>
+			<description>I myself am a huge fan of generators - it saves a lot of time. That&amp;rsquo;s why I love JHipster. JHipster not only uses my favourite frameworks such as Spring Boot and Angular, but it provides you with useful features out-of-the-box.
+One of the questions of the wizard guiding you through the generation of your application, is which languages you want to support. For every selected language, all possible labels are generated.</description>
+			<content type="html"><![CDATA[<p>I myself am a huge fan of generators - it saves a lot of time. That&rsquo;s why I love <a href="http://http://jhipster.tech">JHipster</a>. JHipster not only uses my favourite frameworks such as Spring Boot and Angular, but it provides you with useful features out-of-the-box.</p>
+<p>One of the questions of the wizard guiding you through the generation of your application, is which languages you want to support. For every selected language, all possible labels are generated.</p>
+<p>But what about <em>your</em> labels in <em>your</em> custom developed component? Let&rsquo;s have a look.</p>
+<p>First you need the actual translations. They are located in <code>src/main/webapp/i18n</code>. For each language you selected in the wizard, there is a subfolder named according to a <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO standard</a>: English translations are stored in the <code>en</code>folder, Dutch in <code>nl</code>, &hellip;</p>
+<p>These folder contain json files - one for each JHipster entity, and some utility files (login screen, settings, error messages, &hellip;). Next are the labels for error messages in Dutch:</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;error&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;title&#34;</span><span class="p">:</span> <span class="s2">&#34;Foutpagina!&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;http&#34;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&#34;400&#34;</span><span class="p">:</span> <span class="s2">&#34;Bad request.&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;403&#34;</span><span class="p">:</span> <span class="s2">&#34;U bent niet bevoegd om de pagina te openen.&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;405&#34;</span><span class="p">:</span> <span class="s2">&#34;The HTTP verb you used is not supported for this URL.&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;500&#34;</span><span class="p">:</span> <span class="s2">&#34;Internal server error.&#34;</span>
+        <span class="p">},</span>
+        <span class="nt">&#34;concurrencyFailure&#34;</span><span class="p">:</span> <span class="s2">&#34;Another user modified this data at the same time as you. Your changes were rejected.&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;validation&#34;</span><span class="p">:</span> <span class="s2">&#34;Validation error on the server.&#34;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>So if you want to display the message for an unauthorized access, you use the label <code>error.http.403</code>.</p>
+<p>But how do you actually display the translated message in your angular component? With a directive off course, courtesy of JHipster. In the next snippet only the relevant parts remain (so no <code>[hidden]</code> to only display in case of a 403 error)</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;alert alert-danger&#34;</span> <span class="na">jhiTranslate</span><span class="o">=</span><span class="s">&#34;error.http.403&#34;</span><span class="p">&gt;</span>You are not authorized to access this page.<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div><p>So you use the <code>jhiTranslate</code> directive, assign it the label key, as you defined it in the huge json object in the translation file. The actual value of the div is the fallback message in case no translation is available.</p>
+<p>Final question to answer: how do I configure to include my custom translation files? You don&rsquo;t :) Just check <code>webpack/webpack.common.js</code>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">new</span> <span class="nx">MergeJsonWebpackPlugin</span><span class="p">({</span>
+            <span class="nx">output</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">groupBy</span><span class="o">:</span> <span class="p">[</span>
+                    <span class="p">{</span> <span class="nx">pattern</span><span class="o">:</span> <span class="s2">&#34;./src/main/webapp/i18n/nl/*.json&#34;</span><span class="p">,</span> <span class="nx">fileName</span><span class="o">:</span> <span class="s2">&#34;./i18n/nl.json&#34;</span> <span class="p">}</span>
+                    <span class="c1">// jhipster-needle-i18n-language-webpack - JHipster will add/remove languages in this array
+</span><span class="c1"></span>                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+</code></pre></div><p>It contains a <code>MergeJsonWebpackPlugin</code>, you supply it with a pattern of the files to merge and an output file. And this particular pattern is in case of Dutch <code>./src/main/webapp/i18n/nl/*.json</code>. So it includes <strong>all</strong> json files in the directory. And that&rsquo;s why your new, custom translation is automatically available after a rebuild.</p>
+<p>Now go <a href="http://translate.google.com">translate</a> 🙂.</p>
+]]></content>
+		</item>
+		
+	</channel>
+</rss>

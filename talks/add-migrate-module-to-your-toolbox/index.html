@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="Add the Migrate module to your toolbox">
+<meta itemprop="description" content="Developing a new website or upgrading an existing one: both are challenges. And in most cases there is already content that needs to be copied to the new website.
+Meet the Migrate module! A splendid tool that already has proven itself, it is even included in Drupal 8 core. In this talk you can expect:
+ A short introduction on the migration process - ETL. Overview of the Migrate module:  What is the Migrate module?">
+
+<meta itemprop="wordCount" content="282">
+
+
+
+<meta itemprop="keywords" content="" /><meta property="og:title" content="Add the Migrate module to your toolbox" />
+<meta property="og:description" content="Developing a new website or upgrading an existing one: both are challenges. And in most cases there is already content that needs to be copied to the new website.
+Meet the Migrate module! A splendid tool that already has proven itself, it is even included in Drupal 8 core. In this talk you can expect:
+ A short introduction on the migration process - ETL. Overview of the Migrate module:  What is the Migrate module?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.pieterjd.be/talks/add-migrate-module-to-your-toolbox/" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Add the Migrate module to your toolbox"/>
+<meta name="twitter:description" content="Developing a new website or upgrading an existing one: both are challenges. And in most cases there is already content that needs to be copied to the new website.
+Meet the Migrate module! A splendid tool that already has proven itself, it is even included in Drupal 8 core. In this talk you can expect:
+ A short introduction on the migration process - ETL. Overview of the Migrate module:  What is the Migrate module?"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Add the Migrate module to your toolbox</title>
+	<link rel="stylesheet" href="https://www.pieterjd.be/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://www.pieterjd.be">pieterjd.be</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://www.pieterjd.be/posts/">Posts</a>
+				<a href="https://www.pieterjd.be/talks/">Talks</a>
+				<a href="https://www.pieterjd.be/about/">About</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://www.linkedin.com/in/pieterjandrouillon/" target="_blank" rel="noopener me" title="Linkedin"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="https://github.com/pieterjd" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://www.pieterjd.be/posts/">Posts</a></li>
+			<li><a href="https://www.pieterjd.be/talks/">Talks</a></li>
+			<li><a href="https://www.pieterjd.be/about/">About</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner thin animated fadeIn faster">
+		<h1>Add the Migrate module to your toolbox</h1>
+		<div class="content">
+			<p>Developing a new website or upgrading an existing one: both are challenges. And in most cases there is already content that needs to be copied to the new website.</p>
+<p>Meet the Migrate module! A splendid tool that already has proven itself, it is even included in <a href="http://www.acquia.com/blog/d8migrate">Drupal 8 core</a>. In this talk you can expect:</p>
+<ul>
+<li>A short introduction on the migration process - ETL.</li>
+<li>Overview of the Migrate module:
+<ul>
+<li>What is the Migrate module?</li>
+<li>How to load your data?</li>
+<li>What does the migration process look like?</li>
+<li>How does it work?</li>
+<li>What do you need to know before you can use the Migrate module?</li>
+<li>How to determine the order of migration tasks?</li>
+</ul>
+</li>
+<li>Features of the migrate module:
+<ul>
+<li>What can you migrate?</li>
+<li>How does it integrate with Drush?</li>
+</ul>
+</li>
+</ul>
+<p>During this presentation, all covered topics will be illustrated with experiences from two projects.</p>
+<p>The first is the migration of content of a legacy FAQ site to a brand new Drupal site. The original website was a completely customized web application where students can submit questions. These questions were then answered by the didactical team. The new site had to offer the same features while the content was conserved.</p>
+<p>The second and smaller project is the upgrade of an existing Drupal 6 site to a newly designed website in Drupal 7. As there was not that much content, migration was easier.</p>
+<p>As the design of Drupal 8 is Object-Oriented, there will also be some attention to the nice design of the Migrate module which results in an easy plugin system.</p>
+<h2 id="drupalcamp-ghent-2014">Drupalcamp Ghent 2014<a href="#drupalcamp-ghent-2014" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<h3 id="general-info">General info<a href="#general-info" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<ul>
+<li>date: 8 November 2014</li>
+<li>Event information: available on <a href="http://gent2014.drupalcamp.be/gent_2014/ghent2014.drupalcamp.be/index.html">drupalcamp.be</a></li>
+<li>format: 40 minutes presentation and 10 minutes Q &amp; A</li>
+<li>slides: <a href="/assets/talks/migrate-module/20141108-migratemodule.pdf">PDF</a></li>
+</ul>
+
+		</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="https://www.pieterjd.be">Pieter-Jan Drouillon</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://www.pieterjd.be/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://www.pieterjd.be/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>
