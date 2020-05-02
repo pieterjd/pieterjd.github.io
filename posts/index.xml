@@ -16,10 +16,9 @@
 			
 			<guid>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages/</guid>
 			<description>Deploying to github pages is not as easy as I thought. I tried several things for building a Github Action workflow, however this is only meant for actions related to the repository in question.
-In the end, I follow the approach as mentioned on the Hugo website with a local script.
-#!/bin/sh  # If a command fails then the deploy stops set -e printf &amp;#34;\033[0;32mDeploying updates to GitHub...\033[0m\n&amp;#34; # Build the project.</description>
+In the end, I follow the approach as mentioned on the Hugo website with a local script. I have pimped it by making the commit message mandatory and writing an error message in red when the commit message is omitted.</description>
 			<content type="html"><![CDATA[<p>Deploying to github pages is not as easy as I thought. I tried several things for building a Github Action workflow, however this is only meant for actions related to the repository in question.</p>
-<p>In the end, I follow the <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">approach as mentioned on the Hugo website</a> with a local script.</p>
+<p>In the end, I follow the <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">approach as mentioned on the Hugo website</a> with a local script. I have pimped it by making the commit message mandatory and writing an error message in red when the commit message is omitted.</p>
 <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/sh
 </span><span class="cp"></span>
 <span class="c1"># If a command fails then the deploy stops</span>
