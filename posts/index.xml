@@ -6,8 +6,48 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Fri, 01 May 2020 20:54:17 +0200</lastBuildDate>
+		<lastBuildDate>Sat, 02 May 2020 20:48:17 +0200</lastBuildDate>
 		<atom:link href="http://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Deploy Hugo generated site to Github Pages</title>
+			<link>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages/</link>
+			<pubDate>Sat, 02 May 2020 20:48:17 +0200</pubDate>
+			
+			<guid>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages/</guid>
+			<description>Deploying to github pages is not as easy as I thought. I tried several things for building a Github Action workflow, however this is only meant for actions related to the repository in question.
+In the end, I follow the approach as mentioned on the Hugo website with a local script.
+#!/bin/sh  # If a command fails then the deploy stops set -e printf &amp;#34;\033[0;32mDeploying updates to GitHub...\033[0m\n&amp;#34; # Build the project.</description>
+			<content type="html"><![CDATA[<p>Deploying to github pages is not as easy as I thought. I tried several things for building a Github Action workflow, however this is only meant for actions related to the repository in question.</p>
+<p>In the end, I follow the <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">approach as mentioned on the Hugo website</a> with a local script.</p>
+<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/sh
+</span><span class="cp"></span>
+<span class="c1"># If a command fails then the deploy stops</span>
+<span class="nb">set</span> -e
+
+<span class="nb">printf</span> <span class="s2">&#34;\033[0;32mDeploying updates to GitHub...\033[0m\n&#34;</span>
+
+<span class="c1"># Build the project.</span>
+hugo <span class="c1"># if using a theme, replace with `hugo -t &lt;YOURTHEME&gt;`</span>
+
+<span class="c1"># Go To Public folder</span>
+<span class="nb">cd</span> pieterjd.github.io
+
+<span class="c1"># Add changes to git.</span>
+git add .
+
+<span class="c1"># Commit changes.</span>
+<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;rebuilding site </span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&#34;</span>
+<span class="k">if</span> <span class="o">[</span> -n <span class="s2">&#34;</span><span class="nv">$*</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+	<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$*</span><span class="s2">&#34;</span>
+  git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
+  <span class="c1"># Push source and build repos.</span>
+  git push origin master
+  <span class="k">else</span> <span class="nb">printf</span> <span class="s2">&#34;\033[0;31mCommit message is required, eg ./deploy.sh \&#34;Your optional commit message\&#34;\033[0m\n&#34;</span>
+<span class="k">fi</span>
+
+</code></pre></div>]]></content>
+		</item>
 		
 		<item>
 			<title>Moving from Jekyll to Hugo</title>
