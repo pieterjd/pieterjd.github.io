@@ -19,7 +19,7 @@
       
       <guid>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages/</guid>
       <description>Deploying to github pages is not as easy as I thought. I tried several things for building a Github Action workflow, however this is only meant for actions related to the repository in question.
-In the end, I follow the approach as mentioned on the Hugo website with a local script. I have pimped it by making the commit message mandatory and writing an error message in red when the commit message is omitted.</description>
+In the end, I follow the approach as mentioned on the Hugo website with a local script. I have pimped it by fetching the latest commit message and the use this message for committing the changes in the generated site.</description>
     </item>
     
     <item>

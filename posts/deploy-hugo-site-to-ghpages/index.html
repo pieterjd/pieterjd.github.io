@@ -9,16 +9,16 @@
 	<meta name="msapplication-TileColor" content="#494f5c">
 <meta itemprop="name" content="Deploy Hugo generated site to Github Pages">
 <meta itemprop="description" content="Deploying to github pages is not as easy as I thought. I tried several things for building a Github Action workflow, however this is only meant for actions related to the repository in question.
-In the end, I follow the approach as mentioned on the Hugo website with a local script. I have pimped it by making the commit message mandatory and writing an error message in red when the commit message is omitted.">
+In the end, I follow the approach as mentioned on the Hugo website with a local script. I have pimped it by fetching the latest commit message and the use this message for committing the changes in the generated site.">
 <meta itemprop="datePublished" content="2020-05-02T20:48:17&#43;02:00" />
 <meta itemprop="dateModified" content="2020-05-02T20:48:17&#43;02:00" />
-<meta itemprop="wordCount" content="161">
+<meta itemprop="wordCount" content="151">
 
 
 
 <meta itemprop="keywords" content="" /><meta property="og:title" content="Deploy Hugo generated site to Github Pages" />
 <meta property="og:description" content="Deploying to github pages is not as easy as I thought. I tried several things for building a Github Action workflow, however this is only meant for actions related to the repository in question.
-In the end, I follow the approach as mentioned on the Hugo website with a local script. I have pimped it by making the commit message mandatory and writing an error message in red when the commit message is omitted." />
+In the end, I follow the approach as mentioned on the Hugo website with a local script. I have pimped it by fetching the latest commit message and the use this message for committing the changes in the generated site." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages/" />
 <meta property="article:published_time" content="2020-05-02T20:48:17+02:00" />
@@ -26,7 +26,7 @@ In the end, I follow the approach as mentioned on the Hugo website with a local 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Deploy Hugo generated site to Github Pages"/>
 <meta name="twitter:description" content="Deploying to github pages is not as easy as I thought. I tried several things for building a Github Action workflow, however this is only meant for actions related to the repository in question.
-In the end, I follow the approach as mentioned on the Hugo website with a local script. I have pimped it by making the commit message mandatory and writing an error message in red when the commit message is omitted."/>
+In the end, I follow the approach as mentioned on the Hugo website with a local script. I have pimped it by fetching the latest commit message and the use this message for committing the changes in the generated site."/>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -78,15 +78,17 @@ In the end, I follow the approach as mentioned on the Hugo website with a local 
 			</header>
 			<div class="content">
 				<p>Deploying to github pages is not as easy as I thought. I tried several things for building a Github Action workflow, however this is only meant for actions related to the repository in question.</p>
-<p>In the end, I follow the <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">approach as mentioned on the Hugo website</a> with a local script. I have pimped it by making the commit message mandatory and writing an error message in red when the commit message is omitted.</p>
+<p>In the end, I follow the <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">approach as mentioned on the Hugo website</a> with a local script. I have pimped it by fetching the latest commit message and the use this message for committing the changes in the generated site.</p>
 <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/sh
 </span><span class="cp"></span>
 <span class="c1"># If a command fails then the deploy stops</span>
 <span class="nb">set</span> -e
 
 <span class="nb">printf</span> <span class="s2">&#34;\033[0;32mDeploying updates to GitHub...\033[0m\n&#34;</span>
-
+<span class="nb">printf</span> <span class="s2">&#34;\033[0;32mGetting last commit message...\033[0m\n&#34;</span>
+<span class="nv">commsg</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>git log -1 --pretty<span class="o">=</span>%B<span class="k">)</span><span class="s2">&#34;</span>
 <span class="c1"># Build the project.</span>
+<span class="nb">printf</span> <span class="s2">&#34;\033[0;32mBuilding the site...\033[0m\n&#34;</span>
 hugo <span class="c1"># if using a theme, replace with `hugo -t &lt;YOURTHEME&gt;`</span>
 
 <span class="c1"># Go To Public folder</span>
@@ -96,20 +98,15 @@ hugo <span class="c1"># if using a theme, replace with `hugo -t &lt;YOURTHEME&gt
 git add .
 
 <span class="c1"># Commit changes.</span>
-<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;rebuilding site </span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&#34;</span>
-<span class="k">if</span> <span class="o">[</span> -n <span class="s2">&#34;</span><span class="nv">$*</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-	<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$*</span><span class="s2">&#34;</span>
-  git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
-  <span class="c1"># Push source and build repos.</span>
-  git push origin master
-  <span class="k">else</span> <span class="nb">printf</span> <span class="s2">&#34;\033[0;31mCommit message is required, eg ./deploy.sh \&#34;Your optional commit message\&#34;\033[0m\n&#34;</span>
-<span class="k">fi</span>
+git commit -m <span class="s2">&#34;</span><span class="nv">$commsg</span><span class="s2">&#34;</span>
+<span class="c1"># Push source and build repos.</span>
+git push origin master
 
 </code></pre></div>
 			</div>
 			<hr class="post-end">
 			<footer class="post-info">
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>161 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>151 Words</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-05-02 20:48 &#43;0200</p>
 			</footer>
 		</article>
