@@ -62,6 +62,7 @@ Next in line is how to structure the content. As long as you only want to blog, 
 <h2 id="hugo-as-alternative">Hugo as alternative</h2>
 <p>I&rsquo;ve already read a lot about a Hugo. It seemed interesting, but never took the time to look more into it. Now the time has come, and so far all is good.</p>
 <p>I really like the exhaustive docs, and the very nice quickstart. Next is the built-in import from jekyll. And finally, no tampering to set up a collection of similar post (eg blogpost, talks, recipe, quote, &hellip;). The structure is completely file-based.</p>
+<p>Also browser hot reloading after a rebuild - Awesome!</p>
 <h2 id="getting-my-hands-dirty">Getting my hands dirty</h2>
 <p>I basically followed the quickstart instructions.</p>
 <ol>
