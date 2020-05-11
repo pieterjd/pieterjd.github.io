@@ -6,8 +6,35 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Sat, 02 May 2020 20:48:17 +0200</lastBuildDate>
+		<lastBuildDate>Sun, 10 May 2020 12:16:00 +0200</lastBuildDate>
 		<atom:link href="http://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>IntelliJ Find and Replace with regular expressions</title>
+			<link>http://www.pieterjd.be/posts/intellij-replace-regex/</link>
+			<pubDate>Sun, 10 May 2020 12:16:00 +0200</pubDate>
+			
+			<guid>http://www.pieterjd.be/posts/intellij-replace-regex/</guid>
+			<description>Regular expressions are not my forte, but never the less very useful. Recently I faced this fictional code snippet:
+var a = someFunc(b, c); //..... var d = someFunc(b, d); Almost a gazillion of calls to someFunc needed to be replaced with otherFunc. Cue big gasp! As always, IntelliJ is your go-to companion you always can rely on.
+I already noticed the regex checkbox in the Find/Replace dialog. Now it&amp;rsquo;s time to put this thing into practice.</description>
+			<content type="html"><![CDATA[<p>Regular expressions are not my forte, but never the less very useful. Recently I faced this fictional code snippet:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">someFunc</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">);</span>
+<span class="c1">//.....
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">someFunc</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span> <span class="nx">d</span><span class="p">);</span>
+</code></pre></div><p>Almost a gazillion of calls to <code>someFunc</code> needed to be replaced with <code>otherFunc</code>. Cue big gasp! As always, IntelliJ is your go-to companion you always can rely on.</p>
+<p>I already noticed the regex checkbox in the Find/Replace dialog. Now it&rsquo;s time to put this thing into practice. And it just works great.</p>
+<p>In the find input, you just enter any regular expression, in my case <code>someFunc\((.*)\)</code>. In plain English, I&rsquo;m looking for:</p>
+<ol>
+<li>the literal text <code>someFunc</code>;</li>
+<li>followed by a left parenthesis. Parenthesis&rsquo;s are used for grouping of characters, hence the escaping with a backslash;</li>
+<li>Next part is <code>(.*)</code>, which means &lsquo;take any characters and consider it as 1 group&rsquo;;</li>
+<li>Ending with the closing parenthesis.</li>
+</ol>
+<p>Now the group can be re-used in the replace input. So for me it was <code>otherFunc\($1\)</code>. Again escaping the parenthesis and between them, the group as defined in the regular expression in the input. So for the first statement in the snippet above, <code>$1</code> would be <code>b, c</code>.</p>
+<p>Once again, it&rsquo;s proven that regular expressions are worthwhile learning!</p>
+]]></content>
+		</item>
 		
 		<item>
 			<title>Deploy Hugo generated site to Github Pages</title>
