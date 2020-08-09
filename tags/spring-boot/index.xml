@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Spring Boot on pieterjd.be</title>
-    <link>http://www.pieterjd.be/tags/spring-boot/</link>
+    <link>https://pieterjd.github.io/tags/spring-boot/</link>
     <description>Recent content in Spring Boot on pieterjd.be</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Sun, 11 Aug 2019 14:41:12 +0000</lastBuildDate>
     
-	<atom:link href="http://www.pieterjd.be/tags/spring-boot/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://pieterjd.github.io/tags/spring-boot/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Custom property naming strategy with Jackson</title>
-      <link>http://www.pieterjd.be/posts/2019-08-11-property-naming-strategy-with-jackson/</link>
+      <link>https://pieterjd.github.io/posts/2019-08-11-property-naming-strategy-with-jackson/</link>
       <pubDate>Sun, 11 Aug 2019 14:41:12 +0000</pubDate>
       
-      <guid>http://www.pieterjd.be/posts/2019-08-11-property-naming-strategy-with-jackson/</guid>
+      <guid>https://pieterjd.github.io/posts/2019-08-11-property-naming-strategy-with-jackson/</guid>
       <description>For a pet project of mine, I&amp;rsquo;m consuming a REST API. Unfortunately it&amp;rsquo;s probably not written with Spring (Boot), as the body of requests and response are not according to what you&amp;rsquo;re used to, UpperCamelCase instead of lowerCamelCase.
 {&amp;#34;SessionKey&amp;#34;:&amp;#34;7d38ec29-d1f3-42e9-b35f-91b505bf3206&amp;#34;, &amp;#34;Status&amp;#34;:&amp;#34;UpdatesComplete&amp;#34; } At first, I thought I could solve it with a @JsonProperty(&amp;quot;...&amp;quot;) annotation on every field, but there are so many of them :o
 This can easily be fixed with the property naming class annotation:</description>
@@ -25,10 +25,10 @@ This can easily be fixed with the property naming class annotation:</description
     
     <item>
       <title>Spring boot without a web container</title>
-      <link>http://www.pieterjd.be/posts/2019-07-31-springboot-without-tomcat/</link>
+      <link>https://pieterjd.github.io/posts/2019-07-31-springboot-without-tomcat/</link>
       <pubDate>Wed, 31 Jul 2019 18:34:12 +0000</pubDate>
       
-      <guid>http://www.pieterjd.be/posts/2019-07-31-springboot-without-tomcat/</guid>
+      <guid>https://pieterjd.github.io/posts/2019-07-31-springboot-without-tomcat/</guid>
       <description>I really like spring boot a lot - just throw in some dependencies and BAM it&amp;rsquo;s configured right out of the box.
 For a pet project of mine, I&amp;rsquo;m consuming a REST API. So I included the spring-boot-starter-web artificact.
 Not so surprisingly, the logs showed Tomcat was booting. In this particular project, I don&amp;rsquo;t need tomcat or any other web container for that matter. So how to exclude this?
@@ -37,10 +37,10 @@ My first guess was the application properties, but there was nothing to turn the
     
     <item>
       <title>How to check if a row with a specific column value exists in Spring Data</title>
-      <link>http://www.pieterjd.be/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</link>
+      <link>https://pieterjd.github.io/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</link>
       <pubDate>Tue, 11 Jun 2019 19:16:00 +0000</pubDate>
       
-      <guid>http://www.pieterjd.be/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</guid>
+      <guid>https://pieterjd.github.io/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</guid>
       <description>Spring Data has a great declarative way of defining queries, called derived queries. Suppose you have a Person class with an email field. Then you can define the following method in a Repository interface:
 public interface PersonRepository extends JpaRepository&amp;lt;Person,Long&amp;gt;{ List&amp;lt;Person&amp;gt; findByEmail(String email); } Spring derives the query based on the method name, in this case a query to retrieve all persons with a given value for the email field.
 As you can see, the method returns a List.</description>
@@ -48,10 +48,10 @@ As you can see, the method returns a List.</description>
     
     <item>
       <title>Version endpoint in Spring Boot</title>
-      <link>http://www.pieterjd.be/posts/2019-02-05-version-endpoint-in-spring/</link>
+      <link>https://pieterjd.github.io/posts/2019-02-05-version-endpoint-in-spring/</link>
       <pubDate>Tue, 05 Feb 2019 22:48:21 +0000</pubDate>
       
-      <guid>http://www.pieterjd.be/posts/2019-02-05-version-endpoint-in-spring/</guid>
+      <guid>https://pieterjd.github.io/posts/2019-02-05-version-endpoint-in-spring/</guid>
       <description>When generating your Spring Boot project using Spring Initializr, you already have the spring-boot-maven-plugin plugin in your Maven pom.xmlfile.
 Generating build info is done by adding the build-info goal. This results in a /META-INF/build-info.properties file in your resulting package. By default this contains group id, artifact, buildtime and version of the project.
 Off course you can add additional properties in the additionalProperties element. Just like you define properties in any Maven section.</description>
