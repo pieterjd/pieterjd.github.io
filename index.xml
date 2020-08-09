@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 10 May 2020 12:16:00 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 09 Aug 2020 21:59:17 +0200</lastBuildDate>
     
 	<atom:link href="http://www.pieterjd.be/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Get git-commit-id-plugin working with heroku</title>
+      <link>http://www.pieterjd.be/posts/heroku-and-git-commit-id-plugin/</link>
+      <pubDate>Sun, 09 Aug 2020 21:59:17 +0200</pubDate>
+      
+      <guid>http://www.pieterjd.be/posts/heroku-and-git-commit-id-plugin/</guid>
+      <description>Spring boot offers out-of-the-box support for git-commit-id-plugin, where you can bind git properties to Spring variables. However heroku cannot work with this.
+After some reading up, it appears that the hidden .gitsubfolder is not pushed to heroku. Since during build time the git.propertiesfile is generated and saved in the target folder, the git-commit-id-plugin will fail as there is no .gitsubfolder.
+Then I stumbled on the heroku-maven-plugin. This plugin allows to build your project locally and then push the artifact to heroku - and that&amp;rsquo;s what I need.</description>
+    </item>
     
     <item>
       <title>IntelliJ Find and Replace with regular expressions</title>
@@ -109,18 +120,6 @@ As you can see, the method returns a List.</description>
       <guid>http://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</guid>
       <description>A year ago, In enrolled in the &amp;ldquo;Postgraduate Studies in Big Data &amp;amp; Analytics in Business and Management&amp;rdquo; at KU Leuven. And today, the project I&amp;rsquo;ve been working on for the past 3 months came to a conclusion with the final presentation.
 The dataset I&amp;rsquo;ve been working on was collected by The Belgian federal police during 2014-2016 and contains over 52K car crashes. It has been enriched by Informatie Vlaanderen with additional information on weather conditions, road conditions and severity of the accident.</description>
-    </item>
-    
-    <item>
-      <title>Stream examples Part 3 - Conclusion</title>
-      <link>http://www.pieterjd.be/posts/2019-04-08-streams-part3-conclusion/</link>
-      <pubDate>Mon, 08 Apr 2019 20:14:53 +0000</pubDate>
-      
-      <guid>http://www.pieterjd.be/posts/2019-04-08-streams-part3-conclusion/</guid>
-      <description>I would like to wrap up with some snippets I use a lot!
-Collect to a map When you want to collect to a Map, you need a function for the key and a function for the value.
-Suppose you have a list of Person objects with a firstname and last name. If you want to map the firstname to the lastname, you would write something like this:
-Map&amp;lt;String, String&amp;gt; firstToLastMap = persons.</description>
     </item>
     
   </channel>

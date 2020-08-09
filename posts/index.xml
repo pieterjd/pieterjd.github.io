@@ -6,8 +6,24 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Sun, 10 May 2020 12:16:00 +0200</lastBuildDate>
+		<lastBuildDate>Sun, 09 Aug 2020 21:59:17 +0200</lastBuildDate>
 		<atom:link href="http://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Get git-commit-id-plugin working with heroku</title>
+			<link>http://www.pieterjd.be/posts/heroku-and-git-commit-id-plugin/</link>
+			<pubDate>Sun, 09 Aug 2020 21:59:17 +0200</pubDate>
+			
+			<guid>http://www.pieterjd.be/posts/heroku-and-git-commit-id-plugin/</guid>
+			<description>Spring boot offers out-of-the-box support for git-commit-id-plugin, where you can bind git properties to Spring variables. However heroku cannot work with this.
+After some reading up, it appears that the hidden .gitsubfolder is not pushed to heroku. Since during build time the git.propertiesfile is generated and saved in the target folder, the git-commit-id-plugin will fail as there is no .gitsubfolder.
+Then I stumbled on the heroku-maven-plugin. This plugin allows to build your project locally and then push the artifact to heroku - and that&amp;rsquo;s what I need.</description>
+			<content type="html"><![CDATA[<p>Spring boot offers out-of-the-box support for <code>git-commit-id-plugin</code>, where you can bind git properties to Spring variables. However heroku cannot work with this.</p>
+<p>After some reading up, it appears that the hidden <code>.git</code>subfolder is not pushed to heroku. Since during build time the <code>git.properties</code>file is generated and saved in the <code>target</code> folder, the git-commit-id-plugin will fail as there is no <code>.git</code>subfolder.</p>
+<p>Then I stumbled on the <a href="https://devcenter.heroku.com/articles/deploying-java-applications-with-the-heroku-maven-plugin"><code>heroku-maven-plugin</code></a>. This plugin allows to build your project locally and then push the artifact to heroku - and that&rsquo;s what I need.</p>
+<p>Just go through the instructions that are very clear and complete - I had to configure maven to deploy the stand-alone jar file. And it works :)</p>
+]]></content>
+		</item>
 		
 		<item>
 			<title>IntelliJ Find and Replace with regular expressions</title>
