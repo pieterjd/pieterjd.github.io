@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>pieterjd.be</title>
-    <link>https://pieterjd.github.io/</link>
+    <link>https://www.pieterjd.be/</link>
     <description>Recent content on pieterjd.be</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Sun, 09 Aug 2020 21:59:17 +0200</lastBuildDate>
     
-	<atom:link href="https://pieterjd.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.pieterjd.be/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Get git-commit-id-plugin working with heroku</title>
-      <link>https://pieterjd.github.io/posts/heroku-and-git-commit-id-plugin/</link>
+      <link>https://www.pieterjd.be/posts/heroku-and-git-commit-id-plugin/</link>
       <pubDate>Sun, 09 Aug 2020 21:59:17 +0200</pubDate>
       
-      <guid>https://pieterjd.github.io/posts/heroku-and-git-commit-id-plugin/</guid>
+      <guid>https://www.pieterjd.be/posts/heroku-and-git-commit-id-plugin/</guid>
       <description>Spring boot offers out-of-the-box support for git-commit-id-plugin, where you can bind git properties to Spring variables. However heroku cannot work with this.
 After some reading up, it appears that the hidden .gitsubfolder is not pushed to heroku. Since during build time the git.propertiesfile is generated and saved in the target folder, the git-commit-id-plugin will fail as there is no .gitsubfolder.
 Then I stumbled on the heroku-maven-plugin. This plugin allows to build your project locally and then push the artifact to heroku - and that&amp;rsquo;s what I need.</description>
@@ -25,10 +25,10 @@ Then I stumbled on the heroku-maven-plugin. This plugin allows to build your pro
     
     <item>
       <title>IntelliJ Find and Replace with regular expressions</title>
-      <link>https://pieterjd.github.io/posts/intellij-replace-regex/</link>
+      <link>https://www.pieterjd.be/posts/intellij-replace-regex/</link>
       <pubDate>Sun, 10 May 2020 12:16:00 +0200</pubDate>
       
-      <guid>https://pieterjd.github.io/posts/intellij-replace-regex/</guid>
+      <guid>https://www.pieterjd.be/posts/intellij-replace-regex/</guid>
       <description>Regular expressions are not my forte, but never the less very useful. Recently I faced this fictional code snippet:
 var a = someFunc(b, c); //..... var d = someFunc(b, d); Almost a gazillion of calls to someFunc needed to be replaced with otherFunc. Cue big gasp! As always, IntelliJ is your go-to companion you always can rely on.
 I already noticed the regex checkbox in the Find/Replace dialog. Now it&amp;rsquo;s time to put this thing into practice.</description>
@@ -36,20 +36,20 @@ I already noticed the regex checkbox in the Find/Replace dialog. Now it&amp;rsqu
     
     <item>
       <title>Deploy Hugo generated site to Github Pages</title>
-      <link>https://pieterjd.github.io/posts/deploy-hugo-site-to-ghpages/</link>
+      <link>https://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages/</link>
       <pubDate>Sat, 02 May 2020 20:48:17 +0200</pubDate>
       
-      <guid>https://pieterjd.github.io/posts/deploy-hugo-site-to-ghpages/</guid>
+      <guid>https://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages/</guid>
       <description>Deploying to github pages is not as easy as I thought. I tried several things for building a Github Action workflow, however this is only meant for actions related to the repository in question.
 In the end, I follow the approach as mentioned on the Hugo website with a local script. I have pimped it by fetching the latest commit message and the use this message for committing the changes in the generated site.</description>
     </item>
     
     <item>
       <title>Moving from Jekyll to Hugo</title>
-      <link>https://pieterjd.github.io/posts/moving-from-jekyll-to-hugo/</link>
+      <link>https://www.pieterjd.be/posts/moving-from-jekyll-to-hugo/</link>
       <pubDate>Fri, 01 May 2020 20:54:17 +0200</pubDate>
       
-      <guid>https://pieterjd.github.io/posts/moving-from-jekyll-to-hugo/</guid>
+      <guid>https://www.pieterjd.be/posts/moving-from-jekyll-to-hugo/</guid>
       <description>I&amp;rsquo;ve been using Jekyll for a few years now. Main reason to use it, is its nice integration with Github Pages. However the frustrations now have outweighted the advantages.
 Not so cool What annoyed me tremendously is getting Jekyll to run. All the ruby issues were hard to solve for me.
 Next in line is how to structure the content. As long as you only want to blog, Jekyll is good enough.</description>
@@ -57,10 +57,10 @@ Next in line is how to structure the content. As long as you only want to blog, 
     
     <item>
       <title>Colors for your presentations</title>
-      <link>https://pieterjd.github.io/posts/2019-11-11-colors-for-presentations/</link>
+      <link>https://www.pieterjd.be/posts/2019-11-11-colors-for-presentations/</link>
       <pubDate>Mon, 11 Nov 2019 19:13:12 +0000</pubDate>
       
-      <guid>https://pieterjd.github.io/posts/2019-11-11-colors-for-presentations/</guid>
+      <guid>https://www.pieterjd.be/posts/2019-11-11-colors-for-presentations/</guid>
       <description>As I will be speaking at the Data Science Leuven meetup this Thursday, I&amp;rsquo;m preparing my slidedeck.
 To make it visually more attractive, I&amp;rsquo;ve been looking into color schemes. And this quote was quite interesting:
  Limit yourself to maximum 4 different colors
@@ -70,20 +70,20 @@ To make it visually more attractive, I&amp;rsquo;ve been looking into color sche
     
     <item>
       <title>Writing SQL for an unfamiliar PHP application</title>
-      <link>https://pieterjd.github.io/posts/2019-09-21-writing-sql-for-unfamiliar-php-application/</link>
+      <link>https://www.pieterjd.be/posts/2019-09-21-writing-sql-for-unfamiliar-php-application/</link>
       <pubDate>Sat, 21 Sep 2019 10:33:12 +0000</pubDate>
       
-      <guid>https://pieterjd.github.io/posts/2019-09-21-writing-sql-for-unfamiliar-php-application/</guid>
+      <guid>https://www.pieterjd.be/posts/2019-09-21-writing-sql-for-unfamiliar-php-application/</guid>
       <description>As I&amp;rsquo;m currently working for a famous yellow telco with a huge legacy, I recently had to deal with a PHP application. Although there is a PHP dedicated team, we were forced asked to deal with the PHP part as well.
 I did have some past experiences with PHP (and to some extend Drupal), so I faced this old dud. Luckily I just needed to spin up a Vagrant box so that was quite easy.</description>
     </item>
     
     <item>
       <title>Custom property naming strategy with Jackson</title>
-      <link>https://pieterjd.github.io/posts/2019-08-11-property-naming-strategy-with-jackson/</link>
+      <link>https://www.pieterjd.be/posts/2019-08-11-property-naming-strategy-with-jackson/</link>
       <pubDate>Sun, 11 Aug 2019 14:41:12 +0000</pubDate>
       
-      <guid>https://pieterjd.github.io/posts/2019-08-11-property-naming-strategy-with-jackson/</guid>
+      <guid>https://www.pieterjd.be/posts/2019-08-11-property-naming-strategy-with-jackson/</guid>
       <description>For a pet project of mine, I&amp;rsquo;m consuming a REST API. Unfortunately it&amp;rsquo;s probably not written with Spring (Boot), as the body of requests and response are not according to what you&amp;rsquo;re used to, UpperCamelCase instead of lowerCamelCase.
 {&amp;#34;SessionKey&amp;#34;:&amp;#34;7d38ec29-d1f3-42e9-b35f-91b505bf3206&amp;#34;, &amp;#34;Status&amp;#34;:&amp;#34;UpdatesComplete&amp;#34; } At first, I thought I could solve it with a @JsonProperty(&amp;quot;...&amp;quot;) annotation on every field, but there are so many of them :o
 This can easily be fixed with the property naming class annotation:</description>
@@ -91,10 +91,10 @@ This can easily be fixed with the property naming class annotation:</description
     
     <item>
       <title>Spring boot without a web container</title>
-      <link>https://pieterjd.github.io/posts/2019-07-31-springboot-without-tomcat/</link>
+      <link>https://www.pieterjd.be/posts/2019-07-31-springboot-without-tomcat/</link>
       <pubDate>Wed, 31 Jul 2019 18:34:12 +0000</pubDate>
       
-      <guid>https://pieterjd.github.io/posts/2019-07-31-springboot-without-tomcat/</guid>
+      <guid>https://www.pieterjd.be/posts/2019-07-31-springboot-without-tomcat/</guid>
       <description>I really like spring boot a lot - just throw in some dependencies and BAM it&amp;rsquo;s configured right out of the box.
 For a pet project of mine, I&amp;rsquo;m consuming a REST API. So I included the spring-boot-starter-web artificact.
 Not so surprisingly, the logs showed Tomcat was booting. In this particular project, I don&amp;rsquo;t need tomcat or any other web container for that matter. So how to exclude this?
@@ -103,10 +103,10 @@ My first guess was the application properties, but there was nothing to turn the
     
     <item>
       <title>How to check if a row with a specific column value exists in Spring Data</title>
-      <link>https://pieterjd.github.io/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</link>
+      <link>https://www.pieterjd.be/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</link>
       <pubDate>Tue, 11 Jun 2019 19:16:00 +0000</pubDate>
       
-      <guid>https://pieterjd.github.io/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</guid>
+      <guid>https://www.pieterjd.be/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</guid>
       <description>Spring Data has a great declarative way of defining queries, called derived queries. Suppose you have a Person class with an email field. Then you can define the following method in a Repository interface:
 public interface PersonRepository extends JpaRepository&amp;lt;Person,Long&amp;gt;{ List&amp;lt;Person&amp;gt; findByEmail(String email); } Spring derives the query based on the method name, in this case a query to retrieve all persons with a given value for the email field.
 As you can see, the method returns a List.</description>
@@ -114,10 +114,10 @@ As you can see, the method returns a List.</description>
     
     <item>
       <title>Postgraduate Studies in Big Data &amp; Analytics in Business and Management</title>
-      <link>https://pieterjd.github.io/posts/2019-04-30-pg-big-data-analytics-project/</link>
+      <link>https://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</link>
       <pubDate>Tue, 30 Apr 2019 18:34:12 +0000</pubDate>
       
-      <guid>https://pieterjd.github.io/posts/2019-04-30-pg-big-data-analytics-project/</guid>
+      <guid>https://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</guid>
       <description>A year ago, In enrolled in the &amp;ldquo;Postgraduate Studies in Big Data &amp;amp; Analytics in Business and Management&amp;rdquo; at KU Leuven. And today, the project I&amp;rsquo;ve been working on for the past 3 months came to a conclusion with the final presentation.
 The dataset I&amp;rsquo;ve been working on was collected by The Belgian federal police during 2014-2016 and contains over 52K car crashes. It has been enriched by Informatie Vlaanderen with additional information on weather conditions, road conditions and severity of the accident.</description>
     </item>

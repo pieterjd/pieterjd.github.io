@@ -3,176 +3,176 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://pieterjd.github.io/posts/heroku-and-git-commit-id-plugin/</loc>
+    <loc>https://www.pieterjd.be/posts/heroku-and-git-commit-id-plugin/</loc>
     <lastmod>2020-08-09T21:59:17+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/</loc>
+    <loc>https://www.pieterjd.be/</loc>
     <lastmod>2020-08-09T21:59:17+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/posts/</loc>
+    <loc>https://www.pieterjd.be/posts/</loc>
     <lastmod>2020-08-09T21:59:17+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/posts/intellij-replace-regex/</loc>
+    <loc>https://www.pieterjd.be/posts/intellij-replace-regex/</loc>
     <lastmod>2020-05-10T12:16:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/posts/deploy-hugo-site-to-ghpages/</loc>
+    <loc>https://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages/</loc>
     <lastmod>2020-05-02T20:48:17+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/posts/moving-from-jekyll-to-hugo/</loc>
+    <loc>https://www.pieterjd.be/posts/moving-from-jekyll-to-hugo/</loc>
     <lastmod>2020-05-01T20:54:17+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/posts/2019-11-11-colors-for-presentations/</loc>
+    <loc>https://www.pieterjd.be/posts/2019-11-11-colors-for-presentations/</loc>
     <lastmod>2019-11-11T19:13:12+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/posts/2019-09-21-writing-sql-for-unfamiliar-php-application/</loc>
+    <loc>https://www.pieterjd.be/posts/2019-09-21-writing-sql-for-unfamiliar-php-application/</loc>
     <lastmod>2019-09-21T10:33:12+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/posts/2019-08-11-property-naming-strategy-with-jackson/</loc>
+    <loc>https://www.pieterjd.be/posts/2019-08-11-property-naming-strategy-with-jackson/</loc>
     <lastmod>2019-08-11T14:41:12+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/tags/spring-boot/</loc>
+    <loc>https://www.pieterjd.be/tags/spring-boot/</loc>
     <lastmod>2019-08-11T14:41:12+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/tags/</loc>
+    <loc>https://www.pieterjd.be/tags/</loc>
     <lastmod>2019-08-11T14:41:12+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/posts/2019-07-31-springboot-without-tomcat/</loc>
+    <loc>https://www.pieterjd.be/posts/2019-07-31-springboot-without-tomcat/</loc>
     <lastmod>2019-07-31T18:34:12+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</loc>
+    <loc>https://www.pieterjd.be/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</loc>
     <lastmod>2019-06-11T19:16:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/tags/spring-data/</loc>
+    <loc>https://www.pieterjd.be/tags/spring-data/</loc>
     <lastmod>2019-06-11T19:16:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/tags/big-data/</loc>
+    <loc>https://www.pieterjd.be/tags/big-data/</loc>
     <lastmod>2019-04-30T18:34:12+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/posts/2019-04-30-pg-big-data-analytics-project/</loc>
+    <loc>https://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</loc>
     <lastmod>2019-04-30T18:34:12+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/tags/python/</loc>
+    <loc>https://www.pieterjd.be/tags/python/</loc>
     <lastmod>2019-04-30T18:34:12+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/tags/java/</loc>
+    <loc>https://www.pieterjd.be/tags/java/</loc>
     <lastmod>2019-04-08T20:14:53+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/posts/2019-04-08-streams-part3-conclusion/</loc>
+    <loc>https://www.pieterjd.be/posts/2019-04-08-streams-part3-conclusion/</loc>
     <lastmod>2019-04-08T20:14:53+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/tags/streams/</loc>
+    <loc>https://www.pieterjd.be/tags/streams/</loc>
     <lastmod>2019-04-08T20:14:53+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/posts/2019-04-01-streams-part2-reducers/</loc>
+    <loc>https://www.pieterjd.be/posts/2019-04-01-streams-part2-reducers/</loc>
     <lastmod>2019-04-01T17:30:53+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/posts/2019-03-31-streams-part1-collectors/</loc>
+    <loc>https://www.pieterjd.be/posts/2019-03-31-streams-part1-collectors/</loc>
     <lastmod>2019-03-31T12:34:19+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/posts/2019-02-05-version-endpoint-in-spring/</loc>
+    <loc>https://www.pieterjd.be/posts/2019-02-05-version-endpoint-in-spring/</loc>
     <lastmod>2019-02-05T22:48:21+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/tags/font-awesome/</loc>
+    <loc>https://www.pieterjd.be/tags/font-awesome/</loc>
     <lastmod>2019-01-21T19:24:21+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/posts/2019-01-21-font-awesome-with-jhipster/</loc>
+    <loc>https://www.pieterjd.be/posts/2019-01-21-font-awesome-with-jhipster/</loc>
     <lastmod>2019-01-21T19:24:21+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/tags/jhipster/</loc>
+    <loc>https://www.pieterjd.be/tags/jhipster/</loc>
     <lastmod>2019-01-21T19:24:21+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/tags/i18n/</loc>
+    <loc>https://www.pieterjd.be/tags/i18n/</loc>
     <lastmod>2019-01-15T19:24:21+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/posts/2019-01-15-i18n-with-jhipster/</loc>
+    <loc>https://www.pieterjd.be/posts/2019-01-15-i18n-with-jhipster/</loc>
     <lastmod>2019-01-15T19:24:21+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/talks/</loc>
+    <loc>https://www.pieterjd.be/talks/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/about/</loc>
+    <loc>https://www.pieterjd.be/about/</loc>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/talks/add-migrate-module-to-your-toolbox/</loc>
+    <loc>https://www.pieterjd.be/talks/add-migrate-module-to-your-toolbox/</loc>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/talks/carcrash-analysis/</loc>
+    <loc>https://www.pieterjd.be/talks/carcrash-analysis/</loc>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/talks/module-development-get-the-drupal-started/</loc>
+    <loc>https://www.pieterjd.be/talks/module-development-get-the-drupal-started/</loc>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/talks/aemadmin-monkeywork/</loc>
+    <loc>https://www.pieterjd.be/talks/aemadmin-monkeywork/</loc>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/talks/spot-the-bullies/</loc>
+    <loc>https://www.pieterjd.be/talks/spot-the-bullies/</loc>
   </url>
   
   <url>
-    <loc>https://pieterjd.github.io/talks/drupal-8-views/</loc>
+    <loc>https://www.pieterjd.be/talks/drupal-8-views/</loc>
   </url>
   
 </urlset>
