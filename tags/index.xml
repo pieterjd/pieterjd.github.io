@@ -2,94 +2,94 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on pieterjd.be</title>
-    <link>https://www.pieterjd.be/tags/</link>
+    <link>http://www.pieterjd.be/tags/</link>
     <description>Recent content in Tags on pieterjd.be</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Sun, 11 Aug 2019 14:41:12 +0000</lastBuildDate>
     
-	<atom:link href="https://www.pieterjd.be/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.pieterjd.be/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Spring Boot</title>
-      <link>https://www.pieterjd.be/tags/spring-boot/</link>
+      <link>http://www.pieterjd.be/tags/spring-boot/</link>
       <pubDate>Sun, 11 Aug 2019 14:41:12 +0000</pubDate>
       
-      <guid>https://www.pieterjd.be/tags/spring-boot/</guid>
+      <guid>http://www.pieterjd.be/tags/spring-boot/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Spring Data</title>
-      <link>https://www.pieterjd.be/tags/spring-data/</link>
+      <link>http://www.pieterjd.be/tags/spring-data/</link>
       <pubDate>Tue, 11 Jun 2019 19:16:00 +0000</pubDate>
       
-      <guid>https://www.pieterjd.be/tags/spring-data/</guid>
+      <guid>http://www.pieterjd.be/tags/spring-data/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Big Data</title>
-      <link>https://www.pieterjd.be/tags/big-data/</link>
+      <link>http://www.pieterjd.be/tags/big-data/</link>
       <pubDate>Tue, 30 Apr 2019 18:34:12 +0000</pubDate>
       
-      <guid>https://www.pieterjd.be/tags/big-data/</guid>
+      <guid>http://www.pieterjd.be/tags/big-data/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python</title>
-      <link>https://www.pieterjd.be/tags/python/</link>
+      <link>http://www.pieterjd.be/tags/python/</link>
       <pubDate>Tue, 30 Apr 2019 18:34:12 +0000</pubDate>
       
-      <guid>https://www.pieterjd.be/tags/python/</guid>
+      <guid>http://www.pieterjd.be/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Java</title>
-      <link>https://www.pieterjd.be/tags/java/</link>
+      <link>http://www.pieterjd.be/tags/java/</link>
       <pubDate>Mon, 08 Apr 2019 20:14:53 +0000</pubDate>
       
-      <guid>https://www.pieterjd.be/tags/java/</guid>
+      <guid>http://www.pieterjd.be/tags/java/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Streams</title>
-      <link>https://www.pieterjd.be/tags/streams/</link>
+      <link>http://www.pieterjd.be/tags/streams/</link>
       <pubDate>Mon, 08 Apr 2019 20:14:53 +0000</pubDate>
       
-      <guid>https://www.pieterjd.be/tags/streams/</guid>
+      <guid>http://www.pieterjd.be/tags/streams/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Font Awesome</title>
-      <link>https://www.pieterjd.be/tags/font-awesome/</link>
+      <link>http://www.pieterjd.be/tags/font-awesome/</link>
       <pubDate>Mon, 21 Jan 2019 19:24:21 +0000</pubDate>
       
-      <guid>https://www.pieterjd.be/tags/font-awesome/</guid>
+      <guid>http://www.pieterjd.be/tags/font-awesome/</guid>
       <description></description>
     </item>
     
     <item>
       <title>JHipster</title>
-      <link>https://www.pieterjd.be/tags/jhipster/</link>
+      <link>http://www.pieterjd.be/tags/jhipster/</link>
       <pubDate>Mon, 21 Jan 2019 19:24:21 +0000</pubDate>
       
-      <guid>https://www.pieterjd.be/tags/jhipster/</guid>
+      <guid>http://www.pieterjd.be/tags/jhipster/</guid>
       <description></description>
     </item>
     
     <item>
       <title>I18N</title>
-      <link>https://www.pieterjd.be/tags/i18n/</link>
+      <link>http://www.pieterjd.be/tags/i18n/</link>
       <pubDate>Tue, 15 Jan 2019 19:24:21 +0000</pubDate>
       
-      <guid>https://www.pieterjd.be/tags/i18n/</guid>
+      <guid>http://www.pieterjd.be/tags/i18n/</guid>
       <description></description>
     </item>
     
