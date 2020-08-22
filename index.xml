@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 09 Aug 2020 21:59:17 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 22 Aug 2020 12:10:17 +0200</lastBuildDate>
     
 	<atom:link href="http://www.pieterjd.be/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Tools for Mac OS I use for easier development</title>
+      <link>http://www.pieterjd.be/posts/mac-free-tools/</link>
+      <pubDate>Sat, 22 Aug 2020 12:10:17 +0200</pubDate>
+      
+      <guid>http://www.pieterjd.be/posts/mac-free-tools/</guid>
+      <description>This is more a note to self so I know what tools to install when I purchase a new laptop :)
+Free applications  Rectangle App allows for easy moving and resizing of windows. For instance resize the current window so it takes the left half of the screen, the top 1/3rd of the screen, &amp;hellip; Atom, the famous editor with plenty of plugins - I personally use it when I need to write or program something small and I don&amp;rsquo;t want to fire up a fullblown IDE iTerm2 a more fancy shell with additional info on the git status and so on Postman for testing REST endpoints.</description>
+    </item>
     
     <item>
       <title>Get git-commit-id-plugin working with heroku</title>
@@ -110,16 +120,6 @@ My first guess was the application properties, but there was nothing to turn the
       <description>Spring Data has a great declarative way of defining queries, called derived queries. Suppose you have a Person class with an email field. Then you can define the following method in a Repository interface:
 public interface PersonRepository extends JpaRepository&amp;lt;Person,Long&amp;gt;{ List&amp;lt;Person&amp;gt; findByEmail(String email); } Spring derives the query based on the method name, in this case a query to retrieve all persons with a given value for the email field.
 As you can see, the method returns a List.</description>
-    </item>
-    
-    <item>
-      <title>Postgraduate Studies in Big Data &amp; Analytics in Business and Management</title>
-      <link>http://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</link>
-      <pubDate>Tue, 30 Apr 2019 18:34:12 +0000</pubDate>
-      
-      <guid>http://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</guid>
-      <description>A year ago, In enrolled in the &amp;ldquo;Postgraduate Studies in Big Data &amp;amp; Analytics in Business and Management&amp;rdquo; at KU Leuven. And today, the project I&amp;rsquo;ve been working on for the past 3 months came to a conclusion with the final presentation.
-The dataset I&amp;rsquo;ve been working on was collected by The Belgian federal police during 2014-2016 and contains over 52K car crashes. It has been enriched by Informatie Vlaanderen with additional information on weather conditions, road conditions and severity of the accident.</description>
     </item>
     
   </channel>

@@ -6,8 +6,34 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Sun, 09 Aug 2020 21:59:17 +0200</lastBuildDate>
+		<lastBuildDate>Sat, 22 Aug 2020 12:10:17 +0200</lastBuildDate>
 		<atom:link href="http://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Tools for Mac OS I use for easier development</title>
+			<link>http://www.pieterjd.be/posts/mac-free-tools/</link>
+			<pubDate>Sat, 22 Aug 2020 12:10:17 +0200</pubDate>
+			
+			<guid>http://www.pieterjd.be/posts/mac-free-tools/</guid>
+			<description>This is more a note to self so I know what tools to install when I purchase a new laptop :)
+Free applications  Rectangle App allows for easy moving and resizing of windows. For instance resize the current window so it takes the left half of the screen, the top 1/3rd of the screen, &amp;hellip; Atom, the famous editor with plenty of plugins - I personally use it when I need to write or program something small and I don&amp;rsquo;t want to fire up a fullblown IDE iTerm2 a more fancy shell with additional info on the git status and so on Postman for testing REST endpoints.</description>
+			<content type="html"><![CDATA[<p>This is more a note to self so I know what tools to install when I purchase a new laptop :)</p>
+<h1 id="free-applications">Free applications</h1>
+<ul>
+<li><a href="https://rectangleapp.com/">Rectangle App</a> allows for easy moving and resizing of windows. For instance resize the current window so it takes the left half of the screen, the top 1/3rd of the screen, &hellip;</li>
+<li><a href="http://atom.io">Atom</a>, the famous editor with plenty of plugins - I personally use it when I need to write or program something small and I don&rsquo;t want to fire up a fullblown IDE</li>
+<li><a href="www.iterm2.com">iTerm2</a> a more fancy shell with additional info on the git status and so on</li>
+<li><a href="https://www.postman.com/">Postman</a> for testing REST endpoints. I also must checkout <a href="https://insomnia.rest/">Insomnia</a></li>
+<li><a href="https://www.texstudio.org/">texstudio</a> for the ocassional LaTeX documents</li>
+<li><a href="https://typora.io/">Typora</a> - a really cool markdown editor with support for syntax highlighting, some charts and latex equations</li>
+</ul>
+<h2 id="paid-application">Paid application</h2>
+<ul>
+<li><a href="https://www.jetbrains.com/idea/">IntelliJ</a> is still my favorite :)</li>
+<li><a href="https://www.cyberghostvpn.com/">Cyberghost VPN</a></li>
+</ul>
+]]></content>
+		</item>
 		
 		<item>
 			<title>Get git-commit-id-plugin working with heroku</title>
