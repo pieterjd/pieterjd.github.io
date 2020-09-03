@@ -26,6 +26,16 @@ Free applications  Rectangle App allows for easy moving and resizing of windows.
 <li><a href="https://www.postman.com/">Postman</a> for testing REST endpoints. I also must checkout <a href="https://insomnia.rest/">Insomnia</a></li>
 <li><a href="https://www.texstudio.org/">texstudio</a> for the ocassional LaTeX documents</li>
 <li><a href="https://typora.io/">Typora</a> - a really cool markdown editor with support for syntax highlighting, some charts and latex equations</li>
+<li>chrome</li>
+<li>Homebrew <code>/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&quot;</code></li>
+<li><a href="https://nodejs.org/en/download/">Node.js</a></li>
+<li>Yeoman <code>npm install -g yo</code></li>
+<li>iTerm2
+<ul>
+<li><code>brew install zsh</code></li>
+<li><code>sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;</code></li>
+</ul>
+</li>
 </ul>
 <h2 id="paid-application">Paid application</h2>
 <ul>
