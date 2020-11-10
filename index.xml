@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 22 Aug 2020 12:10:17 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2020 14:48:32 +0200</lastBuildDate>
     
 	<atom:link href="http://www.pieterjd.be/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Adventures with Microsoft Azure</title>
+      <link>http://www.pieterjd.be/posts/adventures-with-azure/</link>
+      <pubDate>Sat, 31 Oct 2020 14:48:32 +0200</pubDate>
+      
+      <guid>http://www.pieterjd.be/posts/adventures-with-azure/</guid>
+      <description>The last few weeks I spent looking into Micrsoft Azure. I followed along with the fundamental learning paths, but I also focused mostly on the spring boot part. Here are some findings.
+Azure Spring Cloud workshop The Azure Spring Cloud Workshop is a nice overview how to deploy your spring boot application to Azure.
+Take-aways  Something nowhere mentioned is that you get a Eureka Discover compatible server OOTB :) You just need to add the Eureka Discovery Client dependency.</description>
+    </item>
     
     <item>
       <title>Tools for Mac OS I use for easier development</title>
@@ -109,17 +120,6 @@ This can easily be fixed with the property naming class annotation:</description
 For a pet project of mine, I&amp;rsquo;m consuming a REST API. So I included the spring-boot-starter-web artificact.
 Not so surprisingly, the logs showed Tomcat was booting. In this particular project, I don&amp;rsquo;t need tomcat or any other web container for that matter. So how to exclude this?
 My first guess was the application properties, but there was nothing to turn the web container on or off.</description>
-    </item>
-    
-    <item>
-      <title>How to check if a row with a specific column value exists in Spring Data</title>
-      <link>http://www.pieterjd.be/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</link>
-      <pubDate>Tue, 11 Jun 2019 19:16:00 +0000</pubDate>
-      
-      <guid>http://www.pieterjd.be/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</guid>
-      <description>Spring Data has a great declarative way of defining queries, called derived queries. Suppose you have a Person class with an email field. Then you can define the following method in a Repository interface:
-public interface PersonRepository extends JpaRepository&amp;lt;Person,Long&amp;gt;{ List&amp;lt;Person&amp;gt; findByEmail(String email); } Spring derives the query based on the method name, in this case a query to retrieve all persons with a given value for the email field.
-As you can see, the method returns a List.</description>
     </item>
     
   </channel>
