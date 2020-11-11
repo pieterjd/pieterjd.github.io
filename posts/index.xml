@@ -15,16 +15,16 @@
 			<pubDate>Sat, 31 Oct 2020 14:48:32 +0200</pubDate>
 			
 			<guid>http://www.pieterjd.be/posts/adventures-with-azure/</guid>
-			<description>The last few weeks I spent looking into Micrsoft Azure. I followed along with the fundamental learning paths, but I also focused mostly on the spring boot part. Here are some findings.
+			<description>The last few weeks I spent looking into Microsoft Azure. I followed along with the fundamental learning paths, but I also focused mostly on the spring boot part. Here are some findings.
 Azure Spring Cloud workshop The Azure Spring Cloud Workshop is a nice overview how to deploy your spring boot application to Azure.
 Take-aways  Something nowhere mentioned is that you get a Eureka Discover compatible server OOTB :) You just need to add the Eureka Discovery Client dependency.</description>
-			<content type="html"><![CDATA[<p>The last few weeks I spent looking into Micrsoft Azure. I followed along with the fundamental learning paths, but I also focused mostly on the spring boot part. Here are some findings.</p>
+			<content type="html"><![CDATA[<p>The last few weeks I spent looking into Microsoft Azure. I followed along with the fundamental learning paths, but I also focused mostly on the spring boot part. Here are some findings.</p>
 <h1 id="azure-spring-cloud-workshop">Azure Spring Cloud workshop</h1>
 <p>The <a href="https://docs.microsoft.com/en-gb/learn/modules/azure-spring-cloud-workshop/">Azure Spring Cloud Workshop</a> is a nice overview how to deploy your spring boot application to Azure.</p>
 <h2 id="take-aways">Take-aways</h2>
 <ul>
 <li>Something nowhere mentioned is that you get a Eureka Discover compatible server OOTB :) You just need to add the <code>Eureka Discovery Client</code> dependency.</li>
-<li>The Cloud gateway works grat with the discovery service. Without any configurations, it queries the discover service to get a list of services and it creates automatically endpoints for each service. For instance I had a running <code>todo-service</code>, with <code>@GetMapping(&quot;/todos&quot;)</code>returning all todos. Using the gateway, you get all todos by sending a request to  <code>&lt;GATEWAY-URI&gt;/TODO-SERVICE/</code></li>
+<li>The Cloud gateway works great with the discovery service. Without any configurations, it queries the discover service to get a list of services and it creates automatically endpoints for each service. For instance I had a running <code>todo-service</code>, with <code>@GetMapping(&quot;/todos&quot;)</code>returning all todos. Using the gateway, you get all todos by sending a request to  <code>&lt;GATEWAY-URI&gt;/TODO-SERVICE/</code></li>
 <li>Since the discovery is nowhere to be found in the Azure dashboard - at least <strong>I</strong> was unable to do so - I added an endpoint in the gateway service
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@RestController</span>
 <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;/eureka&#34;</span><span class="o">)</span>
@@ -51,7 +51,7 @@ Take-aways  Something nowhere mentioned is that you get a Eureka Discover compat
 <p>So I made these services:</p>
 <ul>
 <li><code>TwitterService</code>using <a href="http://twitter4j.org/en/index.html">twitter4j</a> returning the last 20 tweets as Strings</li>
-<li><code>ModerationSerivce</code> connecting to the Azure Content Moderation Service returning scores for offensiveness, sexual suggestiveness and sexual expliciteness</li>
+<li><code>ModerationSerivce</code> connecting to the Azure Content Moderation Service returning scores for offensiveness, sexual suggestiveness and sexual explicitness</li>
 <li><code>OffensiveTweetService</code> pipes the tweets into the <code>ModerationService</code>the original tweet with 3 scores</li>
 </ul>
 <p>To make it more visual, I refreshed my jQuery skills and sorted the tweets based on each of the 3 scores.
