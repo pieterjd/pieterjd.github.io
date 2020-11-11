@@ -19,9 +19,9 @@
 Azure Spring Cloud workshop The Azure Spring Cloud Workshop is a nice overview how to deploy your spring boot application to Azure.
 Take-aways  Something nowhere mentioned is that you get a Eureka Discover compatible server OOTB :) You just need to add the Eureka Discovery Client dependency.</description>
 			<content type="html"><![CDATA[<p>The last few weeks I spent looking into Microsoft Azure. I followed along with the fundamental learning paths, but I also focused mostly on the spring boot part. Here are some findings.</p>
-<h1 id="azure-spring-cloud-workshop">Azure Spring Cloud workshop</h1>
+<h2 id="azure-spring-cloud-workshop">Azure Spring Cloud workshop</h2>
 <p>The <a href="https://docs.microsoft.com/en-gb/learn/modules/azure-spring-cloud-workshop/">Azure Spring Cloud Workshop</a> is a nice overview how to deploy your spring boot application to Azure.</p>
-<h2 id="take-aways">Take-aways</h2>
+<h3 id="take-aways">Take-aways</h3>
 <ul>
 <li>Something nowhere mentioned is that you get a Eureka Discover compatible server OOTB :) You just need to add the <code>Eureka Discovery Client</code> dependency.</li>
 <li>The Cloud gateway works great with the discovery service. Without any configurations, it queries the discover service to get a list of services and it creates automatically endpoints for each service. For instance I had a running <code>todo-service</code>, with <code>@GetMapping(&quot;/todos&quot;)</code>returning all todos. Using the gateway, you get all todos by sending a request to  <code>&lt;GATEWAY-URI&gt;/TODO-SERVICE/</code></li>
