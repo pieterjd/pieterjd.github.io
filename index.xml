@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 31 Oct 2020 14:48:32 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 03 Nov 2020 14:48:32 +0200</lastBuildDate>
     
 	<atom:link href="http://www.pieterjd.be/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,12 +15,23 @@
     <item>
       <title>Adventures with Microsoft Azure</title>
       <link>http://www.pieterjd.be/posts/adventures-with-azure/</link>
-      <pubDate>Sat, 31 Oct 2020 14:48:32 +0200</pubDate>
+      <pubDate>Tue, 03 Nov 2020 14:48:32 +0200</pubDate>
       
       <guid>http://www.pieterjd.be/posts/adventures-with-azure/</guid>
       <description>The last few weeks I spent looking into Microsoft Azure. I followed along with the fundamental learning paths, but I also focused mostly on the spring boot part. Here are some findings.
 Azure Spring Cloud workshop The Azure Spring Cloud Workshop is a nice overview how to deploy your spring boot application to Azure.
 Take-aways  Something nowhere mentioned is that you get a Eureka Discover compatible server OOTB :) You just need to add the Eureka Discovery Client dependency.</description>
+    </item>
+    
+    <item>
+      <title>Hello World - Spring Cloud Version</title>
+      <link>http://www.pieterjd.be/posts/hello-world-spring-cloud-version/</link>
+      <pubDate>Sat, 17 Oct 2020 09:12:00 +0200</pubDate>
+      
+      <guid>http://www.pieterjd.be/posts/hello-world-spring-cloud-version/</guid>
+      <description>I&amp;rsquo;ve wanting to look into some microservices, but I never got around to it. I stumbled upon Java Brain&amp;rsquo;s Spring boot microservice course, which is a great series of videos explaining all the concepts.
+My hello world - Spring Cloud Version contains 3 microservices:
+ datetime-service: returns the current datetime salutation-service: returns at random a salutation for male or female persons greeting-service: uses the first 2 services to compose a greeting  Here&amp;rsquo;s a diagram how they all interact with each other: Keypoints Here are some things that stuck into my head after watching the course:</description>
     </item>
     
     <item>
@@ -108,18 +119,6 @@ I did have some past experiences with PHP (and to some extend Drupal), so I face
       <description>For a pet project of mine, I&amp;rsquo;m consuming a REST API. Unfortunately it&amp;rsquo;s probably not written with Spring (Boot), as the body of requests and response are not according to what you&amp;rsquo;re used to, UpperCamelCase instead of lowerCamelCase.
 {&amp;#34;SessionKey&amp;#34;:&amp;#34;7d38ec29-d1f3-42e9-b35f-91b505bf3206&amp;#34;, &amp;#34;Status&amp;#34;:&amp;#34;UpdatesComplete&amp;#34; } At first, I thought I could solve it with a @JsonProperty(&amp;quot;...&amp;quot;) annotation on every field, but there are so many of them :o
 This can easily be fixed with the property naming class annotation:</description>
-    </item>
-    
-    <item>
-      <title>Spring boot without a web container</title>
-      <link>http://www.pieterjd.be/posts/2019-07-31-springboot-without-tomcat/</link>
-      <pubDate>Wed, 31 Jul 2019 18:34:12 +0000</pubDate>
-      
-      <guid>http://www.pieterjd.be/posts/2019-07-31-springboot-without-tomcat/</guid>
-      <description>I really like spring boot a lot - just throw in some dependencies and BAM it&amp;rsquo;s configured right out of the box.
-For a pet project of mine, I&amp;rsquo;m consuming a REST API. So I included the spring-boot-starter-web artificact.
-Not so surprisingly, the logs showed Tomcat was booting. In this particular project, I don&amp;rsquo;t need tomcat or any other web container for that matter. So how to exclude this?
-My first guess was the application properties, but there was nothing to turn the web container on or off.</description>
     </item>
     
   </channel>

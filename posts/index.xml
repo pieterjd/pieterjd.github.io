@@ -6,13 +6,13 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Sat, 31 Oct 2020 14:48:32 +0200</lastBuildDate>
+		<lastBuildDate>Tue, 03 Nov 2020 14:48:32 +0200</lastBuildDate>
 		<atom:link href="http://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
 			<title>Adventures with Microsoft Azure</title>
 			<link>http://www.pieterjd.be/posts/adventures-with-azure/</link>
-			<pubDate>Sat, 31 Oct 2020 14:48:32 +0200</pubDate>
+			<pubDate>Tue, 03 Nov 2020 14:48:32 +0200</pubDate>
 			
 			<guid>http://www.pieterjd.be/posts/adventures-with-azure/</guid>
 			<description>The last few weeks I spent looking into Microsoft Azure. I followed along with the fundamental learning paths, but I also focused mostly on the spring boot part. Here are some findings.
@@ -58,6 +58,81 @@ Take-aways  Something nowhere mentioned is that you get a Eureka Discover compat
 <img src="/assets/images/adventures-with-azure/webpage.png" /></p>
 <p>All in all, it was a fun project to work on. Unfortunately it no longer is available online as my free credit is already used.</p>
 ]]></content>
+		</item>
+		
+		<item>
+			<title>Hello World - Spring Cloud Version</title>
+			<link>http://www.pieterjd.be/posts/hello-world-spring-cloud-version/</link>
+			<pubDate>Sat, 17 Oct 2020 09:12:00 +0200</pubDate>
+			
+			<guid>http://www.pieterjd.be/posts/hello-world-spring-cloud-version/</guid>
+			<description>I&amp;rsquo;ve wanting to look into some microservices, but I never got around to it. I stumbled upon Java Brain&amp;rsquo;s Spring boot microservice course, which is a great series of videos explaining all the concepts.
+My hello world - Spring Cloud Version contains 3 microservices:
+ datetime-service: returns the current datetime salutation-service: returns at random a salutation for male or female persons greeting-service: uses the first 2 services to compose a greeting  Here&amp;rsquo;s a diagram how they all interact with each other: Keypoints Here are some things that stuck into my head after watching the course:</description>
+			<content type="html"><![CDATA[<p>I&rsquo;ve wanting to look into some microservices, but I never got around to it. I stumbled upon <a href="https://www.youtube.com/c/JavaBrainsChannel/playlists?view=50&amp;sort=dd&amp;shelf_id=12">Java Brain&rsquo;s Spring boot microservice course</a>, which is a great series of videos explaining all the concepts.</p>
+<p>My hello world - Spring Cloud Version contains 3 microservices:</p>
+<ul>
+<li><code>datetime-service</code>: returns the current datetime</li>
+<li><code>salutation-service</code>: returns at random a salutation for male or female persons</li>
+<li><code>greeting-service</code>: uses the first 2 services to compose a greeting</li>
+</ul>
+<p>Here&rsquo;s a diagram how they all interact with each other:
+<img src="./springcloud-helloworld.png" alt=""></p>
+<h2 id="keypoints">Keypoints</h2>
+<p>Here are some things that stuck into my head after watching the course:</p>
+<ul>
+<li>
+<p>It&rsquo;s ok to duplicate <code>data</code>classes. Each microservice should be standalone. As a consequence, there is some code duplication in the model package.</p>
+<p>A common dependency on the datamodel breaks the standalone principle.</p>
+</li>
+<li>
+<p>Each REST endpoint returns an object. This makes it easy to change the return values.</p>
+<p>Suppose an endpoint returns a String. After some time, you need to return a List as well. Now the response of the endpoint breaks the consuming clients.  If an object is returned, you can add a field without breaking anything, because spring only unserializes the field it&rsquo;s aware of.</p>
+</li>
+<li>
+<p>Configure the server port explicitly. This avoids port collision 😃. Don&rsquo;t use <code>0</code>. When running, a random port will be assigned but the instances will not show up in the discovery service (each instance has a name where the configured port value is used as unique identifier. If you spin up all your instance with port 0, there is nothing unique).</p>
+</li>
+<li>
+<p>From the level 2 series: keep in mind hystrix wraps the class containing the <code>@HystrixCommand</code> annotation in a <strong>PROXY CLASS</strong> - I&rsquo;ve put it in bold as this is very important.</p>
+<ul>
+<li>if the fallbackMethod is a method in the same class it will not work, <a href="https://youtu.be/1EIb-4ipWFk?list=PLqq-6Pq4lTTbXZY_elyGv7IkKrfkSrX5e&amp;t=517">because of the proxy class</a>!</li>
+<li>My solution:
+<ol>
+<li>The service class containing the method that can go awry, also contains the fallback method. No <code>@HystrixCommand</code> involved here</li>
+<li>The <code>RestController</code> class has the service autowired. To be precise: the service wrapped in <strong>the proxy class</strong>. The endpoint calling the awry service method <strong>is</strong> annotated with the<code>@HystrixCommand</code> annotation</li>
+<li>The fallbackMethod defined in the <code>RestController</code> class just delegates to the fallback method of the autowired service. This is not an issue, as the fallback method is also wrapped in the proxy class</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="spinning-up-multiple-instances">Spinning up multiple instances</h2>
+<p>Kick of the jar and set the <code>spring.port</code> property with the <code>java</code>  command. However it&rsquo;s quite tedious if you want 4 instances of each of the three microservices. Below an powershell snippet on how to kick things off quickly. It generates the commands that you then can paste in the bash terminal</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nv">$template</span> <span class="p">=</span> <span class="s1">&#39;java -Dserver.port={0} -jar {1} &amp;&#39;</span>
+<span class="nv">$startPort</span><span class="p">=</span><span class="n">50000</span>
+<span class="nv">$increment</span> <span class="p">=</span> <span class="n">100</span>
+<span class="c">#get jars except eureka-server</span>
+<span class="nb">gci </span><span class="n">-Recurse</span> <span class="p">*.</span><span class="n">jar</span> <span class="p">|?{</span><span class="nv">$_</span><span class="p">.</span><span class="n">name</span> <span class="o">-notlike</span> <span class="s1">&#39;*eureka*&#39;</span><span class="p">}</span> <span class="p">|%{</span>
+ <span class="nv">$jarName</span> <span class="p">=</span> <span class="nv">$_</span>
+ <span class="n">0</span><span class="p">..</span><span class="n">3</span> <span class="p">|</span> <span class="p">%{</span><span class="nv">$port</span> <span class="p">=</span> <span class="nv">$startPort</span> <span class="p">+</span><span class="nv">$_</span><span class="p">;</span> <span class="nv">$template</span> <span class="o">-f</span> <span class="nv">$port</span><span class="p">,</span><span class="nv">$jarName</span><span class="p">}</span>
+ <span class="nv">$startPort</span><span class="p">+=</span><span class="nv">$increment</span>
+<span class="p">}</span>
+</code></pre></div><p>Sample output:</p>
+<pre><code>java -Dserver.port=50000 -jar /Users/pjd/_dev/springcloud-helloworld/datetime-service/target/datetime-service-0.0.1-SNAPSHOT.jar &amp;
+java -Dserver.port=50001 -jar /Users/pjd/_dev/springcloud-helloworld/datetime-service/target/datetime-service-0.0.1-SNAPSHOT.jar &amp;
+java -Dserver.port=50002 -jar /Users/pjd/_dev/springcloud-helloworld/datetime-service/target/datetime-service-0.0.1-SNAPSHOT.jar &amp;
+java -Dserver.port=50003 -jar /Users/pjd/_dev/springcloud-helloworld/datetime-service/target/datetime-service-0.0.1-SNAPSHOT.jar &amp;
+
+java -Dserver.port=50100 -jar /Users/pjd/_dev/springcloud-helloworld/greeting-service/target/greeting-service-0.0.1-SNAPSHOT.jar &amp;
+java -Dserver.port=50101 -jar /Users/pjd/_dev/springcloud-helloworld/greeting-service/target/greeting-service-0.0.1-SNAPSHOT.jar &amp;
+java -Dserver.port=50102 -jar /Users/pjd/_dev/springcloud-helloworld/greeting-service/target/greeting-service-0.0.1-SNAPSHOT.jar &amp;
+java -Dserver.port=50103 -jar /Users/pjd/_dev/springcloud-helloworld/greeting-service/target/greeting-service-0.0.1-SNAPSHOT.jar &amp;
+
+java -Dserver.port=50200 -jar /Users/pjd/_dev/springcloud-helloworld/salutation-service/target/salutation-service-0.0.1-SNAPSHOT.jar &amp;
+java -Dserver.port=50201 -jar /Users/pjd/_dev/springcloud-helloworld/salutation-service/target/salutation-service-0.0.1-SNAPSHOT.jar &amp;
+java -Dserver.port=50202 -jar /Users/pjd/_dev/springcloud-helloworld/salutation-service/target/salutation-service-0.0.1-SNAPSHOT.jar &amp;
+java -Dserver.port=50203 -jar /Users/pjd/_dev/springcloud-helloworld/salutation-service/target/salutation-service-0.0.1-SNAPSHOT.jar &amp;
+</code></pre>]]></content>
 		</item>
 		
 		<item>
