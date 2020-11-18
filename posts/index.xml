@@ -6,8 +6,46 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Tue, 03 Nov 2020 14:48:32 +0200</lastBuildDate>
+		<lastBuildDate>Wed, 18 Nov 2020 19:18:00 +0200</lastBuildDate>
 		<atom:link href="http://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Deploy Hugo generated site to Github Pages - Part 2</title>
+			<link>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages-part2/</link>
+			<pubDate>Wed, 18 Nov 2020 19:18:00 +0200</pubDate>
+			
+			<guid>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages-part2/</guid>
+			<description>I still had to run the ./deploy.sh script after committing changes. Not anymore - I&amp;rsquo;m calling this script in a github action being run after a push to master!
+Some refactoring was required - I moved the command related to pushing the generating site to a separate script, and this script is called from github actions.
+Below is the complete action. Enjoy!
+name:BuildandDeployon:push:branches:[master]jobs:build:runs-on:ubuntu-lateststeps:- uses:actions/checkout@v2- name:setuphugouses:peaceiris/actions-hugo@v2with:hugo-version:&amp;#39;0.75.1&amp;#39;- name:buildhugowebsiterun:hugo--minify- name:deploytogithubPagesrun:| cd $GITHUB_WORKSPACEgitconfig--localuser.email&amp;#34;action@github.com&amp;#34;gitconfig--localuser.name&amp;#34;GitHub Action&amp;#34;.</description>
+			<content type="html"><![CDATA[<p>I still had to run the <code>./deploy.sh</code> script after committing changes. Not anymore - I&rsquo;m calling this script in a github action being run after a push to <code>master</code>!</p>
+<p>Some refactoring was required - I moved the command related to pushing the generating site to a separate script, and this script is called from github actions.</p>
+<p>Below is the complete action. Enjoy!</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">name</span><span class="p">:</span><span class="w"> </span>Build<span class="w"> </span>and<span class="w"> </span>Deploy<span class="w">
+</span><span class="w"></span><span class="k">on</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">push</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">branches</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>master<span class="p">]</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">runs-on</span><span class="p">:</span><span class="w"> </span>ubuntu-latest<span class="w">
+</span><span class="w">    </span><span class="k">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="k">uses</span><span class="p">:</span><span class="w"> </span>actions/checkout@v2<span class="w">
+</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>setup<span class="w"> </span>hugo<span class="w">
+</span><span class="w">        </span><span class="k">uses</span><span class="p">:</span><span class="w"> </span>peaceiris/actions-hugo@v2<span class="w">
+</span><span class="w">        </span><span class="k">with</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="k">hugo-version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;0.75.1&#39;</span><span class="w">
+</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>build<span class="w"> </span>hugo<span class="w"> </span>website<span class="w">
+</span><span class="w">        </span><span class="k">run</span><span class="p">:</span><span class="w"> </span>hugo<span class="w"> </span>--minify<span class="w">
+</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>deploy<span class="w"> </span>to<span class="w"> </span>github<span class="w"> </span>Pages<span class="w">
+</span><span class="w">        </span><span class="k">run</span><span class="p">:</span><span class="w"> </span><span class="sd">|
+</span><span class="sd">          cd $GITHUB_WORKSPACE</span><span class="w">
+</span><span class="w">          </span>git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&#34;action@github.com&#34;</span><span class="w">
+</span><span class="w">          </span>git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&#34;GitHub Action&#34;</span><span class="w">
+</span><span class="w">          </span>./push-to-ghpages.sh<span class="w">
+</span></code></pre></div>]]></content>
+		</item>
 		
 		<item>
 			<title>Adventures with Microsoft Azure</title>

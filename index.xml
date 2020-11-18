@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Tue, 03 Nov 2020 14:48:32 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 18 Nov 2020 19:18:00 +0200</lastBuildDate>
     
 	<atom:link href="http://www.pieterjd.be/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Deploy Hugo generated site to Github Pages - Part 2</title>
+      <link>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages-part2/</link>
+      <pubDate>Wed, 18 Nov 2020 19:18:00 +0200</pubDate>
+      
+      <guid>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages-part2/</guid>
+      <description>I still had to run the ./deploy.sh script after committing changes. Not anymore - I&amp;rsquo;m calling this script in a github action being run after a push to master!
+Some refactoring was required - I moved the command related to pushing the generating site to a separate script, and this script is called from github actions.
+Below is the complete action. Enjoy!
+name:BuildandDeployon:push:branches:[master]jobs:build:runs-on:ubuntu-lateststeps:- uses:actions/checkout@v2- name:setuphugouses:peaceiris/actions-hugo@v2with:hugo-version:&amp;#39;0.75.1&amp;#39;- name:buildhugowebsiterun:hugo--minify- name:deploytogithubPagesrun:| cd $GITHUB_WORKSPACEgitconfig--localuser.email&amp;#34;action@github.com&amp;#34;gitconfig--localuser.name&amp;#34;GitHub Action&amp;#34;.</description>
+    </item>
     
     <item>
       <title>Adventures with Microsoft Azure</title>
@@ -108,17 +120,6 @@ To make it visually more attractive, I&amp;rsquo;ve been looking into color sche
       <guid>http://www.pieterjd.be/posts/2019-09-21-writing-sql-for-unfamiliar-php-application/</guid>
       <description>As I&amp;rsquo;m currently working for a famous yellow telco with a huge legacy, I recently had to deal with a PHP application. Although there is a PHP dedicated team, we were forced asked to deal with the PHP part as well.
 I did have some past experiences with PHP (and to some extend Drupal), so I faced this old dud. Luckily I just needed to spin up a Vagrant box so that was quite easy.</description>
-    </item>
-    
-    <item>
-      <title>Custom property naming strategy with Jackson</title>
-      <link>http://www.pieterjd.be/posts/2019-08-11-property-naming-strategy-with-jackson/</link>
-      <pubDate>Sun, 11 Aug 2019 14:41:12 +0000</pubDate>
-      
-      <guid>http://www.pieterjd.be/posts/2019-08-11-property-naming-strategy-with-jackson/</guid>
-      <description>For a pet project of mine, I&amp;rsquo;m consuming a REST API. Unfortunately it&amp;rsquo;s probably not written with Spring (Boot), as the body of requests and response are not according to what you&amp;rsquo;re used to, UpperCamelCase instead of lowerCamelCase.
-{&amp;#34;SessionKey&amp;#34;:&amp;#34;7d38ec29-d1f3-42e9-b35f-91b505bf3206&amp;#34;, &amp;#34;Status&amp;#34;:&amp;#34;UpdatesComplete&amp;#34; } At first, I thought I could solve it with a @JsonProperty(&amp;quot;...&amp;quot;) annotation on every field, but there are so many of them :o
-This can easily be fixed with the property naming class annotation:</description>
     </item>
     
   </channel>
