@@ -1,62 +1,34 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>Posts on pieterjd.be</title>
-		<link>http://www.pieterjd.be/posts/</link>
-		<description>Recent content in Posts on pieterjd.be</description>
-		<generator>Hugo -- gohugo.io</generator>
-		<language>en-us</language>
-		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Wed, 18 Nov 2020 19:18:00 +0200</lastBuildDate>
-		<atom:link href="http://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml" />
-		
-		<item>
-			<title>Deploy Hugo generated site to Github Pages - Part 2</title>
-			<link>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages-part2/</link>
-			<pubDate>Wed, 18 Nov 2020 19:18:00 +0200</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages-part2/</guid>
-			<description>I still had to run the ./deploy.sh script after committing changes. Not anymore - I&amp;rsquo;m calling this script in a github action being run after a push to master!
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on pieterjd.be</title><link>http://www.pieterjd.be/posts/</link><description>Recent content in Posts on pieterjd.be</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 18 Nov 2020 19:18:00 +0200</lastBuildDate><atom:link href="http://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Deploy Hugo generated site to Github Pages - Part 2</title><link>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages-part2/</link><pubDate>Wed, 18 Nov 2020 19:18:00 +0200</pubDate><guid>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages-part2/</guid><description>I still had to run the ./deploy.sh script after committing changes. Not anymore - I&amp;rsquo;m calling this script in a github action being run after a push to master!
 Some refactoring was required - I moved the command related to pushing the generating site to a separate script, and this script is called from github actions.
 Below is the complete action. Enjoy!
-name:BuildandDeployon:push:branches:[master]jobs:build:runs-on:ubuntu-lateststeps:- uses:actions/checkout@v2- name:setuphugouses:peaceiris/actions-hugo@v2with:hugo-version:&amp;#39;0.75.1&amp;#39;- name:buildhugowebsiterun:hugo--minify- name:deploytogithubPagesrun:| cd $GITHUB_WORKSPACEgitconfig--localuser.email&amp;#34;action@github.com&amp;#34;gitconfig--localuser.name&amp;#34;GitHub Action&amp;#34;.</description>
-			<content type="html"><![CDATA[<p>I still had to run the <code>./deploy.sh</code> script after committing changes. Not anymore - I&rsquo;m calling this script in a github action being run after a push to <code>master</code>!</p>
+name:Build and Deployon:push:branches:[master]jobs:build:runs-on:ubuntu-lateststeps:- uses:actions/checkout@v2- name:setup hugouses:peaceiris/actions-hugo@v2with:hugo-version:&amp;#39;0.75.1&amp;#39;- name:build hugo websiterun:hugo --minify- name:deploy to github Pagesrun:| cd $GITHUB_WORKSPACE git config --local user.</description><content type="html"><![CDATA[<p>I still had to run the <code>./deploy.sh</code> script after committing changes. Not anymore - I&rsquo;m calling this script in a github action being run after a push to <code>master</code>!</p>
 <p>Some refactoring was required - I moved the command related to pushing the generating site to a separate script, and this script is called from github actions.</p>
 <p>Below is the complete action. Enjoy!</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">name</span><span class="p">:</span><span class="w"> </span>Build<span class="w"> </span>and<span class="w"> </span>Deploy<span class="w">
-</span><span class="w"></span><span class="k">on</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">push</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">branches</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>master<span class="p">]</span><span class="w">
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build and Deploy</span><span class="w">
+</span><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">master]</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="k">jobs</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">build</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">runs-on</span><span class="p">:</span><span class="w"> </span>ubuntu-latest<span class="w">
-</span><span class="w">    </span><span class="k">steps</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="k">uses</span><span class="p">:</span><span class="w"> </span>actions/checkout@v2<span class="w">
-</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>setup<span class="w"> </span>hugo<span class="w">
-</span><span class="w">        </span><span class="k">uses</span><span class="p">:</span><span class="w"> </span>peaceiris/actions-hugo@v2<span class="w">
-</span><span class="w">        </span><span class="k">with</span><span class="p">:</span><span class="w">
-</span><span class="w">          </span><span class="k">hugo-version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;0.75.1&#39;</span><span class="w">
-</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>build<span class="w"> </span>hugo<span class="w"> </span>website<span class="w">
-</span><span class="w">        </span><span class="k">run</span><span class="p">:</span><span class="w"> </span>hugo<span class="w"> </span>--minify<span class="w">
-</span><span class="w">      </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>deploy<span class="w"> </span>to<span class="w"> </span>github<span class="w"> </span>Pages<span class="w">
-</span><span class="w">        </span><span class="k">run</span><span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">          cd $GITHUB_WORKSPACE</span><span class="w">
-</span><span class="w">          </span>git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&#34;action@github.com&#34;</span><span class="w">
-</span><span class="w">          </span>git<span class="w"> </span>config<span class="w"> </span>--local<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&#34;GitHub Action&#34;</span><span class="w">
-</span><span class="w">          </span>./push-to-ghpages.sh<span class="w">
-</span></code></pre></div>]]></content>
-		</item>
-		
-		<item>
-			<title>Adventures with Microsoft Azure</title>
-			<link>http://www.pieterjd.be/posts/adventures-with-azure/</link>
-			<pubDate>Tue, 03 Nov 2020 14:48:32 +0200</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/adventures-with-azure/</guid>
-			<description>The last few weeks I spent looking into Microsoft Azure. I followed along with the fundamental learning paths, but I also focused mostly on the spring boot part. Here are some findings.
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v2</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">setup hugo</span><span class="w">
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/actions-hugo@v2</span><span class="w">
+</span><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">hugo-version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;0.75.1&#39;</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">build hugo website</span><span class="w">
+</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">hugo --minify</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">deploy to github Pages</span><span class="w">
+</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="sd">|
+</span><span class="sd">          cd $GITHUB_WORKSPACE
+</span><span class="sd">          git config --local user.email &#34;action@github.com&#34;
+</span><span class="sd">          git config --local user.name &#34;GitHub Action&#34;
+</span><span class="sd">          ./push-to-ghpages.sh
+</span></code></pre></div>]]></content></item><item><title>Adventures with Microsoft Azure</title><link>http://www.pieterjd.be/posts/adventures-with-azure/</link><pubDate>Tue, 03 Nov 2020 14:48:32 +0200</pubDate><guid>http://www.pieterjd.be/posts/adventures-with-azure/</guid><description>The last few weeks I spent looking into Microsoft Azure. I followed along with the fundamental learning paths, but I also focused mostly on the spring boot part. Here are some findings.
 Azure Spring Cloud workshop The Azure Spring Cloud Workshop is a nice overview how to deploy your spring boot application to Azure.
-Take-aways  Something nowhere mentioned is that you get a Eureka Discover compatible server OOTB :) You just need to add the Eureka Discovery Client dependency.</description>
-			<content type="html"><![CDATA[<p>The last few weeks I spent looking into Microsoft Azure. I followed along with the fundamental learning paths, but I also focused mostly on the spring boot part. Here are some findings.</p>
+Take-aways Something nowhere mentioned is that you get a Eureka Discover compatible server OOTB :) You just need to add the Eureka Discovery Client dependency.</description><content type="html"><![CDATA[<p>The last few weeks I spent looking into Microsoft Azure. I followed along with the fundamental learning paths, but I also focused mostly on the spring boot part. Here are some findings.</p>
 <h2 id="azure-spring-cloud-workshop">Azure Spring Cloud workshop</h2>
 <p>The <a href="https://docs.microsoft.com/en-gb/learn/modules/azure-spring-cloud-workshop/">Azure Spring Cloud Workshop</a> is a nice overview how to deploy your spring boot application to Azure.</p>
 <h3 id="take-aways">Take-aways</h3>
@@ -95,19 +67,9 @@ Take-aways  Something nowhere mentioned is that you get a Eureka Discover compat
 <p>To make it more visual, I refreshed my jQuery skills and sorted the tweets based on each of the 3 scores.
 <img src="/assets/images/adventures-with-azure/webpage.png" /></p>
 <p>All in all, it was a fun project to work on. Unfortunately it no longer is available online as my free credit is already used.</p>
-]]></content>
-		</item>
-		
-		<item>
-			<title>Hello World - Spring Cloud Version</title>
-			<link>http://www.pieterjd.be/posts/hello-world-spring-cloud-version/</link>
-			<pubDate>Sat, 17 Oct 2020 09:12:00 +0200</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/hello-world-spring-cloud-version/</guid>
-			<description>I&amp;rsquo;ve wanting to look into some microservices, but I never got around to it. I stumbled upon Java Brain&amp;rsquo;s Spring boot microservice course, which is a great series of videos explaining all the concepts.
+]]></content></item><item><title>Hello World - Spring Cloud Version</title><link>http://www.pieterjd.be/posts/hello-world-spring-cloud-version/</link><pubDate>Sat, 17 Oct 2020 09:12:00 +0200</pubDate><guid>http://www.pieterjd.be/posts/hello-world-spring-cloud-version/</guid><description>I&amp;rsquo;ve wanting to look into some microservices, but I never got around to it. I stumbled upon Java Brain&amp;rsquo;s Spring boot microservice course, which is a great series of videos explaining all the concepts.
 My hello world - Spring Cloud Version contains 3 microservices:
- datetime-service: returns the current datetime salutation-service: returns at random a salutation for male or female persons greeting-service: uses the first 2 services to compose a greeting  Here&amp;rsquo;s a diagram how they all interact with each other: Keypoints Here are some things that stuck into my head after watching the course:</description>
-			<content type="html"><![CDATA[<p>I&rsquo;ve wanting to look into some microservices, but I never got around to it. I stumbled upon <a href="https://www.youtube.com/c/JavaBrainsChannel/playlists?view=50&amp;sort=dd&amp;shelf_id=12">Java Brain&rsquo;s Spring boot microservice course</a>, which is a great series of videos explaining all the concepts.</p>
+datetime-service: returns the current datetime salutation-service: returns at random a salutation for male or female persons greeting-service: uses the first 2 services to compose a greeting Here&amp;rsquo;s a diagram how they all interact with each other: Keypoints Here are some things that stuck into my head after watching the course:</description><content type="html"><![CDATA[<p>I&rsquo;ve wanting to look into some microservices, but I never got around to it. I stumbled upon <a href="https://www.youtube.com/c/JavaBrainsChannel/playlists?view=50&amp;sort=dd&amp;shelf_id=12">Java Brain&rsquo;s Spring boot microservice course</a>, which is a great series of videos explaining all the concepts.</p>
 <p>My hello world - Spring Cloud Version contains 3 microservices:</p>
 <ul>
 <li><code>datetime-service</code>: returns the current datetime</li>
@@ -170,18 +132,8 @@ java -Dserver.port=50200 -jar /Users/pjd/_dev/springcloud-helloworld/salutation-
 java -Dserver.port=50201 -jar /Users/pjd/_dev/springcloud-helloworld/salutation-service/target/salutation-service-0.0.1-SNAPSHOT.jar &amp;
 java -Dserver.port=50202 -jar /Users/pjd/_dev/springcloud-helloworld/salutation-service/target/salutation-service-0.0.1-SNAPSHOT.jar &amp;
 java -Dserver.port=50203 -jar /Users/pjd/_dev/springcloud-helloworld/salutation-service/target/salutation-service-0.0.1-SNAPSHOT.jar &amp;
-</code></pre>]]></content>
-		</item>
-		
-		<item>
-			<title>Tools for Mac OS I use for easier development</title>
-			<link>http://www.pieterjd.be/posts/mac-free-tools/</link>
-			<pubDate>Sat, 22 Aug 2020 12:10:17 +0200</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/mac-free-tools/</guid>
-			<description>This is more a note to self so I know what tools to install when I purchase a new laptop :)
-Free applications  Rectangle App allows for easy moving and resizing of windows. For instance resize the current window so it takes the left half of the screen, the top 1/3rd of the screen, &amp;hellip; Atom, the famous editor with plenty of plugins - I personally use it when I need to write or program something small and I don&amp;rsquo;t want to fire up a fullblown IDE iTerm2 a more fancy shell with additional info on the git status and so on Postman for testing REST endpoints.</description>
-			<content type="html"><![CDATA[<p>This is more a note to self so I know what tools to install when I purchase a new laptop :)</p>
+</code></pre>]]></content></item><item><title>Tools for Mac OS I use for easier development</title><link>http://www.pieterjd.be/posts/mac-free-tools/</link><pubDate>Sat, 22 Aug 2020 12:10:17 +0200</pubDate><guid>http://www.pieterjd.be/posts/mac-free-tools/</guid><description>This is more a note to self so I know what tools to install when I purchase a new laptop :)
+Free applications Rectangle App allows for easy moving and resizing of windows. For instance resize the current window so it takes the left half of the screen, the top 1/3rd of the screen, &amp;hellip; Atom, the famous editor with plenty of plugins - I personally use it when I need to write or program something small and I don&amp;rsquo;t want to fire up a fullblown IDE iTerm2 a more fancy shell with additional info on the git status and so on Postman for testing REST endpoints.</description><content type="html"><![CDATA[<p>This is more a note to self so I know what tools to install when I purchase a new laptop :)</p>
 <h2 id="free-applications">Free applications</h2>
 <ul>
 <li><a href="https://rectangleapp.com/">Rectangle App</a> allows for easy moving and resizing of windows. For instance resize the current window so it takes the left half of the screen, the top 1/3rd of the screen, &hellip;</li>
@@ -212,35 +164,15 @@ Free applications  Rectangle App allows for easy moving and resizing of windows.
 <li><a href="https://wallpapercave.com/w/wp6582780">2 silouets</a></li>
 <li><a href="https://wallpapercave.com/w/wp1828902">1 slogan</a></li>
 </ul>
-]]></content>
-		</item>
-		
-		<item>
-			<title>Get git-commit-id-plugin working with heroku</title>
-			<link>http://www.pieterjd.be/posts/heroku-and-git-commit-id-plugin/</link>
-			<pubDate>Sun, 09 Aug 2020 21:59:17 +0200</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/heroku-and-git-commit-id-plugin/</guid>
-			<description>Spring boot offers out-of-the-box support for git-commit-id-plugin, where you can bind git properties to Spring variables. However heroku cannot work with this.
+]]></content></item><item><title>Get git-commit-id-plugin working with heroku</title><link>http://www.pieterjd.be/posts/heroku-and-git-commit-id-plugin/</link><pubDate>Sun, 09 Aug 2020 21:59:17 +0200</pubDate><guid>http://www.pieterjd.be/posts/heroku-and-git-commit-id-plugin/</guid><description>Spring boot offers out-of-the-box support for git-commit-id-plugin, where you can bind git properties to Spring variables. However heroku cannot work with this.
 After some reading up, it appears that the hidden .gitsubfolder is not pushed to heroku. Since during build time the git.propertiesfile is generated and saved in the target folder, the git-commit-id-plugin will fail as there is no .gitsubfolder.
-Then I stumbled on the heroku-maven-plugin. This plugin allows to build your project locally and then push the artifact to heroku - and that&amp;rsquo;s what I need.</description>
-			<content type="html"><![CDATA[<p>Spring boot offers out-of-the-box support for <code>git-commit-id-plugin</code>, where you can bind git properties to Spring variables. However heroku cannot work with this.</p>
+Then I stumbled on the heroku-maven-plugin. This plugin allows to build your project locally and then push the artifact to heroku - and that&amp;rsquo;s what I need.</description><content type="html"><![CDATA[<p>Spring boot offers out-of-the-box support for <code>git-commit-id-plugin</code>, where you can bind git properties to Spring variables. However heroku cannot work with this.</p>
 <p>After some reading up, it appears that the hidden <code>.git</code>subfolder is not pushed to heroku. Since during build time the <code>git.properties</code>file is generated and saved in the <code>target</code> folder, the git-commit-id-plugin will fail as there is no <code>.git</code>subfolder.</p>
 <p>Then I stumbled on the <a href="https://devcenter.heroku.com/articles/deploying-java-applications-with-the-heroku-maven-plugin"><code>heroku-maven-plugin</code></a>. This plugin allows to build your project locally and then push the artifact to heroku - and that&rsquo;s what I need.</p>
 <p>Just go through the instructions that are very clear and complete - I had to configure maven to deploy the stand-alone jar file. And it works :)</p>
-]]></content>
-		</item>
-		
-		<item>
-			<title>IntelliJ Find and Replace with regular expressions</title>
-			<link>http://www.pieterjd.be/posts/intellij-replace-regex/</link>
-			<pubDate>Sun, 10 May 2020 12:16:00 +0200</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/intellij-replace-regex/</guid>
-			<description>Regular expressions are not my forte, but never the less very useful. Recently I faced this fictional code snippet:
+]]></content></item><item><title>IntelliJ Find and Replace with regular expressions</title><link>http://www.pieterjd.be/posts/intellij-replace-regex/</link><pubDate>Sun, 10 May 2020 12:16:00 +0200</pubDate><guid>http://www.pieterjd.be/posts/intellij-replace-regex/</guid><description>Regular expressions are not my forte, but never the less very useful. Recently I faced this fictional code snippet:
 var a = someFunc(b, c); //..... var d = someFunc(b, d); Almost a gazillion of calls to someFunc needed to be replaced with otherFunc. Cue big gasp! As always, IntelliJ is your go-to companion you always can rely on.
-I already noticed the regex checkbox in the Find/Replace dialog. Now it&amp;rsquo;s time to put this thing into practice.</description>
-			<content type="html"><![CDATA[<p>Regular expressions are not my forte, but never the less very useful. Recently I faced this fictional code snippet:</p>
+I already noticed the regex checkbox in the Find/Replace dialog. Now it&amp;rsquo;s time to put this thing into practice.</description><content type="html"><![CDATA[<p>Regular expressions are not my forte, but never the less very useful. Recently I faced this fictional code snippet:</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">someFunc</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">);</span>
 <span class="c1">//.....
 </span><span class="c1"></span><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">someFunc</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span> <span class="nx">d</span><span class="p">);</span>
@@ -255,18 +187,8 @@ I already noticed the regex checkbox in the Find/Replace dialog. Now it&amp;rsqu
 </ol>
 <p>Now the group can be re-used in the replace input. So for me it was <code>otherFunc\($1\)</code>. Again escaping the parenthesis and between them, the group as defined in the regular expression in the input. So for the first statement in the snippet above, <code>$1</code> would be <code>b, c</code>.</p>
 <p>Once again, it&rsquo;s proven that regular expressions are worthwhile learning!</p>
-]]></content>
-		</item>
-		
-		<item>
-			<title>Deploy Hugo generated site to Github Pages</title>
-			<link>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages/</link>
-			<pubDate>Sat, 02 May 2020 20:48:17 +0200</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages/</guid>
-			<description>Deploying to github pages is not as easy as I thought. I tried several things for building a Github Action workflow, however this is only meant for actions related to the repository in question.
-In the end, I follow the approach as mentioned on the Hugo website with a local script. I have pimped it by fetching the latest commit message and the use this message for committing the changes in the generated site.</description>
-			<content type="html"><![CDATA[<p>Deploying to github pages is not as easy as I thought. I tried several things for building a Github Action workflow, however this is only meant for actions related to the repository in question.</p>
+]]></content></item><item><title>Deploy Hugo generated site to Github Pages</title><link>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages/</link><pubDate>Sat, 02 May 2020 20:48:17 +0200</pubDate><guid>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages/</guid><description>Deploying to github pages is not as easy as I thought. I tried several things for building a Github Action workflow, however this is only meant for actions related to the repository in question.
+In the end, I follow the approach as mentioned on the Hugo website with a local script. I have pimped it by fetching the latest commit message and the use this message for committing the changes in the generated site.</description><content type="html"><![CDATA[<p>Deploying to github pages is not as easy as I thought. I tried several things for building a Github Action workflow, however this is only meant for actions related to the repository in question.</p>
 <p>In the end, I follow the <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">approach as mentioned on the Hugo website</a> with a local script. I have pimped it by fetching the latest commit message and the use this message for committing the changes in the generated site.</p>
 <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/sh
 </span><span class="cp"></span>
@@ -291,19 +213,9 @@ git commit -m <span class="s2">&#34;</span><span class="nv">$commsg</span><span 
 <span class="c1"># Push source and build repos.</span>
 git push origin master
 
-</code></pre></div>]]></content>
-		</item>
-		
-		<item>
-			<title>Moving from Jekyll to Hugo</title>
-			<link>http://www.pieterjd.be/posts/moving-from-jekyll-to-hugo/</link>
-			<pubDate>Fri, 01 May 2020 20:54:17 +0200</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/moving-from-jekyll-to-hugo/</guid>
-			<description>I&amp;rsquo;ve been using Jekyll for a few years now. Main reason to use it, is its nice integration with Github Pages. However the frustrations now have outweighted the advantages.
+</code></pre></div>]]></content></item><item><title>Moving from Jekyll to Hugo</title><link>http://www.pieterjd.be/posts/moving-from-jekyll-to-hugo/</link><pubDate>Fri, 01 May 2020 20:54:17 +0200</pubDate><guid>http://www.pieterjd.be/posts/moving-from-jekyll-to-hugo/</guid><description>I&amp;rsquo;ve been using Jekyll for a few years now. Main reason to use it, is its nice integration with Github Pages. However the frustrations now have outweighted the advantages.
 Not so cool What annoyed me tremendously is getting Jekyll to run. All the ruby issues were hard to solve for me.
-Next in line is how to structure the content. As long as you only want to blog, Jekyll is good enough.</description>
-			<content type="html"><![CDATA[<p>I&rsquo;ve been using Jekyll for a few years now. Main reason to use it, is its nice integration with Github Pages. However the frustrations now have outweighted the advantages.</p>
+Next in line is how to structure the content. As long as you only want to blog, Jekyll is good enough.</description><content type="html"><![CDATA[<p>I&rsquo;ve been using Jekyll for a few years now. Main reason to use it, is its nice integration with Github Pages. However the frustrations now have outweighted the advantages.</p>
 <h2 id="not-so-cool">Not so cool</h2>
 <p>What annoyed me tremendously is getting Jekyll to run. All the ruby issues were hard to solve for me.</p>
 <p>Next in line is how to structure the content. As long as you only want to blog, Jekyll is good enough. If you need another kind of collection, then things get tedious. I took me a very long time to figure out how to get my talks organized and displayed just the way I want.</p>
@@ -348,21 +260,11 @@ Next in line is how to structure the content. As long as you only want to blog, 
 </li>
 </ol>
 <p>Only thing left to do, is how to get the generated files on github pages. To be continued.</p>
-]]></content>
-		</item>
-		
-		<item>
-			<title>Colors for your presentations</title>
-			<link>http://www.pieterjd.be/posts/2019-11-11-colors-for-presentations/</link>
-			<pubDate>Mon, 11 Nov 2019 19:13:12 +0000</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/2019-11-11-colors-for-presentations/</guid>
-			<description>As I will be speaking at the Data Science Leuven meetup this Thursday, I&amp;rsquo;m preparing my slidedeck.
+]]></content></item><item><title>Colors for your presentations</title><link>http://www.pieterjd.be/posts/2019-11-11-colors-for-presentations/</link><pubDate>Mon, 11 Nov 2019 19:13:12 +0000</pubDate><guid>http://www.pieterjd.be/posts/2019-11-11-colors-for-presentations/</guid><description>As I will be speaking at the Data Science Leuven meetup this Thursday, I&amp;rsquo;m preparing my slidedeck.
 To make it visually more attractive, I&amp;rsquo;ve been looking into color schemes. And this quote was quite interesting:
- Limit yourself to maximum 4 different colors
- In the end I found inspiration from the slideteam website, the &amp;lsquo;Red and Grey&amp;rsquo; color palette.
- Gray : #EFEFEF Darkgray : #7F7F7F Red : #E04556 Darkred : #2B1515  These colors are then combined so there is contrast in the combination.</description>
-			<content type="html"><![CDATA[<p>As I will be speaking at the <a href="https://www.meetup.com/Data-Science-Leuven/events/264310676/">Data Science Leuven meetup</a> this Thursday, I&rsquo;m preparing my slidedeck.</p>
+Limit yourself to maximum 4 different colors
+In the end I found inspiration from the slideteam website, the &amp;lsquo;Red and Grey&amp;rsquo; color palette.
+Gray : #EFEFEF Darkgray : #7F7F7F Red : #E04556 Darkred : #2B1515 These colors are then combined so there is contrast in the combination.</description><content type="html"><![CDATA[<p>As I will be speaking at the <a href="https://www.meetup.com/Data-Science-Leuven/events/264310676/">Data Science Leuven meetup</a> this Thursday, I&rsquo;m preparing my slidedeck.</p>
 <p>To make it visually more attractive, I&rsquo;ve been looking into color schemes. And this quote was quite interesting:</p>
 <blockquote>
 <p>Limit yourself to maximum 4 different colors</p>
@@ -381,18 +283,8 @@ To make it visually more attractive, I&amp;rsquo;ve been looking into color sche
   <span style='background-color: #EFEFEF;color: #2B1515'>Darkred on gray background</span>
 </span>
 <p>It&rsquo;s hard to tell but the colors are a bit softer than in the first list without any background color.</p>
-]]></content>
-		</item>
-		
-		<item>
-			<title>Writing SQL for an unfamiliar PHP application</title>
-			<link>http://www.pieterjd.be/posts/2019-09-21-writing-sql-for-unfamiliar-php-application/</link>
-			<pubDate>Sat, 21 Sep 2019 10:33:12 +0000</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/2019-09-21-writing-sql-for-unfamiliar-php-application/</guid>
-			<description>As I&amp;rsquo;m currently working for a famous yellow telco with a huge legacy, I recently had to deal with a PHP application. Although there is a PHP dedicated team, we were forced asked to deal with the PHP part as well.
-I did have some past experiences with PHP (and to some extend Drupal), so I faced this old dud. Luckily I just needed to spin up a Vagrant box so that was quite easy.</description>
-			<content type="html"><![CDATA[<p>As I&rsquo;m currently working for a famous yellow telco with a huge legacy, I recently had to deal with a PHP application. Although there is a PHP dedicated team, we were <del>forced</del> asked to deal with the PHP part as well.</p>
+]]></content></item><item><title>Writing SQL for an unfamiliar PHP application</title><link>http://www.pieterjd.be/posts/2019-09-21-writing-sql-for-unfamiliar-php-application/</link><pubDate>Sat, 21 Sep 2019 10:33:12 +0000</pubDate><guid>http://www.pieterjd.be/posts/2019-09-21-writing-sql-for-unfamiliar-php-application/</guid><description>As I&amp;rsquo;m currently working for a famous yellow telco with a huge legacy, I recently had to deal with a PHP application. Although there is a PHP dedicated team, we were forced asked to deal with the PHP part as well.
+I did have some past experiences with PHP (and to some extend Drupal), so I faced this old dud. Luckily I just needed to spin up a Vagrant box so that was quite easy.</description><content type="html"><![CDATA[<p>As I&rsquo;m currently working for a famous yellow telco with a huge legacy, I recently had to deal with a PHP application. Although there is a PHP dedicated team, we were <del>forced</del> asked to deal with the PHP part as well.</p>
 <p>I did have some past experiences with PHP (and to some extend Drupal), so I faced this old dud. Luckily I just needed to spin up a Vagrant box so that was quite easy.</p>
 <p>My mission was to add a product. There was a admin page where you could do this manually, but for CI/CD purposes we really needed the SQL. So how to tackle this when you application/database schema and business knowledge is limited?</p>
 <p>You can do it the hard way and study and annoy your collegues with a lot of questions. Or you think for a while and you come up with a more creative solution, which was my approach.</p>
@@ -407,19 +299,9 @@ general_log_file = /tmp/mysql.log
 </code></pre></li>
 <li>Restart MySQL</li>
 </ul>
-]]></content>
-		</item>
-		
-		<item>
-			<title>Custom property naming strategy with Jackson</title>
-			<link>http://www.pieterjd.be/posts/2019-08-11-property-naming-strategy-with-jackson/</link>
-			<pubDate>Sun, 11 Aug 2019 14:41:12 +0000</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/2019-08-11-property-naming-strategy-with-jackson/</guid>
-			<description>For a pet project of mine, I&amp;rsquo;m consuming a REST API. Unfortunately it&amp;rsquo;s probably not written with Spring (Boot), as the body of requests and response are not according to what you&amp;rsquo;re used to, UpperCamelCase instead of lowerCamelCase.
+]]></content></item><item><title>Custom property naming strategy with Jackson</title><link>http://www.pieterjd.be/posts/2019-08-11-property-naming-strategy-with-jackson/</link><pubDate>Sun, 11 Aug 2019 14:41:12 +0000</pubDate><guid>http://www.pieterjd.be/posts/2019-08-11-property-naming-strategy-with-jackson/</guid><description>For a pet project of mine, I&amp;rsquo;m consuming a REST API. Unfortunately it&amp;rsquo;s probably not written with Spring (Boot), as the body of requests and response are not according to what you&amp;rsquo;re used to, UpperCamelCase instead of lowerCamelCase.
 {&amp;#34;SessionKey&amp;#34;:&amp;#34;7d38ec29-d1f3-42e9-b35f-91b505bf3206&amp;#34;, &amp;#34;Status&amp;#34;:&amp;#34;UpdatesComplete&amp;#34; } At first, I thought I could solve it with a @JsonProperty(&amp;quot;...&amp;quot;) annotation on every field, but there are so many of them :o
-This can easily be fixed with the property naming class annotation:</description>
-			<content type="html"><![CDATA[<p>For a pet project of mine, I&rsquo;m consuming a REST API. Unfortunately it&rsquo;s probably not written with Spring (Boot), as the body of requests and response are not according to what you&rsquo;re used to, UpperCamelCase instead of lowerCamelCase.</p>
+This can easily be fixed with the property naming class annotation:</description><content type="html"><![CDATA[<p>For a pet project of mine, I&rsquo;m consuming a REST API. Unfortunately it&rsquo;s probably not written with Spring (Boot), as the body of requests and response are not according to what you&rsquo;re used to, UpperCamelCase instead of lowerCamelCase.</p>
 <div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span><span class="nt">&#34;SessionKey&#34;</span><span class="p">:</span><span class="s2">&#34;7d38ec29-d1f3-42e9-b35f-91b505bf3206&#34;</span><span class="p">,</span>
 <span class="nt">&#34;Status&#34;</span><span class="p">:</span><span class="s2">&#34;UpdatesComplete&#34;</span>
 <span class="p">}</span>
@@ -427,20 +309,10 @@ This can easily be fixed with the property naming class annotation:</description
 <p>This can easily be fixed with the property naming class annotation:</p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@JsonNaming</span><span class="o">(</span><span class="n">PropertyNamingStrategy</span><span class="o">.</span><span class="na">UpperCamelCaseStrategy</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeClassName</span> <span class="o">{}</span>
-</code></pre></div>]]></content>
-		</item>
-		
-		<item>
-			<title>Spring boot without a web container</title>
-			<link>http://www.pieterjd.be/posts/2019-07-31-springboot-without-tomcat/</link>
-			<pubDate>Wed, 31 Jul 2019 18:34:12 +0000</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/2019-07-31-springboot-without-tomcat/</guid>
-			<description>I really like spring boot a lot - just throw in some dependencies and BAM it&amp;rsquo;s configured right out of the box.
+</code></pre></div>]]></content></item><item><title>Spring boot without a web container</title><link>http://www.pieterjd.be/posts/2019-07-31-springboot-without-tomcat/</link><pubDate>Wed, 31 Jul 2019 18:34:12 +0000</pubDate><guid>http://www.pieterjd.be/posts/2019-07-31-springboot-without-tomcat/</guid><description>I really like spring boot a lot - just throw in some dependencies and BAM it&amp;rsquo;s configured right out of the box.
 For a pet project of mine, I&amp;rsquo;m consuming a REST API. So I included the spring-boot-starter-web artificact.
 Not so surprisingly, the logs showed Tomcat was booting. In this particular project, I don&amp;rsquo;t need tomcat or any other web container for that matter. So how to exclude this?
-My first guess was the application properties, but there was nothing to turn the web container on or off.</description>
-			<content type="html"><![CDATA[<p>I really like spring boot a lot - just throw in some dependencies and <strong>BAM</strong> it&rsquo;s configured right out of the box.</p>
+My first guess was the application properties, but there was nothing to turn the web container on or off.</description><content type="html"><![CDATA[<p>I really like spring boot a lot - just throw in some dependencies and <strong>BAM</strong> it&rsquo;s configured right out of the box.</p>
 <p>For a pet project of mine, I&rsquo;m consuming a REST API. So I included the <code>spring-boot-starter-web</code> artificact.</p>
 <p>Not so surprisingly, the logs showed Tomcat was booting. In this particular project,
 I don&rsquo;t need tomcat or any other web container for that matter. So how to exclude this?</p>
@@ -468,25 +340,15 @@ I don&rsquo;t need tomcat or any other web container for that matter. So how to 
       <span class="nt">&lt;/exclusion&gt;</span>
   <span class="nt">&lt;/exclusions&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre></div>]]></content>
-		</item>
-		
-		<item>
-			<title>How to check if a row with a specific column value exists in Spring Data</title>
-			<link>http://www.pieterjd.be/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</link>
-			<pubDate>Tue, 11 Jun 2019 19:16:00 +0000</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</guid>
-			<description>Spring Data has a great declarative way of defining queries, called derived queries. Suppose you have a Person class with an email field. Then you can define the following method in a Repository interface:
+</code></pre></div>]]></content></item><item><title>How to check if a row with a specific column value exists in Spring Data</title><link>http://www.pieterjd.be/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</link><pubDate>Tue, 11 Jun 2019 19:16:00 +0000</pubDate><guid>http://www.pieterjd.be/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/</guid><description>Spring Data has a great declarative way of defining queries, called derived queries. Suppose you have a Person class with an email field. Then you can define the following method in a Repository interface:
 public interface PersonRepository extends JpaRepository&amp;lt;Person,Long&amp;gt;{ List&amp;lt;Person&amp;gt; findByEmail(String email); } Spring derives the query based on the method name, in this case a query to retrieve all persons with a given value for the email field.
-As you can see, the method returns a List.</description>
-			<content type="html"><![CDATA[<p>Spring Data has a great declarative way of defining queries, called derived queries. Suppose you have a Person class with an email field. Then you can define the following method in a
+As you can see, the method returns a List.</description><content type="html"><![CDATA[<p>Spring Data has a great declarative way of defining queries, called derived queries. Suppose you have a Person class with an email field. Then you can define the following method in a
 Repository interface:</p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PersonRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">,</span><span class="n">Long</span><span class="o">&gt;{</span>
   <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="nf">findByEmail</span><span class="o">(</span><span class="n">String</span> <span class="n">email</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div><p>Spring derives the query based on the method name, in this case a query to retrieve all persons with a given value for the email field.</p>
-<p>As you can see, the method returns a <code>List</code>. If you want to process all Persons, that is ok. But sometimes you want to know &lsquo;does a row with this particular value exist?'.</p>
+<p>As you can see, the method returns a <code>List</code>. If you want to process all Persons, that is ok. But sometimes you want to know &lsquo;does a row with this particular value exist?&rsquo;.</p>
 <p>One way to do this is as follows:</p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">if</span><span class="o">(!</span><span class="n">personRepository</span><span class="o">.</span><span class="na">findByEmail</span><span class="o">(</span><span class="s">&#34;test@mail.com&#34;</span><span class="o">).</span><span class="na">isEmpty</span><span class="o">()){</span>
   <span class="c1">//do something if a person with the test email already exists in the repository
@@ -506,38 +368,18 @@ there is a disclaimer stating</p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PersonRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">,</span><span class="n">Long</span><span class="o">&gt;{</span>
   <span class="kt">boolean</span> <span class="nf">findByEmail</span><span class="o">(</span><span class="n">String</span> <span class="n">email</span><span class="o">);</span> <span class="c1">//now returns a boolean instead of a List&lt;Person&gt;
 </span><span class="c1"></span><span class="o">}</span>
-</code></pre></div>]]></content>
-		</item>
-		
-		<item>
-			<title>Postgraduate Studies in Big Data &amp; Analytics in Business and Management</title>
-			<link>http://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</link>
-			<pubDate>Tue, 30 Apr 2019 18:34:12 +0000</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</guid>
-			<description>A year ago, In enrolled in the &amp;ldquo;Postgraduate Studies in Big Data &amp;amp; Analytics in Business and Management&amp;rdquo; at KU Leuven. And today, the project I&amp;rsquo;ve been working on for the past 3 months came to a conclusion with the final presentation.
-The dataset I&amp;rsquo;ve been working on was collected by The Belgian federal police during 2014-2016 and contains over 52K car crashes. It has been enriched by Informatie Vlaanderen with additional information on weather conditions, road conditions and severity of the accident.</description>
-			<content type="html"><![CDATA[<p>A year ago, In enrolled in the &ldquo;Postgraduate Studies in Big Data &amp; Analytics in Business and Management&rdquo; at <a href="https://feb.kuleuven.be/permanente-vorming/bigdataanalytics">KU Leuven</a>. And today, the project I&rsquo;ve been working on for the past 3 months came to a conclusion with the final presentation.</p>
+</code></pre></div>]]></content></item><item><title>Postgraduate Studies in Big Data &amp; Analytics in Business and Management</title><link>http://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</link><pubDate>Tue, 30 Apr 2019 18:34:12 +0000</pubDate><guid>http://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</guid><description>A year ago, In enrolled in the &amp;ldquo;Postgraduate Studies in Big Data &amp;amp; Analytics in Business and Management&amp;rdquo; at KU Leuven. And today, the project I&amp;rsquo;ve been working on for the past 3 months came to a conclusion with the final presentation.
+The dataset I&amp;rsquo;ve been working on was collected by The Belgian federal police during 2014-2016 and contains over 52K car crashes. It has been enriched by Informatie Vlaanderen with additional information on weather conditions, road conditions and severity of the accident.</description><content type="html"><![CDATA[<p>A year ago, In enrolled in the &ldquo;Postgraduate Studies in Big Data &amp; Analytics in Business and Management&rdquo; at <a href="https://feb.kuleuven.be/permanente-vorming/bigdataanalytics">KU Leuven</a>. And today, the project I&rsquo;ve been working on for the past 3 months came to a conclusion with the final presentation.</p>
 <p>The dataset I&rsquo;ve been working on was collected by The Belgian federal police  during 2014-2016 and contains over 52K car crashes. It has been enriched by Informatie Vlaanderen with additional information on weather conditions, road conditions and severity of the accident.</p>
 <p>In this project I went through all stages of data cleaning, and I must admit: all rumours you have heard, are true. Data is <strong>not</strong> perfect and complete at all, and it doesn&rsquo;t even make sense at all (Speed limit of 999 km/h, seriously?). Data cleaning does take 80% of your available time.</p>
 <p>I&rsquo;ve used random forest (the ensemble variant of decision tree) to predict the severity of the car crash. The performance of this model was not at all accurate, because of the huge imbalance of the severity: over 95 percent of the car crashes only had &ldquo;gewonden&rdquo; (casualties). This is great from a humanity point of view, not so much from a data perspective.</p>
 <p>So to tackle this issue, I&rsquo;ve been over- and undersampling the data. The accuracy improved a bit, but still a lot of room for improvement.</p>
 <p>After all, I enjoyed the program (even during the late evening classes) and although challenging, the project was fun to work on! The report itself is available on <a href="https://github.com/pieterjd/pg-dissertation/blob/master/report/report.pdf">github</a>.</p>
 <p>I also presented my work at different occasions, please check the details [for this specific talk]({% link _talks/carcrash-analysis.md %}).</p>
-]]></content>
-		</item>
-		
-		<item>
-			<title>Stream examples Part 3 - Conclusion</title>
-			<link>http://www.pieterjd.be/posts/2019-04-08-streams-part3-conclusion/</link>
-			<pubDate>Mon, 08 Apr 2019 20:14:53 +0000</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/2019-04-08-streams-part3-conclusion/</guid>
-			<description>I would like to wrap up with some snippets I use a lot!
+]]></content></item><item><title>Stream examples Part 3 - Conclusion</title><link>http://www.pieterjd.be/posts/2019-04-08-streams-part3-conclusion/</link><pubDate>Mon, 08 Apr 2019 20:14:53 +0000</pubDate><guid>http://www.pieterjd.be/posts/2019-04-08-streams-part3-conclusion/</guid><description>I would like to wrap up with some snippets I use a lot!
 Collect to a map When you want to collect to a Map, you need a function for the key and a function for the value.
 Suppose you have a list of Person objects with a firstname and last name. If you want to map the firstname to the lastname, you would write something like this:
-Map&amp;lt;String, String&amp;gt; firstToLastMap = persons.</description>
-			<content type="html"><![CDATA[<p>I would like to wrap up with some snippets I use a lot!</p>
+Map&amp;lt;String, String&amp;gt; firstToLastMap = persons.</description><content type="html"><![CDATA[<p>I would like to wrap up with some snippets I use a lot!</p>
 <h1 id="collect-to-a-map">Collect to a map</h1>
 <p>When you want to collect to a Map, you need a function for the key and a function for the value.</p>
 <p>Suppose you have a list of Person objects with a firstname and last name. If you want to map the firstname to the lastname, you would write something like this:</p>
@@ -567,18 +409,8 @@ this particular length. Then you would group all Strings in the list by their le
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">partitioningBy</span><span class="o">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()&gt;</span><span class="n">3</span><span class="o">)));</span>
 <span class="c1">//{false=[one, two, six], true=[three, four, five]}
 </span><span class="c1"></span>
-</code></pre></div>]]></content>
-		</item>
-		
-		<item>
-			<title>Stream examples Part 2 - Reducers</title>
-			<link>http://www.pieterjd.be/posts/2019-04-01-streams-part2-reducers/</link>
-			<pubDate>Mon, 01 Apr 2019 17:30:53 +0000</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/2019-04-01-streams-part2-reducers/</guid>
-			<description>Next to collectors, Streams offer reducers as well. You can consider it as building a result, starting from a partial solution and building on top of that. It is actually comparable to how the result is built up when using recursion.
-As an example, let&amp;rsquo;s take the sum of all integers starting from 1 up until n. The trivial solution is 0 for the &amp;lsquo;empty case&amp;rsquo;, this is the value before you start looping.</description>
-			<content type="html"><![CDATA[<p>Next to collectors, Streams offer reducers as well. You can consider it as building a result, starting from a partial solution and building on top of that. It is actually comparable to how the result is built up when using recursion.</p>
+</code></pre></div>]]></content></item><item><title>Stream examples Part 2 - Reducers</title><link>http://www.pieterjd.be/posts/2019-04-01-streams-part2-reducers/</link><pubDate>Mon, 01 Apr 2019 17:30:53 +0000</pubDate><guid>http://www.pieterjd.be/posts/2019-04-01-streams-part2-reducers/</guid><description>Next to collectors, Streams offer reducers as well. You can consider it as building a result, starting from a partial solution and building on top of that. It is actually comparable to how the result is built up when using recursion.
+As an example, let&amp;rsquo;s take the sum of all integers starting from 1 up until n. The trivial solution is 0 for the &amp;lsquo;empty case&amp;rsquo;, this is the value before you start looping.</description><content type="html"><![CDATA[<p>Next to collectors, Streams offer reducers as well. You can consider it as building a result, starting from a partial solution and building on top of that. It is actually comparable to how the result is built up when using recursion.</p>
 <p>As an example, let&rsquo;s take the sum of all integers starting from 1 up until n. The trivial solution is 0 for the &lsquo;empty case&rsquo;, this is the value before you start looping. This will be the initial value or IdentityValue in stream speak. We move to the next value in the range (1). We combine our intial value and current value by taking the sum. Now we have the sum of all integers 1 up until 1. Now take 2, and add it to the partial solution that we already have, and now we have the partial solution for all integers starting from 1 up until 2.</p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Integer</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">IntStream</span><span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="n">1</span><span class="o">,</span><span class="n">n</span><span class="o">+</span><span class="n">1</span><span class="o">)</span>
 <span class="o">.</span><span class="na">reduce</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="o">(</span><span class="n">partial_solution</span><span class="o">,</span> <span class="n">next</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">partial_solution</span> <span class="o">+</span> <span class="n">next</span><span class="o">);</span>
@@ -591,18 +423,8 @@ As an example, let&amp;rsquo;s take the sum of all integers starting from 1 up u
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span> <span class="n">commaSeparated</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
 <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">joining</span><span class="o">(</span><span class="s">&#34;,&#34;</span><span class="o">));</span>
 </code></pre></div><p>At first, streams can appear difficult to grasp, but once you get the hang of it, you&rsquo;ll really enjoy it!</p>
-]]></content>
-		</item>
-		
-		<item>
-			<title>Stream examples Part 1 - Collectors</title>
-			<link>http://www.pieterjd.be/posts/2019-03-31-streams-part1-collectors/</link>
-			<pubDate>Sun, 31 Mar 2019 12:34:19 +0000</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/2019-03-31-streams-part1-collectors/</guid>
-			<description>Streams are quite fun - in short: it&amp;rsquo;s a different approach to writing loops. Suppose you have a List of Strings and you want to filter out the String starting with an &amp;lsquo;s&amp;rsquo; and put them in a new List.
-List&amp;lt;String&amp;gt; sStrings = new ArrayList&amp;lt;&amp;gt;(); for(int i = 0; i &amp;lt; strings.size(); i++){ if(strings.get(i).startsWith(&amp;#39;s&amp;#39;)){ //do something with strings starting with s  sStrings.add(strings.get(i)); } } Although still readable, there is a lot of redundant code: the for loop itself with the counter and condition, the if statement.</description>
-			<content type="html"><![CDATA[<p>Streams are quite fun - in short: it&rsquo;s a different approach to writing loops. Suppose you have a List of Strings and you want to filter out the String starting with an &lsquo;s&rsquo; and put them in a new List.</p>
+]]></content></item><item><title>Stream examples Part 1 - Collectors</title><link>http://www.pieterjd.be/posts/2019-03-31-streams-part1-collectors/</link><pubDate>Sun, 31 Mar 2019 12:34:19 +0000</pubDate><guid>http://www.pieterjd.be/posts/2019-03-31-streams-part1-collectors/</guid><description>Streams are quite fun - in short: it&amp;rsquo;s a different approach to writing loops. Suppose you have a List of Strings and you want to filter out the String starting with an &amp;rsquo;s' and put them in a new List.
+List&amp;lt;String&amp;gt; sStrings = new ArrayList&amp;lt;&amp;gt;(); for(int i = 0; i &amp;lt; strings.size(); i++){ if(strings.get(i).startsWith(&amp;#39;s&amp;#39;)){ //do something with strings starting with s sStrings.add(strings.get(i)); } } Although still readable, there is a lot of redundant code: the for loop itself with the counter and condition, the if statement.</description><content type="html"><![CDATA[<p>Streams are quite fun - in short: it&rsquo;s a different approach to writing loops. Suppose you have a List of Strings and you want to filter out the String starting with an &rsquo;s' and put them in a new List.</p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">sStrings</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
 <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">strings</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++){</span>
     <span class="k">if</span><span class="o">(</span><span class="n">strings</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">startsWith</span><span class="o">(</span><span class="sc">&#39;s&#39;</span><span class="o">)){</span>
@@ -614,27 +436,17 @@ List&amp;lt;String&amp;gt; sStrings = new ArrayList&amp;lt;&amp;gt;(); for(int i
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">sStrings</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
   <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="sc">&#39;s&#39;</span><span class="o">))</span>
   <span class="n">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
-</code></pre></div><p>Inside the filter method, you have a function - this has the same meaning as in mathematics: you have some inputs, the functions does it magic and something different comes out. In this case, the function takes a String and outputs true when the String starts with an &lsquo;s&rsquo;.</p>
-<p>This filter generates a stream on its own, in this case a stream of Strings all starting with an &lsquo;s&rsquo;. You can collect the results, in this case a List.</p>
-<p>Besides filter you also have map, suppose you want the length of all Strings starting with an &lsquo;s&rsquo;. You can just add a map after the filter statement. map also takes a function, in this case a String as input, and it outputs a number, the length of the strings. You can string filter and map calls as much as you want. There is a second map, turning an in into an Integer. It is not mandatory as such with <a href="https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html">autoboxing</a> available, but it shows you can have as much maps as you want.</p>
+</code></pre></div><p>Inside the filter method, you have a function - this has the same meaning as in mathematics: you have some inputs, the functions does it magic and something different comes out. In this case, the function takes a String and outputs true when the String starts with an &rsquo;s'.</p>
+<p>This filter generates a stream on its own, in this case a stream of Strings all starting with an &rsquo;s'. You can collect the results, in this case a List.</p>
+<p>Besides filter you also have map, suppose you want the length of all Strings starting with an &rsquo;s'. You can just add a map after the filter statement. map also takes a function, in this case a String as input, and it outputs a number, the length of the strings. You can string filter and map calls as much as you want. There is a second map, turning an in into an Integer. It is not mandatory as such with <a href="https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html">autoboxing</a> available, but it shows you can have as much maps as you want.</p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stringLengths</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
   <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="sc">&#39;s&#39;</span><span class="o">))</span>
   <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">())</span>
   <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
   <span class="n">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
-</code></pre></div>]]></content>
-		</item>
-		
-		<item>
-			<title>Version endpoint in Spring Boot</title>
-			<link>http://www.pieterjd.be/posts/2019-02-05-version-endpoint-in-spring/</link>
-			<pubDate>Tue, 05 Feb 2019 22:48:21 +0000</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/2019-02-05-version-endpoint-in-spring/</guid>
-			<description>When generating your Spring Boot project using Spring Initializr, you already have the spring-boot-maven-plugin plugin in your Maven pom.xmlfile.
+</code></pre></div>]]></content></item><item><title>Version endpoint in Spring Boot</title><link>http://www.pieterjd.be/posts/2019-02-05-version-endpoint-in-spring/</link><pubDate>Tue, 05 Feb 2019 22:48:21 +0000</pubDate><guid>http://www.pieterjd.be/posts/2019-02-05-version-endpoint-in-spring/</guid><description>When generating your Spring Boot project using Spring Initializr, you already have the spring-boot-maven-plugin plugin in your Maven pom.xmlfile.
 Generating build info is done by adding the build-info goal. This results in a /META-INF/build-info.properties file in your resulting package. By default this contains group id, artifact, buildtime and version of the project.
-Off course you can add additional properties in the additionalProperties element. Just like you define properties in any Maven section.</description>
-			<content type="html"><![CDATA[<p>When generating your Spring Boot project using <a href="https://start.spring.io/">Spring Initializr</a>, you already have the <code>spring-boot-maven-plugin</code> plugin in your Maven <code>pom.xml</code>file.</p>
+Off course you can add additional properties in the additionalProperties element. Just like you define properties in any Maven section.</description><content type="html"><![CDATA[<p>When generating your Spring Boot project using <a href="https://start.spring.io/">Spring Initializr</a>, you already have the <code>spring-boot-maven-plugin</code> plugin in your Maven <code>pom.xml</code>file.</p>
 <p>Generating build info is done by adding the <code>build-info</code> goal. This results in a <code>/META-INF/build-info.properties</code> file in your resulting package. By default this contains group id, artifact, buildtime and version of the project.</p>
 <p>Off course you can add additional properties in the <code>additionalProperties</code> element. Just like you define properties in any Maven section.</p>
 <p>Below is the relevant snippet from a Spring Boot application. It contains</p>
@@ -704,19 +516,9 @@ Off course you can add additional properties in the additionalProperties element
 <li>configure Maven and add your custom properties if required</li>
 <li>create a RestController, auto-wire BuildProperties and transform it to <code>java.util.properties</code> , <code>Map</code> or whatever you want</li>
 </ol>
-]]></content>
-		</item>
-		
-		<item>
-			<title>Font Awesome with JHipster</title>
-			<link>http://www.pieterjd.be/posts/2019-01-21-font-awesome-with-jhipster/</link>
-			<pubDate>Mon, 21 Jan 2019 19:24:21 +0000</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/2019-01-21-font-awesome-with-jhipster/</guid>
-			<description>Font Awesome offers vector icons and social logos. As it is one of the most popular icon sets, it is included with JHipster.
+]]></content></item><item><title>Font Awesome with JHipster</title><link>http://www.pieterjd.be/posts/2019-01-21-font-awesome-with-jhipster/</link><pubDate>Mon, 21 Jan 2019 19:24:21 +0000</pubDate><guid>http://www.pieterjd.be/posts/2019-01-21-font-awesome-with-jhipster/</guid><description>Font Awesome offers vector icons and social logos. As it is one of the most popular icon sets, it is included with JHipster.
 Out of the box, only some icons are available for your angular front-end. And it&amp;rsquo;s a bit tricky to find out how these icons are loaded as all Angular components use the fa-icon directive, available in JHipster.
-In this particular use-case, I need to add the shopping basket icon.</description>
-			<content type="html"><![CDATA[<p><a href="https://fontawesome.com/">Font Awesome</a> offers vector icons and social logos. As it is one of the most popular icon sets, it is included with JHipster.</p>
+In this particular use-case, I need to add the shopping basket icon.</description><content type="html"><![CDATA[<p><a href="https://fontawesome.com/">Font Awesome</a> offers vector icons and social logos. As it is one of the most popular icon sets, it is included with JHipster.</p>
 <p>Out of the box, only some icons are available for your angular front-end. And it&rsquo;s a bit tricky to find out how these icons are loaded as all Angular components use the <code>fa-icon</code> directive, available in JHipster.</p>
 <p>In this particular use-case, I need to add the shopping basket icon. After some searching around, I found out all <del>Font</del> <a href="https://fortawesome.com/">Fort Awesome</a> icons are loaded in <code>src/main/webapp/app/vendor.ts</code>. So you just load in the icon of your choice:</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">import</span> <span class="p">{</span>
@@ -728,18 +530,8 @@ In this particular use-case, I need to add the shopping basket icon.</descriptio
 <span class="c1">//snip
 </span><span class="c1"></span><span class="nx">library</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">faShoppingBasket</span><span class="p">);</span>
 </code></pre></div><p>Finally in your component&rsquo;s template, you can include the icon with <code>&lt;fa-icon icon=&quot;shopping-basket&quot;&gt;&lt;/fa-icon&gt;</code>.</p>
-]]></content>
-		</item>
-		
-		<item>
-			<title>I18N with JHipster</title>
-			<link>http://www.pieterjd.be/posts/2019-01-15-i18n-with-jhipster/</link>
-			<pubDate>Tue, 15 Jan 2019 19:24:21 +0000</pubDate>
-			
-			<guid>http://www.pieterjd.be/posts/2019-01-15-i18n-with-jhipster/</guid>
-			<description>I myself am a huge fan of generators - it saves a lot of time. That&amp;rsquo;s why I love JHipster. JHipster not only uses my favourite frameworks such as Spring Boot and Angular, but it provides you with useful features out-of-the-box.
-One of the questions of the wizard guiding you through the generation of your application, is which languages you want to support. For every selected language, all possible labels are generated.</description>
-			<content type="html"><![CDATA[<p>I myself am a huge fan of generators - it saves a lot of time. That&rsquo;s why I love <a href="http://http://jhipster.tech">JHipster</a>. JHipster not only uses my favourite frameworks such as Spring Boot and Angular, but it provides you with useful features out-of-the-box.</p>
+]]></content></item><item><title>I18N with JHipster</title><link>http://www.pieterjd.be/posts/2019-01-15-i18n-with-jhipster/</link><pubDate>Tue, 15 Jan 2019 19:24:21 +0000</pubDate><guid>http://www.pieterjd.be/posts/2019-01-15-i18n-with-jhipster/</guid><description>I myself am a huge fan of generators - it saves a lot of time. That&amp;rsquo;s why I love JHipster. JHipster not only uses my favourite frameworks such as Spring Boot and Angular, but it provides you with useful features out-of-the-box.
+One of the questions of the wizard guiding you through the generation of your application, is which languages you want to support. For every selected language, all possible labels are generated.</description><content type="html"><![CDATA[<p>I myself am a huge fan of generators - it saves a lot of time. That&rsquo;s why I love <a href="http://http://jhipster.tech">JHipster</a>. JHipster not only uses my favourite frameworks such as Spring Boot and Angular, but it provides you with useful features out-of-the-box.</p>
 <p>One of the questions of the wizard guiding you through the generation of your application, is which languages you want to support. For every selected language, all possible labels are generated.</p>
 <p>But what about <em>your</em> labels in <em>your</em> custom developed component? Let&rsquo;s have a look.</p>
 <p>First you need the actual translations. They are located in <code>src/main/webapp/i18n</code>. For each language you selected in the wizard, there is a subfolder named according to a <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO standard</a>: English translations are stored in the <code>en</code>folder, Dutch in <code>nl</code>, &hellip;</p>
@@ -772,8 +564,4 @@ One of the questions of the wizard guiding you through the generation of your ap
         <span class="p">})</span>
 </code></pre></div><p>It contains a <code>MergeJsonWebpackPlugin</code>, you supply it with a pattern of the files to merge and an output file. And this particular pattern is in case of Dutch <code>./src/main/webapp/i18n/nl/*.json</code>. So it includes <strong>all</strong> json files in the directory. And that&rsquo;s why your new, custom translation is automatically available after a rebuild.</p>
 <p>Now go <a href="http://translate.google.com">translate</a> 🙂.</p>
-]]></content>
-		</item>
-		
-	</channel>
-</rss>
+]]></content></item></channel></rss>
