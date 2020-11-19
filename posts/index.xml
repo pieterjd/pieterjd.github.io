@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on pieterjd.be</title><link>http://www.pieterjd.be/posts/</link><description>Recent content in Posts on pieterjd.be</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 18 Nov 2020 19:18:00 +0200</lastBuildDate><atom:link href="http://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Deploy Hugo generated site to Github Pages - Part 2</title><link>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages-part2/</link><pubDate>Wed, 18 Nov 2020 19:18:00 +0200</pubDate><guid>http://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages-part2/</guid><description>I still had to run the ./deploy.sh script after committing changes. Not anymore - I&amp;rsquo;m calling this script in a github action being run after a push to master!
 Some refactoring was required - I moved the command related to pushing the generating site to a separate script, and this script is called from github actions.
-Below is the complete action. Enjoy!
-name:Build and Deployon:push:branches:[master]jobs:build:runs-on:ubuntu-lateststeps:- uses:actions/checkout@v2- name:setup hugouses:peaceiris/actions-hugo@v2with:hugo-version:&amp;#39;0.75.1&amp;#39;- name:build hugo websiterun:hugo --minify- name:deploy to github Pagesrun:| cd $GITHUB_WORKSPACE git config --local user.</description><content type="html"><![CDATA[<p>I still had to run the <code>./deploy.sh</code> script after committing changes. Not anymore - I&rsquo;m calling this script in a github action being run after a push to <code>master</code>!</p>
-<p>Some refactoring was required - I moved the command related to pushing the generating site to a separate script, and this script is called from github actions.</p>
+UPDATE: this did not work at all! I resorted to trying out a lot of push Github Actions but none worked.</description><content type="html"><![CDATA[<p>I still had to run the <code>./deploy.sh</code> script after committing changes. Not anymore - I&rsquo;m calling this script in a github action being run after a push to <code>master</code>!</p>
+<p>Some refactoring was required - I moved the command related to pushing the generating site to a separate script, <del>and this script is called from github actions</del>.</p>
+<p><strong>UPDATE</strong>: this did not work at all! I resorted to trying out a lot of push Github Actions but none worked. Then I stumbled on this specific &lsquo;Deploy to GH Pages&rsquo; action and this one did the trick. Only downside now is the commit message - every commit message is suffixed with the name of my hugo repo and the commit hash.</p>
 <p>Below is the complete action. Enjoy!</p>
 <div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build and Deploy</span><span class="w">
 </span><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
@@ -14,18 +14,30 @@ name:Build and Deployon:push:branches:[master]jobs:build:runs-on:ubuntu-latestst
 </span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
 </span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
 </span><span class="w">      </span>- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v2</span><span class="w">
-</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">setup hugo</span><span class="w">
-</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/actions-hugo@v2</span><span class="w">
-</span><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
-</span><span class="w">          </span><span class="nt">hugo-version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;0.75.1&#39;</span><span class="w">
-</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">build hugo website</span><span class="w">
-</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">hugo --minify</span><span class="w">
-</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">deploy to github Pages</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">setup git submodules</span><span class="w">
 </span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="sd">|
-</span><span class="sd">          cd $GITHUB_WORKSPACE
-</span><span class="sd">          git config --local user.email &#34;action@github.com&#34;
-</span><span class="sd">          git config --local user.name &#34;GitHub Action&#34;
-</span><span class="sd">          ./push-to-ghpages.sh
+</span><span class="sd">          git submodule init
+</span><span class="sd">          git submodule update
+</span><span class="sd">      - name: setup hugo
+</span><span class="sd">        uses: peaceiris/actions-hugo@v2
+</span><span class="sd">        with:
+</span><span class="sd">          hugo-version: &#39;0.75.1&#39;
+</span><span class="sd">      - name: build hugo website
+</span><span class="sd">        run: hugo --minify
+</span><span class="sd">      - name: dump information
+</span><span class="sd">        env:
+</span><span class="sd">          TO_DUMP: ${{ toJson(github.event) }}
+</span><span class="sd">        run: echo &#34;$TO_DUMP&#34;
+</span><span class="sd">      - name: deploy to github Pages
+</span><span class="sd">        uses: peaceiris/actions-gh-pages@v3
+</span><span class="sd">        with:
+</span><span class="sd">          publish_dir: ./pieterjd.github.io
+</span><span class="sd">          external_repository: pieterjd/pieterjd.github.io
+</span><span class="sd">          publish_branch: master
+</span><span class="sd">          personal_token: ${{ secrets.GH_PAGES_ACCESS_TOKEN }}
+</span><span class="sd">          user_name: &#39;github-actions[bot]&#39;
+</span><span class="sd">          user_email: &#39;github-actions[bot]@users.noreply.github.com&#39;
+</span><span class="sd">          full_commit_message: ${{ github.event.head_commit.message }}
 </span></code></pre></div>]]></content></item><item><title>Adventures with Microsoft Azure</title><link>http://www.pieterjd.be/posts/adventures-with-azure/</link><pubDate>Tue, 03 Nov 2020 14:48:32 +0200</pubDate><guid>http://www.pieterjd.be/posts/adventures-with-azure/</guid><description>The last few weeks I spent looking into Microsoft Azure. I followed along with the fundamental learning paths, but I also focused mostly on the spring boot part. Here are some findings.
 Azure Spring Cloud workshop The Azure Spring Cloud Workshop is a nice overview how to deploy your spring boot application to Azure.
 Take-aways Something nowhere mentioned is that you get a Eureka Discover compatible server OOTB :) You just need to add the Eureka Discovery Client dependency.</description><content type="html"><![CDATA[<p>The last few weeks I spent looking into Microsoft Azure. I followed along with the fundamental learning paths, but I also focused mostly on the spring boot part. Here are some findings.</p>
