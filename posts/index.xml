@@ -1,4 +1,130 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on pieterjd.be</title><link>http://www.pieterjd.be/posts/</link><description>Recent content in Posts on pieterjd.be</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 13 Dec 2020 20:54:17 +0200</lastBuildDate><atom:link href="http://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Automate Boring Tasks - Part 1</title><link>http://www.pieterjd.be/posts/automate-boring-tasks-part1/</link><pubDate>Sun, 13 Dec 2020 20:54:17 +0200</pubDate><guid>http://www.pieterjd.be/posts/automate-boring-tasks-part1/</guid><description>With every job come boring tasks. Number one, by far, is filling out timesheets. And if you are unlucky, as I was in case of the yellow telco, you&amp;rsquo;re dealing with an old dud.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on pieterjd.be</title><link>http://www.pieterjd.be/posts/</link><description>Recent content in Posts on pieterjd.be</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 02 Jan 2021 12:22:00 +0200</lastBuildDate><atom:link href="http://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Automate Angular Material Workflow using Schematics</title><link>http://www.pieterjd.be/posts/automate-angular-material-workflow-with-schematics/</link><pubDate>Sat, 02 Jan 2021 12:22:00 +0200</pubDate><guid>http://www.pieterjd.be/posts/automate-angular-material-workflow-with-schematics/</guid><description>What is this post about? I&amp;rsquo;m a huge fan of the SpringBoot backend - Angular frontend combination. And since my UX/UI skills are very limited, I really enjoy working with angular material, a really nice library of common widgets implemented as Angular components using the material design.
+I found myself doing the same thing over and over again:
+generate a table component, using the material table schematic create a service with Angular CLI connecting to a SpringBoot backend to retrieve objects, using the typical CRUD methods (getAll, save, delete, &amp;hellip;) create an interface matching the json obtained from the backend Then I suddenly realized:</description><content type="html"><![CDATA[<h2 id="what-is-this-post-about">What is this post about?</h2>
+<p>I&rsquo;m a huge fan of the SpringBoot backend - Angular frontend combination. And since my UX/UI skills are very limited, I really enjoy working with <a href="https://material.angular.io/">angular material</a>, a really nice library of common widgets implemented as Angular components using the material design.</p>
+<p>I found myself doing the same thing over and over again:</p>
+<ol>
+<li>generate a table component, using the <a href="https://material.angular.io/guide/schematics">material table schematic</a></li>
+<li>create a service with Angular CLI connecting to a SpringBoot backend to retrieve objects, using the typical CRUD methods (getAll, save, delete, &hellip;)</li>
+<li>create an interface matching the json obtained from the backend</li>
+</ol>
+<p>Then I suddenly realized:</p>
+<blockquote>
+<p>If the material table schematic exists and I can generate components using the Angular CLI, shouldn&rsquo;t it be possible to create my own schematic that executes the above steps?</p>
+</blockquote>
+<p>Short answer: Yes, it&rsquo;s possible! A quick search led me to <a href="https://angular.io/guide/schematics-authoring">the offical docs</a> and <a href="https://blog.angular.io/schematics-an-introduction-dc1dfbc2a2b2">a post on the offical Angular blog</a>. Below I describe my journey how I tackled this challenge!</p>
+<h2 id="install--generate-boilerplate">Install &amp; Generate boilerplate</h2>
+<p>This one is easy, just follow along with the steps mentioned in the Angular blogpost.</p>
+<h2 id="calling-material-table-schematics-and-chaining-tasks">Calling Material Table schematics and Chaining tasks</h2>
+<p>As mentioned in the introduction, I need multiple steps</p>
+<ol>
+<li>call the material table schematics</li>
+<li>generate the service and a dummy interface using a template -</li>
+</ol>
+<p>and that happened to be the next section &lsquo;Calling Another Schematic&rsquo;. I had some trouble finding out what the names were of the collection and schematics, but I figured it out based on the <a href="https://material.angular.io/guide/schematics">Angular Material Schematics Guide</a> and <a href="https://github.com/amcdnl/material-schematics">the source code available on github</a>. For future reference:</p>
+<ul>
+<li>schematic collection: <code>@angular/material</code></li>
+<li>schematic name: <code>table</code></li>
+</ul>
+<p>When calling <code>externalSchematic</code>, there is also an <code>options</code> parameter - this corresponds to the parameters you can provide using the CLI. Check the <a href="https://github.com/amcdnl/material-schematics/blob/master/src/table/schema.json">schema.json on github</a>. At the bottom of the file, there is the <code>required</code> entry, an array with the mandatory parameters. You should at least add these to the option parameter you provide to <code>externalSchematic</code>.</p>
+<h2 id="issue---cannot-find-module-errors">issue - cannot find module errors</h2>
+<p>When trying to run my schematic, I ended up having this kind of error:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Cannot find module <span class="s1">&#39;@schematics/angular/utility/change&#39;</span>
+Require stack:
+- /Users/pieterjd/Documents/table-service/node_modules/@angular/cdk/schematics/utils/ast.js
+- /Users/pieterjd/Documents/table-service/node_modules/@angular/cdk/schematics/utils/index.js
+- /Users/pieterjd/Documents/table-service/node_modules/@angular/cdk/schematics/index.js
+- /Users/pieterjd/Documents/table-service/node_modules/@angular/material/schematics/ng-generate/table/index.js
+- /Users/pieterjd/Documents/test-project/node_modules/@angular-devkit/schematics/tools/export-ref.js
+- /Users/pieterjd/Documents/test-project/node_modules/@angular-devkit/schematics/tools/index.js
+- /Users/pieterjd/Documents/test-project/node_modules/@angular/cli/utilities/json-schema.js
+- /Users/pieterjd/Documents/test-project/node_modules/@angular/cli/models/command-runner.js
+- /Users/pieterjd/Documents/test-project/node_modules/@angular/cli/lib/cli/index.js
+</code></pre></div><p>It took some time to figure out, but my project was missing dependencies on <code>@angular/cdk</code>, <code>@angular/material</code>, <code>@angular-devkit</code>, and so on. After fixing this with the necessary <code>npm install --save</code>, my package.json file now contained all these dependencies:</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+<span class="err">//skip</span> <span class="err">other</span> <span class="err">stuff</span>
+<span class="nt">&#34;dependencies&#34;</span><span class="p">:{</span>
+    <span class="nt">&#34;@angular/animations&#34;</span><span class="p">:</span> <span class="s2">&#34;^11.0.5&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;@angular/cdk&#34;</span><span class="p">:</span> <span class="s2">&#34;^11.0.3&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;@angular/cli&#34;</span><span class="p">:</span> <span class="s2">&#34;^11.0.5&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;@angular/common&#34;</span><span class="p">:</span> <span class="s2">&#34;^11.0.5&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;@angular/core&#34;</span><span class="p">:</span> <span class="s2">&#34;^11.0.5&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;@angular/forms&#34;</span><span class="p">:</span> <span class="s2">&#34;^11.0.5&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;@angular/material&#34;</span><span class="p">:</span> <span class="s2">&#34;^11.0.3&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;@angular/platform-browser&#34;</span><span class="p">:</span> <span class="s2">&#34;^11.0.5&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;typescript&#34;</span><span class="p">:</span> <span class="s2">&#34;~4.0.2&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;zone.js&#34;</span><span class="p">:</span> <span class="s2">&#34;^0.11.3&#34;</span>
+<span class="p">}}</span>
+</code></pre></div><h2 id="defining-input-using-schemajson">Defining input using schema.json</h2>
+<p>So far all component and service names were hardcoded. Off course you would like to define them on the CLI. That&rsquo;s where the <code>schema.json</code> file comes in - cf <a href="https://angular.io/guide/schematics-authoring#defining-input-options-with-a-schema-and-interfaces">official docs</a>.</p>
+<p>In this case, only 2 prompts are required:</p>
+<ul>
+<li>Entity name, for instance <code>user</code></li>
+<li>Backend url, for instance <code>/api/v1/users</code></li>
+</ul>
+<p>These two inputs then result in a <code>userlist</code> component (generated with the material table schematics), and a <code>UserService</code>with a <code>HttpCLient</code> instance connecting to <code>/api/v1/users</code> to get, post, &hellip; user instances. Both of them are mandatory.</p>
+<h2 id="generating-the-service-with-templates">Generating the service with templates</h2>
+<p>Generating the boilerplate code is done with templates - not sure, but I think the syntax is based on <a href="https://ejs.co/">EJS</a>.</p>
+<p>A bit complicated, but the name of the template file needs to be named in a specific way. In my case, the template filename is <code>__name@dasherize__.service.ts.template</code>. Whatever is between <code>__</code>is interpolated:</p>
+<ul>
+<li><code>name</code> is a variable</li>
+<li><code>@dasherize</code> is a function applied to the variable before the @.  For instance <code>innerHTML</code>is transformed into <code>inner-html</code></li>
+</ul>
+<p>So if <code>name</code>  has the value <code>actionHero</code>, a file called <code>action-hero.service.ts</code>is generated.</p>
+<p>It&rsquo;s rather easy to define this - check following snippet:</p>
+<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="kr">const</span> <span class="nx">templateSource</span> <span class="o">=</span> <span class="nx">apply</span><span class="p">(</span><span class="nx">url</span><span class="p">(</span><span class="s1">&#39;./files&#39;</span><span class="p">),</span> <span class="p">[</span>
+      <span class="nx">applyTemplates</span><span class="p">({</span>
+        <span class="nx">classify</span>: <span class="kt">strings.classify</span><span class="p">,</span>
+        <span class="nx">dasherize</span>: <span class="kt">strings.dasherize</span><span class="p">,</span>
+        <span class="nx">camelize</span>: <span class="kt">strings.camelize</span><span class="p">,</span>
+        <span class="nx">name</span>: <span class="kt">name</span><span class="p">,</span>
+        <span class="nx">backendUrl</span>: <span class="kt">_options.backendUrl</span>
+      <span class="p">}),</span>
+      <span class="nx">move</span><span class="p">(</span><span class="nx">normalize</span><span class="p">(</span><span class="nx">join</span><span class="p">(</span><span class="nx">_options</span><span class="p">.</span><span class="nx">path</span><span class="p">,</span><span class="nx">_options</span><span class="p">.</span><span class="nx">servicePath</span><span class="p">)</span> <span class="kr">as</span> <span class="kt">string</span><span class="p">))</span>
+    <span class="p">]);</span>
+</code></pre></div><ul>
+<li>All templates are located in the <code>files</code>subfolder</li>
+<li>Next are the rules:
+<ul>
+<li>an object with functions (<code>classify</code>, <code>dasherize</code>, <code>camelize</code>) and variables (<code>name</code>, <code>backendUrl</code>) to be used in the template are provided to <code>applyTemplates</code></li>
+<li>when generation is completed, move the resulting file to some path</li>
+</ul>
+</li>
+</ul>
+<h2 id="issue-cannot-read-property-match-of-undefined">Issue: Cannot read property &lsquo;match&rsquo; of undefined</h2>
+<p>make sure the <code>normalize</code> function is imported from <code>path</code>, not <code>@angular-devkit/core</code>!</p>
+<h2 id="service-template">Service Template</h2>
+<p>Writing the service <a href="https://angular.io/guide/schematics-for-libraries#add-template-files">template</a> is now straightforward - note the mix of the code of an actual service and the templating variables and functions as mentioned in a previous section.</p>
+<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">HttpClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+
+<span class="c1">//dummy &lt;%= classify(name) %&gt; interface so everything compiles
+</span><span class="c1"></span><span class="kr">export</span> <span class="kr">interface</span> <span class="o">&lt;%=</span> <span class="nx">classify</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">%&gt;</span><span class="p">{}</span>
+
+
+<span class="kd">@Injectable</span><span class="p">({</span>
+  <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span>
+<span class="p">})</span>
+<span class="kr">export</span> <span class="kr">class</span> <span class="o">&lt;%=</span> <span class="nx">classify</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">%&gt;</span><span class="nx">Service</span> <span class="p">{</span>
+  <span class="kr">private</span> <span class="nx">URL</span>: <span class="kt">string</span> <span class="o">=</span> <span class="s2">&#34;&lt;%= backendUrl %&gt;&#34;</span><span class="p">;</span>
+  <span class="kr">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">http</span>: <span class="kt">HttpClient</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+  <span class="kr">public</span> <span class="nx">getAll</span><span class="p">()</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;&lt;%=</span> <span class="nx">classify</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">%&gt;</span><span class="p">[]</span><span class="o">&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="kr">get</span><span class="o">&lt;&lt;%=</span> <span class="nx">classify</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">%&gt;</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">URL</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kr">public</span> <span class="nx">save</span><span class="o">&lt;%=</span> <span class="nx">classify</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">%&gt;</span><span class="p">(</span><span class="o">&lt;%=</span> <span class="nx">camelize</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">%&gt;:</span> <span class="o">&lt;%=</span> <span class="nx">classify</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">%&gt;</span><span class="p">)</span><span class="o">:</span> <span class="k">void</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">URL</span><span class="p">,</span> <span class="o">&lt;%=</span> <span class="nx">camelize</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">%&gt;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>That&rsquo;s it - I now have a working schematic that will help me generate boring, tedious boilerplate code!</p>
+<ul>
+<li>A point for improvement: I still need to add manually the new service to the <code>providers</code> section of the <code>app</code> module - this should be possible using schematics as well</li>
+<li>Good to know: if you don&rsquo;t use a parameter of the function, you get a nasty &lsquo;not read&rsquo; warning. Prefix the variable with _ and it disappears 👍</li>
+</ul>
+]]></content></item><item><title>Automate Timesheeting</title><link>http://www.pieterjd.be/posts/automate-timesheeting/</link><pubDate>Sun, 13 Dec 2020 20:54:17 +0200</pubDate><guid>http://www.pieterjd.be/posts/automate-timesheeting/</guid><description>With every job come boring tasks. Number one, by far, is filling out timesheets. And if you are unlucky, as I was in case of the yellow telco, you&amp;rsquo;re dealing with an old dud.
 What old dud? I&amp;rsquo;m talking about fusion by Oracle. It has a horrible interface - even entering a single digit is annoying. On top of that, it was an exotic, buggy, beta version - no one wanted to touch it , including Oracle.</description><content type="html"><![CDATA[<p>With every job come boring tasks. Number one, by far, is filling out timesheets. And if you are unlucky, as I was in case of the yellow telco, you&rsquo;re dealing with an old dud.</p>
 <h2 id="what-old-dud">What old dud?</h2>
 <p>I&rsquo;m talking about fusion by Oracle. It has a horrible interface - even entering a single digit is annoying. On top of that, it was an exotic, buggy, beta version - no one wanted to touch it , including Oracle.</p>
