@@ -125,6 +125,7 @@ Require stack:
 <ul>
 <li>I still need to add manually the new service to the <code>providers</code> section of the <code>app</code> module - this should be possible using schematics as well</li>
 <li>automatically add a route pointing to the generated component containing a material table</li>
+<li>add an optional Snackbar, displaying a success or error message</li>
 </ul>
 </li>
 <li>Good to know: if you don&rsquo;t use a parameter of the function, you get a nasty &lsquo;not read&rsquo; warning. Prefix the variable with _ and it disappears 👍</li>
