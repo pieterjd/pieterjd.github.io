@@ -1,4 +1,42 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on pieterjd.be</title><link>http://www.pieterjd.be/posts/</link><description>Recent content in Posts on pieterjd.be</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 08 Feb 2021 19:31:00 +0200</lastBuildDate><atom:link href="http://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Automate AEM development</title><link>http://www.pieterjd.be/posts/automate-aem-development/</link><pubDate>Mon, 08 Feb 2021 19:31:00 +0200</pubDate><guid>http://www.pieterjd.be/posts/automate-aem-development/</guid><description>When working with AEM, you&amp;rsquo;re confronted with tedious work - writing components with dialogs defined in XML, lots of boiler-plating. Ideal for automation!
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on pieterjd.be</title><link>http://www.pieterjd.be/posts/</link><description>Recent content in Posts on pieterjd.be</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 17 Mar 2021 19:51:17 +0200</lastBuildDate><atom:link href="http://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Simple Jackson Deserializer</title><link>http://www.pieterjd.be/posts/simple-jackson-deserializer/</link><pubDate>Wed, 17 Mar 2021 19:51:17 +0200</pubDate><guid>http://www.pieterjd.be/posts/simple-jackson-deserializer/</guid><description>As I was working on some random data with a ZonedDateTime, it turned out Jackson was unable to deserialize it. How come?
+Why not use Jackson datetime module? The codebase I was working on, did not support the Jackson datetime module. It was also not possible to add this module as all Jackson related code was provided and the vendor stressed very clearly &amp;lsquo;not to mess things up with other versions&amp;rsquo;.</description><content type="html"><![CDATA[<p>As I was working on some random data with a ZonedDateTime, it turned out Jackson was unable to deserialize it. How come?</p>
+<h2 id="why-not-use-jackson-datetime-module">Why not use Jackson datetime module?</h2>
+<p>The codebase I was working on, did not support the Jackson datetime module. It was also not possible to add this module as all Jackson related code was provided and the vendor stressed very clearly &lsquo;not to mess things up with other versions&rsquo;.</p>
+<h2 id="writing-the-deserializer">Writing the Deserializer</h2>
+<p>So I wrote a simple deserializer. It was actually quite easy: datetime&rsquo;s wer in the following format: <code>2020-05-09T23:24:13Z</code></p>
+<p>Luckily the ZonedDateTime offers a <a href="https://docs.oracle.com/javase/8/docs/api/java/time/ZonedDateTime.html#parse-java.lang.CharSequence-">static parse method</a>.</p>
+<p>So it all comes down to this simple class:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">com.fasterxml.jackson.core.JsonParser</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.core.JsonProcessingException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.DeserializationContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.deser.std.StdDeserializer</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.time.ZonedDateTime</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ZonedDateTimeDeserializer</span> <span class="kd">extends</span> <span class="n">StdDeserializer</span><span class="o">&lt;</span><span class="n">ZonedDateTime</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">ZonedDateTimeDeserializer</span><span class="o">(){</span>
+        <span class="k">this</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">protected</span> <span class="nf">ZonedDateTimeDeserializer</span><span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">vc</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">vc</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">ZonedDateTime</span> <span class="nf">deserialize</span><span class="o">(</span><span class="n">JsonParser</span> <span class="n">jsonParser</span><span class="o">,</span> <span class="n">DeserializationContext</span> <span class="n">deserializationContext</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">JsonProcessingException</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">ZonedDateTime</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">jsonParser</span><span class="o">.</span><span class="na">getText</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><h2 id="using-the-deserializer">Using the Deserializer</h2>
+<p>The field I want to deserialize into, needs an additional annotation:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@JsonDeserialize</span><span class="o">(</span><span class="n">using</span> <span class="o">=</span> <span class="n">ZonedDateTimeDeserializer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">private</span> <span class="n">ZonedDateTime</span> <span class="n">date</span><span class="o">;</span>
+</code></pre></div><p>That&rsquo;s it! In summary:</p>
+<ul>
+<li>Write a custom deserializer</li>
+<li>Use it with the <code>@JsonDeserialize</code> annotation</li>
+</ul>
+]]></content></item><item><title>Automate AEM development</title><link>http://www.pieterjd.be/posts/automate-aem-development/</link><pubDate>Mon, 08 Feb 2021 19:31:00 +0200</pubDate><guid>http://www.pieterjd.be/posts/automate-aem-development/</guid><description>When working with AEM, you&amp;rsquo;re confronted with tedious work - writing components with dialogs defined in XML, lots of boiler-plating. Ideal for automation!
 Enter your favorite code generator Yeoman, &amp;ldquo;the Web&amp;rsquo;s Scaffolding ToolFor Modern Webapps&amp;rdquo; is great for this purpose. I came to know this when working on some JHipster project.
 It&amp;rsquo;s very easy to define generator (eg. generate an AEM component) using templates (renderscript, dialog, &amp;hellip;.)
 I&amp;rsquo;ve put things together in the AEM Generator Repo.</description><content type="html"><![CDATA[<p>When working with AEM, you&rsquo;re confronted with tedious work - writing components with dialogs defined in XML, lots of boiler-plating. Ideal for automation!</p>
