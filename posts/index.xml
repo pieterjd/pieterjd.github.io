@@ -602,10 +602,11 @@ Map&amp;lt;String, String&amp;gt; firstToLastMap = persons.</description><conten
 <p>When you want to collect to a Map, you need a function for the key and a function for the value.</p>
 <p>Suppose you have a list of Person objects with a firstname and last name. If you want to map the firstname to the lastname, you would write something like this:</p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">firstToLastMap</span> <span class="o">=</span> <span class="n">persons</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
-<span class="o">.</span><span class="na">toMap</span><span class="o">(</span>
- <span class="n">p</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">.</span><span class="na">getFirstname</span><span class="o">(),</span> <span class="c1">//key mapper function
-</span><span class="c1"></span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">.</span><span class="na">getLastname</span><span class="o">()</span>   <span class="c1">// value mapper function
-</span><span class="c1"></span><span class="o">);</span>
+<span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toMap</span><span class="o">(</span>
+  <span class="n">p</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">.</span><span class="na">getFirstname</span><span class="o">(),</span> <span class="c1">//key mapper function
+</span><span class="c1"></span>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">.</span><span class="na">getLastname</span><span class="o">()</span>   <span class="c1">// value mapper function
+</span><span class="c1"></span> <span class="o">)</span>
+<span class="o">);</span>
 </code></pre></div><h1 id="grouping">Grouping</h1>
 <p>Suppose you have a List of strings. Per possible length, you want to know which Strings have
 this particular length. Then you would group all Strings in the list by their length.</p>
