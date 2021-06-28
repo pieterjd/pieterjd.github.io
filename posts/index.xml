@@ -1,4 +1,25 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on pieterjd.be</title><link>https://www.pieterjd.be/posts/</link><description>Recent content in Posts on pieterjd.be</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 17 Mar 2021 19:51:17 +0200</lastBuildDate><atom:link href="https://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Simple Jackson Deserializer</title><link>https://www.pieterjd.be/posts/simple-jackson-deserializer/</link><pubDate>Wed, 17 Mar 2021 19:51:17 +0200</pubDate><guid>https://www.pieterjd.be/posts/simple-jackson-deserializer/</guid><description>As I was working on some random data with a ZonedDateTime, it turned out Jackson was unable to deserialize it. How come?
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on pieterjd.be</title><link>https://www.pieterjd.be/posts/</link><description>Recent content in Posts on pieterjd.be</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 27 Jun 2021 12:33:00 +0200</lastBuildDate><atom:link href="https://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Summarize Latest Changes In Your Codebase</title><link>https://www.pieterjd.be/posts/deploy-summary/</link><pubDate>Sun, 27 Jun 2021 12:33:00 +0200</pubDate><guid>https://www.pieterjd.be/posts/deploy-summary/</guid><description>You are probably familiar with this workflow
+work on different stories pull requests are approved and merged deploy changes inform the team For the last part, you check your todo list to get a nice description instead of some mysterious ID. You could do this manually, but this is very time-consuming, not to mention mind-numbing. Scripts to the rescue!
+High level approach Fetch the version information of the environment you want to deploy to.</description><content type="html"><![CDATA[<p>You are probably familiar with this workflow</p>
+<ol>
+<li>work on different stories</li>
+<li>pull requests are approved and merged</li>
+<li>deploy changes</li>
+<li>inform the team</li>
+</ol>
+<p>For the last part, you check your todo list to get a nice description instead of some mysterious ID. You could do this manually, but this is very time-consuming, not to mention mind-numbing. Scripts to the rescue!</p>
+<h2 id="high-level-approach">High level approach</h2>
+<ol>
+<li>Fetch the version information of the environment you want to deploy to. If not yet available, I suggest you create a version endpoint and include the commit id of the lastest commit. If you work with the Java/Maven combo, then just include the <a href="https://github.com/git-commit-id/git-commit-id-maven-plugin">Git Commit ID Maven Plugin</a></li>
+<li>Get all information from all commits starting from the commit id, retrieved from the version id up till the last one. Assuming you use git (and you should!) then you can use the following command</li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git log &lt;commitIdFromVersionEndpoint&gt;..HEAD --format<span class="o">=</span>format:<span class="s2">&#34;%s&#34;</span>
+</code></pre></div><ol>
+<li>Do some regex magic to extract the story id, task id, &hellip;.</li>
+<li>Connect to your backlog (REST, commandline, &hellip;.) to retrieve the information of the story id</li>
+<li>print on the console</li>
+</ol>
+]]></content></item><item><title>Simple Jackson Deserializer</title><link>https://www.pieterjd.be/posts/simple-jackson-deserializer/</link><pubDate>Wed, 17 Mar 2021 19:51:17 +0200</pubDate><guid>https://www.pieterjd.be/posts/simple-jackson-deserializer/</guid><description>As I was working on some random data with a ZonedDateTime, it turned out Jackson was unable to deserialize it. How come?
 Why not use Jackson datetime module? The codebase I was working on, did not support the Jackson datetime module. It was also not possible to add this module as all Jackson related code was provided and the vendor stressed very clearly &amp;lsquo;not to mess things up with other versions&amp;rsquo;.</description><content type="html"><![CDATA[<p>As I was working on some random data with a ZonedDateTime, it turned out Jackson was unable to deserialize it. How come?</p>
 <h2 id="why-not-use-jackson-datetime-module">Why not use Jackson datetime module?</h2>
 <p>The codebase I was working on, did not support the Jackson datetime module. It was also not possible to add this module as all Jackson related code was provided and the vendor stressed very clearly &lsquo;not to mess things up with other versions&rsquo;.</p>
