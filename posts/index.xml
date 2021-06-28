@@ -10,14 +10,22 @@ High level approach Fetch the version information of the environment you want to
 <p>For the last part, you check your todo list to get a nice description instead of some mysterious ID. You could do this manually, but this is very time-consuming, not to mention mind-numbing. Scripts to the rescue!</p>
 <h2 id="high-level-approach">High level approach</h2>
 <ol>
-<li>Fetch the version information of the environment you want to deploy to. If not yet available, I suggest you create a version endpoint and include the commit id of the lastest commit. If you work with the Java/Maven combo, then just include the <a href="https://github.com/git-commit-id/git-commit-id-maven-plugin">Git Commit ID Maven Plugin</a></li>
-<li>Get all information from all commits starting from the commit id, retrieved from the version id up till the last one. Assuming you use git (and you should!) then you can use the following command</li>
-</ol>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git log &lt;commitIdFromVersionEndpoint&gt;..HEAD --format<span class="o">=</span>format:<span class="s2">&#34;%s&#34;</span>
-</code></pre></div><ol>
-<li>Do some regex magic to extract the story id, task id, &hellip;.</li>
-<li>Connect to your backlog (REST, commandline, &hellip;.) to retrieve the information of the story id</li>
-<li>print on the console</li>
+<li>
+<p>Fetch the version information of the environment you want to deploy to. If not yet available, I suggest you create a version endpoint and include the commit id of the lastest commit. If you work with the Java/Maven combo, then just include the <a href="https://github.com/git-commit-id/git-commit-id-maven-plugin">Git Commit ID Maven Plugin</a></p>
+</li>
+<li>
+<p>Get all information from all commits starting from the commit id, retrieved from the version id up till the last one. Assuming you use git (and you should!) then you can use the following command</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"> git log &lt;commitIdFromVersionEndpoint&gt;..HEAD --format<span class="o">=</span>format:<span class="s2">&#34;%s&#34;</span>
+</code></pre></div></li>
+<li>
+<p>Do some regex magic to extract the story id, task id, &hellip;.</p>
+</li>
+<li>
+<p>Connect to your backlog (REST, commandline, &hellip;.) to retrieve the information of the story id</p>
+</li>
+<li>
+<p>print on the console</p>
+</li>
 </ol>
 ]]></content></item><item><title>Simple Jackson Deserializer</title><link>https://www.pieterjd.be/posts/simple-jackson-deserializer/</link><pubDate>Wed, 17 Mar 2021 19:51:17 +0200</pubDate><guid>https://www.pieterjd.be/posts/simple-jackson-deserializer/</guid><description>As I was working on some random data with a ZonedDateTime, it turned out Jackson was unable to deserialize it. How come?
 Why not use Jackson datetime module? The codebase I was working on, did not support the Jackson datetime module. It was also not possible to add this module as all Jackson related code was provided and the vendor stressed very clearly &amp;lsquo;not to mess things up with other versions&amp;rsquo;.</description><content type="html"><![CDATA[<p>As I was working on some random data with a ZonedDateTime, it turned out Jackson was unable to deserialize it. How come?</p>
