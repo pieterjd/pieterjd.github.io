@@ -1,0 +1,22 @@
+---
+title: "Summarize Latest Changes In Your Codebase"
+date: 2021-06-27T12:33:00+02:00
+---
+You are probably familiar with this workflow
+1. work on different stories
+1. pull requests are approved and merged
+1. deploy changes
+1. inform the team
+
+For the last part, you check your todo list to get a nice description instead of some mysterious ID. You could do this manually, but this is very time-consuming, not to mention mind-numbing. Scripts to the rescue!
+
+## High level approach
+
+1. Fetch the version information of the environment you want to deploy to. If not yet available, I suggest you create a version endpoint and include the commit id of the lastest commit. If you work with the Java/Maven combo, then just include the [Git Commit ID Maven Plugin](https://github.com/git-commit-id/git-commit-id-maven-plugin)
+1. Get all information from all commits starting from the commit id, retrieved from the version id up till the last one. Assuming you use git (and you should!) then you can use the following command
+  ```bash
+  git log <commitIdFromVersionEndpoint>..HEAD --format=format:"%s"
+  ```
+1. Do some regex magic to extract the story id, task id, ....
+1. Connect to your backlog (REST, commandline, ....) to retrieve the information of the story id
+1. print on the console
