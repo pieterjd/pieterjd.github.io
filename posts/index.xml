@@ -54,6 +54,56 @@ High level approach Fetch the version information of the environment you want to
 <p>print on the console</p>
 </li>
 </ol>
+]]></content></item><item><title>Templating as Automation</title><link>https://www.pieterjd.be/posts/templating/</link><pubDate>Sat, 17 Apr 2021 19:33:17 +0200</pubDate><guid>https://www.pieterjd.be/posts/templating/</guid><description>In this post, I&amp;rsquo;ll cover different examples of what I like to call templating. Doing the same over and over again, but only few parts change each iteration.
+Environment Variables While working on integrating an API, I had to authenticate with a Bearer token in the authentication header. These tokens are typically short-lived, so they change multiple times a day.
+As part of the integration, I write down the API calls in Typora, a very nice markdown editor.</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll cover different examples of what I like to call <em>templating</em>. Doing the same over and over again, but only few parts change each iteration.</p>
+<h2 id="environment-variables">Environment Variables</h2>
+<p>While working on integrating an API, I had to authenticate with a Bearer token in the authentication header. These tokens are typically short-lived, so they change multiple times a day.</p>
+<p>As part of the integration, I write down the API calls in <code>Typora</code>, a very nice markdown editor. I really like I can add code snippets that are being highlighted, it&rsquo;s easy to work with, so it&rsquo;s an ideal tool for taking notes that I can later refer to. A typical entry would be like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">http <span class="s1">&#39;Authentication: Bearer 123456789...XYZ&#39;</span> http: //www.example.com
+</code></pre></div><p>A typical workflow is copying the call from my markdown notes and execute them in the shell. Off course the bearer token has expired in the meantime, so I have to request a new token, update my notes and copy again.</p>
+<p>And then it hit me: why not replace the bearer token in my notes with environment variables? That way I can just copy and paste the command, and if the token is expired, I can just update it without changing my notes.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">TOKEN</span><span class="o">=</span>123456789...XYZ <span class="c1"># update the bearer token if expired</span>
+http <span class="s2">&#34;Authentication: Bearer </span><span class="nv">$TOKEN</span><span class="s2">&#34;</span> http://www.example.com
+</code></pre></div><h2 id="sql-statement-generation">SQL statement generation</h2>
+<p>Currently working on a new Java application with typical user roles.</p>
+<p>For developing and testing purposes it is useful to have a dedicated user for each role. In this particular case this requires a row to be added to the <code>user</code> and <code>user_roles</code> tables. Not that hard, but there are 5 roles, for each role 2 queries meaning a total of 10 queries that differ on only a few places, being the <code>email</code> address and the <code>credential</code> value.</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">sql</span> <span class="k">insert</span> <span class="k">into</span> <span class="o">`</span><span class="k">user</span><span class="o">`</span> <span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">is_active</span><span class="p">,</span> <span class="n">created_at</span><span class="p">,</span> <span class="n">updated_at</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;admin@example.com&#39;</span><span class="p">,</span> <span class="n">sha1</span><span class="p">(</span><span class="s1">&#39;pass&#39;</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">now</span><span class="p">(),</span> <span class="n">now</span><span class="p">()</span> <span class="p">);</span>
+
+<span class="k">insert</span> <span class="k">into</span> <span class="n">user_credential</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">credential</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">created_at</span><span class="p">,</span><span class="n">updated_at</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="n">LAST_INSERT_ID</span><span class="p">(),</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">now</span><span class="p">(),</span><span class="n">now</span><span class="p">());</span>
+</code></pre></div><p>So it is Powershell to the rescue, more specific the templating functionality.</p>
+<p>In powershell you can define placeholders between curly brackets around an index (zero-based). Next you can format the template while providing the values for each placeholder - the <code>-f</code> is shorthand for <code>format</code> and then you provide all values separated by commas. This <code>$_</code> is a special variable in powershell, it is the currently processed value of the array. In the first iteration, it will have the value <code>admin</code>, the next iteration the value <code>press</code>, and so on.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nv">$sql_template</span> <span class="p">=</span> <span class="sh">@&#34;
+</span><span class="sh">insert into `user`
+</span><span class="sh">(email, password, is_active, created_at, updated_at)
+</span><span class="sh">values(&#39;{0}@example.com&#39;, sha1(&#39;pass&#39;), 1, now(), now() );
+</span><span class="sh">
+</span><span class="sh">insert into user_credential
+</span><span class="sh">(user_id,credential,value,created_at,updated_at)
+</span><span class="sh">values (LAST_INSERT_ID(),&#39;{0}&#39;,1,now(),now());
+</span><span class="sh">&#34;@</span>
+
+<span class="c"># loop over roles array and provide each one of them to the template.</span>
+<span class="p">@(</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span><span class="s1">&#39;press&#39;</span><span class="p">,</span><span class="s1">&#39;super-admin&#39;</span><span class="p">,</span><span class="s1">&#39;mice&#39;</span><span class="p">,</span><span class="s1">&#39;spot&#39;</span><span class="p">)</span>
+  <span class="p">|%{</span><span class="nv">$sql_template</span> <span class="o">-f</span> <span class="nv">$_</span><span class="p">}</span>
+</code></pre></div><p>Of course this does not work on all environments because the list of user roles is different for each environment. So you can rewrite this Powershell template with an actual SQL statement, using the <code>CONCAT</code>function. It does not look pretty, but it gets the job done.</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="k">distinct</span> <span class="n">uc</span><span class="p">.</span><span class="n">credential</span> <span class="k">as</span> <span class="k">c</span><span class="p">,</span>
+<span class="n">CONCAT</span><span class="p">(</span><span class="s2">&#34;insert into `user` ( email, password,
+</span><span class="s2">is_active, created_at, updated_at)
+</span><span class="s2">values(&#39;&#34;</span><span class="p">,</span>  <span class="n">credential</span><span class="p">,</span> <span class="s2">&#34;@emakina.com&#39;, sha1(&#39;pass&#39;),
+</span><span class="s2">1, now(), now());&#34;</span><span class="p">)</span>
+<span class="k">as</span> <span class="n">command</span>
+<span class="k">from</span> <span class="n">user_credential</span> <span class="n">uc</span>
+<span class="k">UNION</span>
+<span class="k">SELECT</span> <span class="k">distinct</span> <span class="n">uc</span><span class="p">.</span><span class="n">credential</span> <span class="k">as</span> <span class="k">c</span><span class="p">,</span>
+<span class="n">CONCAT</span><span class="p">(</span><span class="s2">&#34;insert into user_credential (user_id, credential,
+</span><span class="s2">value, created_at, updated_at)
+</span><span class="s2">values (LAST_INSERT_ID(), &#39;&#34;</span><span class="p">,</span>  <span class="n">credential</span><span class="p">,</span><span class="s2">&#34;&#39;, 1, now(), now());&#34;</span><span class="p">)</span>
+<span class="k">as</span> <span class="n">command</span>
+<span class="k">from</span> <span class="n">user_credential</span> <span class="n">uc</span>
+<span class="k">order</span> <span class="k">by</span> <span class="k">c</span><span class="p">;</span>
+</code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>Templating can help a lot with reducing annoying tasks. Powershell (or any language/tool that supports some kind of templating) is a great help, if not available, CONCAT functions go a long way as well</p>
 ]]></content></item><item><title>Simple Jackson Deserializer</title><link>https://www.pieterjd.be/posts/simple-jackson-deserializer/</link><pubDate>Wed, 17 Mar 2021 19:51:17 +0200</pubDate><guid>https://www.pieterjd.be/posts/simple-jackson-deserializer/</guid><description>As I was working on some random data with a ZonedDateTime, it turned out Jackson was unable to deserialize it. How come?
 Why not use Jackson datetime module? The codebase I was working on, did not support the Jackson datetime module. It was also not possible to add this module as all Jackson related code was provided and the vendor stressed very clearly &amp;lsquo;not to mess things up with other versions&amp;rsquo;.</description><content type="html"><![CDATA[<p>As I was working on some random data with a ZonedDateTime, it turned out Jackson was unable to deserialize it. How come?</p>
 <h2 id="why-not-use-jackson-datetime-module">Why not use Jackson datetime module?</h2>
