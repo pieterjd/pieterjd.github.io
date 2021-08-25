@@ -54,6 +54,12 @@ High level approach Fetch the version information of the environment you want to
 <p>print on the console</p>
 </li>
 </ol>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://github.com/git-commit-id/git-commit-id-maven-plugin">Maven Git Commit ID Plugin</a></li>
+<li><a href="https://git-scm.com/docs/git-log">Git Log command</a></li>
+<li><a href="https://www.atlassian.com/blog/jira-software/jql-the-most-flexible-way-to-search-jira-14">Getting started with JQL</a> - <a href="https://support.atlassian.com/jira-service-management-cloud/docs/use-advanced-search-with-jira-query-language-jql/">Advanced Search with JQL</a></li>
+</ul>
 ]]></content></item><item><title>Templating as Automation</title><link>https://www.pieterjd.be/posts/templating/</link><pubDate>Sat, 17 Apr 2021 19:33:17 +0200</pubDate><guid>https://www.pieterjd.be/posts/templating/</guid><description>In this post, I&amp;rsquo;ll cover different examples of what I like to call templating. Doing the same over and over again, but only few parts change each iteration.
 Environment Variables While working on integrating an API, I had to authenticate with a Bearer token in the authentication header. These tokens are typically short-lived, so they change multiple times a day.
 As part of the integration, I write down the API calls in Typora, a very nice markdown editor.</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll cover different examples of what I like to call <em>templating</em>. Doing the same over and over again, but only few parts change each iteration.</p>
@@ -104,6 +110,16 @@ http <span class="s2">&#34;Authentication: Bearer </span><span class="nv">$TOKEN
 <span class="k">order</span> <span class="k">by</span> <span class="k">c</span><span class="p">;</span>
 </code></pre></div><h2 id="conclusion">Conclusion</h2>
 <p>Templating can help a lot with reducing annoying tasks. Powershell (or any language/tool that supports some kind of templating) is a great help, if not available, CONCAT functions go a long way as well</p>
+<h2 id="references">References</h2>
+<ul>
+<li>Environment variables: <a href="https://www.shell-tips.com/bash/environment-variables/">Bash (Linux / Mac)</a> - <a href="https://ss64.com/nt/syntax-variables.html">DOS / Windows</a></li>
+<li><a href="https://docs.microsoft.com/en-us/learn/modules/introduction-to-powershell/">Introduction to Powershell</a> - <a href="https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-string-substitutions?view=powershell-7.1">Everything you wanted to know about variable substitution in strings in Powershell</a>
+<ul>
+<li>Download Powershell: <a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-macos?view=powershell-7.1">Mac</a> <a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7.1">Windows</a> <a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-7.1">Linux</a></li>
+</ul>
+</li>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat">(My)SQL Concat</a> - <a href="https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_group-concat">(My)SQL Group Concat</a></li>
+</ul>
 ]]></content></item><item><title>Simple Jackson Deserializer</title><link>https://www.pieterjd.be/posts/simple-jackson-deserializer/</link><pubDate>Wed, 17 Mar 2021 19:51:17 +0200</pubDate><guid>https://www.pieterjd.be/posts/simple-jackson-deserializer/</guid><description>As I was working on some random data with a ZonedDateTime, it turned out Jackson was unable to deserialize it. How come?
 Why not use Jackson datetime module? The codebase I was working on, did not support the Jackson datetime module. It was also not possible to add this module as all Jackson related code was provided and the vendor stressed very clearly &amp;lsquo;not to mess things up with other versions&amp;rsquo;.</description><content type="html"><![CDATA[<p>As I was working on some random data with a ZonedDateTime, it turned out Jackson was unable to deserialize it. How come?</p>
 <h2 id="why-not-use-jackson-datetime-module">Why not use Jackson datetime module?</h2>
@@ -157,6 +173,10 @@ I&amp;rsquo;ve put things together in the AEM Generator Repo.</description><cont
 <li>AEM Page with <strong>Ipsum Lorem</strong> content</li>
 </ul>
 <p>Check out the repository for instruction on how to install and run the generators.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://yeoman.io">Yeoman</a> - <a href="https://yeoman.io/authoring/">Creating a generator</a></li>
+</ul>
 ]]></content></item><item><title>Minified Javascript in AEM Clientlibs breaks the build</title><link>https://www.pieterjd.be/posts/minified-javascript-in-aem-clientlib/</link><pubDate>Sat, 30 Jan 2021 21:25:00 +0200</pubDate><guid>https://www.pieterjd.be/posts/minified-javascript-in-aem-clientlib/</guid><description>Recently we had to integrate third-party minified javascript and css in an AEM client library. Unfortunatly this broke the build on Adobe Cloud. How did we solve this?
 What&amp;rsquo;s the problem? Minification! From our client, we received already minified javascript and styling we needed to integrate in the AEM website. Nothing too difficult, but the build on AEM Cloud finished with errors. On top of that, we could not download the logs, so we really were in the dark here.</description><content type="html"><![CDATA[<p>Recently we had to integrate third-party minified javascript and css in an AEM client library. Unfortunatly this broke the build on Adobe Cloud. How did we solve this?</p>
 <h2 id="whats-the-problem-minification">What&rsquo;s the problem? Minification!</h2>
@@ -310,6 +330,13 @@ What old dud? I&amp;rsquo;m talking about fusion by Oracle. It has a horrible in
 <p>As things go in big corporations, I also had to book my time spent in Jira. As I&rsquo;m allergic to doing things twice (entering time spent in both Jira and Fusion), I started looking for a solution. And I Found one: Jira exposes a REST api - one of the operations is to execute a query for time spent.</p>
 <p>The new workflow is now pulling in all my time spent together with the timesheet code from Jira, and then feeding this in the Selenium code.</p>
 <p>And while my colleagues were stressing out about filling out their timesheet, I just kicked off my script, went to the kitchen for fresh coffee and by the time I was back at my desk my timesheet was completed and ready to submit.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://jquery.com/">Jquery</a></li>
+<li><a href="https://www.atlassian.com/blog/jira-software/jql-the-most-flexible-way-to-search-jira-14">Getting started with JQL</a> - <a href="https://support.atlassian.com/jira-service-management-cloud/docs/use-advanced-search-with-jira-query-language-jql/">Advanced Search with JQL</a></li>
+<li><a href="https://www.w3schools.com/python/default.asp">W3School Python Tutorial</a> - <a href="https://docs.python.org/3/library/json.html">Reading JSON</a></li>
+<li><a href="https://selenium-python.readthedocs.io/">Selenium with Python</a></li>
+</ul>
 ]]></content></item><item><title>Deploy Hugo generated site to Github Pages - Part 2</title><link>https://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages-part2/</link><pubDate>Wed, 18 Nov 2020 19:18:00 +0200</pubDate><guid>https://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages-part2/</guid><description>I still had to run the ./deploy.sh script after committing changes. Not anymore - I&amp;rsquo;m calling this script in a github action being run after a push to master!
 Some refactoring was required - I moved the command related to pushing the generating site to a separate script, and this script is called from github actions.
 UPDATE: this did not work at all! I resorted to trying out a lot of push Github Actions but none worked.</description><content type="html"><![CDATA[<p>I still had to run the <code>./deploy.sh</code> script after committing changes. Not anymore - I&rsquo;m calling this script in a github action being run after a push to <code>master</code>!</p>
@@ -350,7 +377,13 @@ UPDATE: this did not work at all! I resorted to trying out a lot of push Github 
 </span><span class="sd">          user_name: &#39;github-actions[bot]&#39;
 </span><span class="sd">          user_email: &#39;github-actions[bot]@users.noreply.github.com&#39;
 </span><span class="sd">          full_commit_message: ${{ github.event.head_commit.message }}
-</span></code></pre></div>]]></content></item><item><title>Adventures with Microsoft Azure</title><link>https://www.pieterjd.be/posts/adventures-with-azure/</link><pubDate>Tue, 03 Nov 2020 14:48:32 +0200</pubDate><guid>https://www.pieterjd.be/posts/adventures-with-azure/</guid><description>The last few weeks I spent looking into Microsoft Azure. I followed along with the fundamental learning paths, but I also focused mostly on the spring boot part. Here are some findings.
+</span></code></pre></div><h2 id="references">References</h2>
+<ul>
+<li><a href="https://pages.github.com/">Github Pages</a></li>
+<li><a href="https://gohugo.io/">Hugo</a></li>
+<li><a href="https://github.com/features/actions">Github Actions</a> - <a href="https://docs.github.com/en/actions">Github Actions Docs</a></li>
+</ul>
+]]></content></item><item><title>Adventures with Microsoft Azure</title><link>https://www.pieterjd.be/posts/adventures-with-azure/</link><pubDate>Tue, 03 Nov 2020 14:48:32 +0200</pubDate><guid>https://www.pieterjd.be/posts/adventures-with-azure/</guid><description>The last few weeks I spent looking into Microsoft Azure. I followed along with the fundamental learning paths, but I also focused mostly on the spring boot part. Here are some findings.
 Azure Spring Cloud workshop The Azure Spring Cloud Workshop is a nice overview how to deploy your spring boot application to Azure.
 Take-aways Something nowhere mentioned is that you get a Eureka Discover compatible server OOTB :) You just need to add the Eureka Discovery Client dependency.</description><content type="html"><![CDATA[<p>The last few weeks I spent looking into Microsoft Azure. I followed along with the fundamental learning paths, but I also focused mostly on the spring boot part. Here are some findings.</p>
 <h2 id="azure-spring-cloud-workshop">Azure Spring Cloud workshop</h2>
@@ -537,7 +570,12 @@ git commit -m <span class="s2">&#34;</span><span class="nv">$commsg</span><span 
 <span class="c1"># Push source and build repos.</span>
 git push origin master
 
-</code></pre></div>]]></content></item><item><title>Moving from Jekyll to Hugo</title><link>https://www.pieterjd.be/posts/moving-from-jekyll-to-hugo/</link><pubDate>Fri, 01 May 2020 20:54:17 +0200</pubDate><guid>https://www.pieterjd.be/posts/moving-from-jekyll-to-hugo/</guid><description>I&amp;rsquo;ve been using Jekyll for a few years now. Main reason to use it, is its nice integration with Github Pages. However the frustrations now have outweighted the advantages.
+</code></pre></div><h2 id="references">References</h2>
+<ul>
+<li><a href="https://pages.github.com/">Github Pages</a></li>
+<li><a href="https://gohugo.io/">Hugo</a></li>
+</ul>
+]]></content></item><item><title>Moving from Jekyll to Hugo</title><link>https://www.pieterjd.be/posts/moving-from-jekyll-to-hugo/</link><pubDate>Fri, 01 May 2020 20:54:17 +0200</pubDate><guid>https://www.pieterjd.be/posts/moving-from-jekyll-to-hugo/</guid><description>I&amp;rsquo;ve been using Jekyll for a few years now. Main reason to use it, is its nice integration with Github Pages. However the frustrations now have outweighted the advantages.
 Not so cool What annoyed me tremendously is getting Jekyll to run. All the ruby issues were hard to solve for me.
 Next in line is how to structure the content. As long as you only want to blog, Jekyll is good enough.</description><content type="html"><![CDATA[<p>I&rsquo;ve been using Jekyll for a few years now. Main reason to use it, is its nice integration with Github Pages. However the frustrations now have outweighted the advantages.</p>
 <h2 id="not-so-cool">Not so cool</h2>
