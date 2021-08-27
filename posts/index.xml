@@ -51,13 +51,58 @@ High level approach Fetch the version information of the environment you want to
 <p>Connect to your backlog (REST, commandline, &hellip;.) to retrieve the information of the story id</p>
 </li>
 <li>
-<p>print on the console</p>
+<p>print on the console and copy to clipboard</p>
 </li>
 </ol>
+<h2 id="example-script">Example script</h2>
+<p>As I am a fan of powershell, this was my go to language to implement this workflow.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="c"># --- helper functions ---</span>
+<span class="c"># get all commit messages starting from the given hash</span>
+<span class="k">function</span> <span class="nb">get-commits</span><span class="p">(</span><span class="nv">$fromHash</span><span class="p">){</span>
+  <span class="nv">$commits</span> <span class="p">=</span> <span class="p">&amp;</span> <span class="s2">&#34;git&#34;</span> <span class="p">@(</span><span class="s2">&#34;log&#34;</span><span class="p">,</span><span class="s2">&#34;$fromHash..HEAD&#34;</span><span class="p">,</span> <span class="s2">&#34;--format=format:&#34;&#34;%s&#34;&#34;&#34;</span><span class="p">)</span>
+  <span class="k">return</span> <span class="nv">$commits</span>
+<span class="p">}</span>
+
+<span class="c"># $ticketId: the Jira ticket id</span>
+<span class="c"># $prefix: prefix for the message that will be returned - empty by default</span>
+<span class="k">function</span> <span class="nb">get-description</span><span class="p">(</span><span class="nv">$ticketId</span><span class="p">,</span><span class="nv">$prefix</span><span class="p">=</span><span class="s1">&#39;&#39;</span><span class="p">){</span>
+<span class="nv">$url</span> <span class="p">=</span> <span class="s2">&#34;https://&lt;replace with jira url&gt;/rest/api/2/search?jql=issue={0}&amp;fields=summary,parent&#34;</span> <span class="o">-f</span> <span class="nv">$ticketId</span>
+<span class="nv">$response</span> <span class="p">=</span> <span class="p">(</span><span class="nb">curl </span><span class="n">-u</span> <span class="p">&lt;</span><span class="n">your</span> <span class="n">credential</span><span class="p">&gt;</span> <span class="nv">$url</span> <span class="n">-s</span><span class="p">)</span> <span class="p">|</span> <span class="nb">ConvertFrom-json</span>
+
+<span class="nv">$summary</span> <span class="p">=</span> <span class="nv">$response</span><span class="p">.</span><span class="n">issues</span><span class="p">.</span><span class="n">fields</span> <span class="p">|</span> <span class="nb">select </span><span class="n">-ExpandProperty</span> <span class="n">summary</span>
+<span class="k">return</span> <span class="s2">&#34;{0}{1} - {2}&#34;</span> <span class="o">-f</span> <span class="nv">$prefix</span><span class="p">,</span><span class="nv">$ticketId</span><span class="p">,</span><span class="nv">$summary</span>
+<span class="p">}</span>
+
+<span class="c"># Step 1: get version endpoint and get the hash of the latest deployed commit</span>
+<span class="nv">$shortCommitId</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Invoke-RestMethod</span> <span class="n">https</span><span class="err">:</span><span class="p">//&lt;</span><span class="n">replace</span> <span class="n">with</span> <span class="n">your</span> <span class="n">own</span> <span class="n">endpoint</span><span class="p">&gt;/</span><span class="n">version</span><span class="p">).</span><span class="n">gitHash</span>
+
+<span class="c"># Step 2: pull in latest changes and get all commit messages</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">develop</span>
+<span class="n">git</span> <span class="n">pull</span>
+<span class="nv">$commits</span> <span class="p">=</span> <span class="nb">get-commits</span><span class="p">(</span><span class="nv">$shortCommitId</span><span class="p">)</span>
+
+<span class="c"># step 3: keep commit messages containing qntc, the Jira project key</span>
+<span class="nv">$commits</span> <span class="p">=</span> <span class="nv">$commits</span> <span class="p">|?{</span><span class="nv">$_</span> <span class="o">-like</span> <span class="s1">&#39;*qntc*&#39;</span><span class="p">}</span>
+<span class="c"># start building the message as an array of strings</span>
+<span class="nv">$msg</span> <span class="p">=</span> <span class="p">@(</span><span class="s2">&#34;Starting deploy to int. Deploy includes: &#34;</span><span class="p">)</span>
+<span class="c"># Step 4: retrieve the story description</span>
+<span class="c"># typical powershell one-liner:</span>
+<span class="c"># - Loop over all commits and check for QNTC prefix</span>
+<span class="c"># - Sort the found prefixes</span>
+<span class="c"># - Select the unique values</span>
+<span class="c"># - Fetch the story description for each unique value</span>
+<span class="c"># the array of the unique story description is prefixed with &#39;* &#39;, and are then appended to the $msg array</span>
+<span class="nv">$msg</span> <span class="p">+=</span> <span class="p">(</span><span class="nv">$commits</span> <span class="p">|%{</span><span class="k">if</span><span class="p">(</span><span class="nv">$_</span> <span class="o">-match</span> <span class="s1">&#39;QNTC[SUP]*-\d+&#39;</span><span class="p">)</span> <span class="p">{</span><span class="nv">$Matches</span><span class="p">[</span><span class="n">0</span><span class="p">]}}</span> <span class="p">|</span> <span class="n">sort</span><span class="p">|</span> <span class="nb">select </span><span class="n">-unique</span> <span class="p">|</span> <span class="p">%{</span><span class="nb">get-description</span> <span class="nv">$_</span> <span class="s1">&#39;* &#39;</span><span class="p">})</span>
+<span class="c"># copy the message to the clipboard</span>
+<span class="nv">$msg</span> <span class="p">|</span> <span class="n">pbcopy</span>
+<span class="nb">Write-Host</span> <span class="s1">&#39;copied to clipboard&#39;</span>
+
+</code></pre></div><p>That&rsquo;s it! I&rsquo;m sure you can implement this in your favourite scripting language</p>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://github.com/git-commit-id/git-commit-id-maven-plugin">Maven Git Commit ID Plugin</a></li>
 <li><a href="https://git-scm.com/docs/git-log">Git Log command</a></li>
+<li><a href="https://docs.microsoft.com/en-us/learn/modules/introduction-to-powershell/">Introduction to Powershell</a> - <a href="https://docs.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-string-substitutions?view=powershell-7.1">Everything you wanted to know about variable substitution in strings in Powershell</a></li>
 <li><a href="https://www.atlassian.com/blog/jira-software/jql-the-most-flexible-way-to-search-jira-14">Getting started with JQL</a> - <a href="https://support.atlassian.com/jira-service-management-cloud/docs/use-advanced-search-with-jira-query-language-jql/">Advanced Search with JQL</a></li>
 </ul>
 ]]></content></item><item><title>Templating as Automation</title><link>https://www.pieterjd.be/posts/templating/</link><pubDate>Sat, 17 Apr 2021 19:33:17 +0200</pubDate><guid>https://www.pieterjd.be/posts/templating/</guid><description>In this post, I&amp;rsquo;ll cover different examples of what I like to call templating. Doing the same over and over again, but only few parts change each iteration.
