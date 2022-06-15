@@ -1,4 +1,82 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on pieterjd.be</title><link>https://www.pieterjd.be/posts/</link><description>Recent content in Posts on pieterjd.be</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 08 Jul 2021 10:45:00 +0200</lastBuildDate><atom:link href="https://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Reduce docker ps Output Clutter with AWK</title><link>https://www.pieterjd.be/posts/reduce-docker-ps-clutter-with-awk/</link><pubDate>Thu, 08 Jul 2021 10:45:00 +0200</pubDate><guid>https://www.pieterjd.be/posts/reduce-docker-ps-clutter-with-awk/</guid><description>I&amp;rsquo;m a fan of docker, especially with my brand new macbook - spinning up loads of containers is always fun 😀. However when listing the containers, things get a bit unclear. Check the following output:
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on pieterjd.be</title><link>https://www.pieterjd.be/posts/</link><description>Recent content in Posts on pieterjd.be</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 14 Jun 2022 20:17:40 +0000</lastBuildDate><atom:link href="https://www.pieterjd.be/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Proper JMS conversion to POJOs</title><link>https://www.pieterjd.be/posts/jms-property-name-must-not-be-null/</link><pubDate>Tue, 14 Jun 2022 20:17:40 +0000</pubDate><guid>https://www.pieterjd.be/posts/jms-property-name-must-not-be-null/</guid><description>While looking into Azure Service bus with Spring Boot, I stumbled upon a nasty stacktrace caused by an IllegalArgumentException:
+java.lang.IllegalArgumentException: Property name must not be null So what is going on here?
+Setup I configured a queue persons on Azure service bus and in my spring boot application I defined a QueueListener using the @JmsListener annotation
+@Component public class PersonQueueListener { private static final String QUEUENAME=&amp;#34;persons&amp;#34;; @JmsListener(destination = QUEUENAME) public void receiveMessage(Person person) throws JsonProcessingException { log.</description><content type="html"><![CDATA[<p>While looking into Azure Service bus with Spring Boot, I stumbled upon a nasty stacktrace caused by an IllegalArgumentException:</p>
+<pre><code>java.lang.IllegalArgumentException: Property name must not be null
+</code></pre><p>So what is going on here?</p>
+<h2 id="setup">Setup</h2>
+<p>I configured a queue <code>persons</code> on Azure service bus and in my spring boot application I defined a QueueListener using the <code>@JmsListener</code> annotation</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PersonQueueListener</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">QUEUENAME</span><span class="o">=</span><span class="s">&#34;persons&#34;</span><span class="o">;</span>
+
+    <span class="nd">@JmsListener</span><span class="o">(</span><span class="n">destination</span> <span class="o">=</span> <span class="n">QUEUENAME</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">receiveMessage</span><span class="o">(</span><span class="n">Person</span> <span class="n">person</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JsonProcessingException</span> <span class="o">{</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;Received Person {} on Service Bus&#34;</span><span class="o">,</span> <span class="n">person</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><p>Somehow I expected this to work - after all the <code>Person</code> class was filled with Jackson annotations. However, exceptions were flying around with the only clue <code>Property name must not be null</code>.</p>
+<h2 id="root-cause">Root cause</h2>
+<pre><code>org.springframework.jms.listener.adapter.ListenerExecutionFailedException: Listener method 'public void com.example.demo.PersonQueueListener.receiveMessage(com.example.demo.Person) throws com.fasterxml.jackson.core.JsonProcessingException' threw exception; nested exception is java.lang.IllegalArgumentException: Property name must not be null
+	at org.springframework.jms.listener.adapter.MessagingMessageListenerAdapter.invokeHandler(MessagingMessageListenerAdapter.java:122) ~[spring-jms-5.3.20.jar:5.3.20]
+	at org.springframework.jms.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:77) ~[spring-jms-5.3.20.jar:5.3.20]
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:736) ~[spring-jms-5.3.20.jar:5.3.20]
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:696) ~[spring-jms-5.3.20.jar:5.3.20]
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:674) ~[spring-jms-5.3.20.jar:5.3.20]
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:331) ~[spring-jms-5.3.20.jar:5.3.20]
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:270) ~[spring-jms-5.3.20.jar:5.3.20]
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1237) ~[spring-jms-5.3.20.jar:5.3.20]
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1227) ~[spring-jms-5.3.20.jar:5.3.20]
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:1120) ~[spring-jms-5.3.20.jar:5.3.20]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+Caused by: java.lang.IllegalArgumentException: Property name must not be null
+	at org.apache.qpid.jms.message.JmsMessagePropertySupport.checkPropertyNameIsValid(JmsMessagePropertySupport.java:57) ~[qpid-jms-client-0.53.0.jar:na]
+	at org.apache.qpid.jms.message.JmsMessagePropertyIntercepter.getProperty(JmsMessagePropertyIntercepter.java:692) ~[qpid-jms-client-0.53.0.jar:na]
+	at org.apache.qpid.jms.message.JmsMessage.getObjectProperty(JmsMessage.java:353) ~[qpid-jms-client-0.53.0.jar:na]
+	at org.apache.qpid.jms.message.JmsMessage.getStringProperty(JmsMessage.java:393) ~[qpid-jms-client-0.53.0.jar:na]
+	at org.springframework.jms.support.converter.MappingJackson2MessageConverter.getJavaTypeForMessage(MappingJackson2MessageConverter.java:453) ~[spring-jms-5.3.20.jar:5.3.20]
+	at org.springframework.jms.support.converter.MappingJackson2MessageConverter.fromMessage(MappingJackson2MessageConverter.java:233) ~[spring-jms-5.3.20.jar:5.3.20]
+
+</code></pre><p>Let&rsquo;s take a side-step. When deserialising a JSON string with objectMapper, you explicitly provide the type to deserialise to. For instance:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span> <span class="n">json</span><span class="o">=</span><span class="s">&#34;&#34;&#34;
+</span><span class="s">{
+</span><span class="s">  &#34;</span><span class="n">firstName</span><span class="s">&#34;: &#34;</span><span class="n">Byram</span><span class="s">&#34;,
+</span><span class="s">  &#34;</span><span class="n">lastName</span><span class="s">&#34;: &#34;</span><span class="n">Aguirrezabal</span><span class="s">&#34;
+</span><span class="s">}
+</span><span class="s">&#34;&#34;&#34;</span><span class="o">;</span>
+<span class="c1">//creating a Person object from the json String
+</span><span class="c1"></span><span class="n">Person</span> <span class="n">p</span> <span class="o">=</span> <span class="n">objectMapper</span><span class="o">.</span><span class="na">readValue</span><span class="o">(</span><span class="n">json</span><span class="o">,</span> <span class="n">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</code></pre></div><p>Now when receiving some text from a message queue, you don&rsquo;t know what the type is: is it a <code>Person</code>,  <code>List</code>,  <code>LocalDateTime</code>, &hellip; and that is exactly what <code>MappingJackson2MessageConverter.getJavaTypeForMessage</code> is trying to figure out. According to the <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jms/support/converter/MappingJackson2MessageConverter.html#getJavaTypeForMessage-javax.jms.Message-">Javadocs</a>:</p>
+<blockquote>
+<p>Determine a Jackson JavaType for the given JMS Message, typically parsing a type id message property.</p>
+</blockquote>
+<h2 id="solution">Solution</h2>
+<p>So you need to add a property to your JMS message stating &lsquo;this message represents a Person, List, &hellip;.&rsquo;, and you need to tell the <code>MappingJackson2MessageConverter</code> what the name of this property is with the <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jms/support/converter/MappingJackson2MessageConverter.html#setTypeIdPropertyName-java.lang.String-"><code>setTypeIdPropertyName</code> method</a> - I lik the note in bold, that is hardly mentioned in any other documentation :)</p>
+<blockquote>
+<p>Specify the name of the JMS message property that carries the type id for the contained object: either a mapped id value or a raw Java class name.</p>
+<p>Default is none. <strong>NOTE: This property needs to be set in order to allow for converting from an incoming message to a Java object.</strong></p>
+</blockquote>
+<p>Now we are ready to define a custom bean:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"> <span class="nd">@Bean</span>
+<span class="kd">public</span> <span class="n">MessageConverter</span> <span class="nf">jsonJmsConverter</span><span class="o">()</span> <span class="o">{</span>
+  <span class="n">MappingJackson2MessageConverter</span> <span class="n">jackson</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MappingJackson2MessageConverter</span><span class="o">();</span>
+  <span class="c1">//json is just text
+</span><span class="c1"></span>  <span class="n">jackson</span><span class="o">.</span><span class="na">setTargetType</span><span class="o">(</span><span class="n">MessageType</span><span class="o">.</span><span class="na">TEXT</span><span class="o">);</span>
+  <span class="c1">//each message should contain a property called _type and its value is the name of the class to serialize to
+</span><span class="c1"></span>  <span class="n">jackson</span><span class="o">.</span><span class="na">setTypeIdPropertyName</span><span class="o">(</span><span class="s">&#34;_type&#34;</span><span class="o">);</span>
+  <span class="k">return</span> <span class="n">jackson</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div><p>Allright, let&rsquo;s test this out. Head over to the Azure portal, select your Service Bus instance and open the Service Bus Explorer (still in preview at the time of writing). In the explorer, you can send messages and put them on the bus.</p>
+<p><img src="./service-bus-explorer.png" alt="Service Bus Explorer">
+Things to note:</p>
+<ol>
+<li>the message body should contain valid JSON</li>
+<li>set the content type to <code>application/json</code></li>
+<li>add a custom property so the converter can find out what class to deserialize to.</li>
+</ol>
+<p>Restarting the Spring Boot app, and on the logs I now see this nice message without any stack traces.</p>
+<pre><code>2022-06-15 20:17:30.749  INFO 50892 --- [ntContainer#0-1] com.example.demo.PersonQueueListener     : Received Person com.example.demo.Person@7f445293 on Service Bus
+</code></pre>]]></content></item><item><title>Reduce docker ps Output Clutter with AWK</title><link>https://www.pieterjd.be/posts/reduce-docker-ps-clutter-with-awk/</link><pubDate>Thu, 08 Jul 2021 10:45:00 +0200</pubDate><guid>https://www.pieterjd.be/posts/reduce-docker-ps-clutter-with-awk/</guid><description>I&amp;rsquo;m a fan of docker, especially with my brand new macbook - spinning up loads of containers is always fun 😀. However when listing the containers, things get a bit unclear. Check the following output:
 CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES d52c11b67cfe docker.elastic.co/elasticsearch/elasticsearch:7.13.2 &amp;quot;/bin/tini -- /usr/l…&amp;quot; 2 hours ago Up 2 hours 0.0.0.0:9200-&amp;gt;9200/tcp, :::9200-&amp;gt;9200/tcp, 0.0.0.0:9300-&amp;gt;9300/tcp, :::9300-&amp;gt;9300/tcp vb-bo_elasticsearch_1 76fee05889f0 logstash:7.13.2 &amp;quot;/usr/local/bin/dock…&amp;quot; 2 hours ago Up 50 minutes 0.0.0.0:5044-&amp;gt;5044/tcp, :::5044-&amp;gt;5044/tcp, 0.</description><content type="html"><![CDATA[<p>I&rsquo;m a fan of docker, especially with my brand new macbook - spinning up loads of containers is always fun 😀. However when listing the containers, things get a bit unclear. Check the following output:</p>
 <pre><code>CONTAINER ID   IMAGE                                                  COMMAND                  CREATED       STATUS             
     PORTS                                                                                  NAMES
