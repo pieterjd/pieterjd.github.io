@@ -2,11 +2,11 @@
 java.lang.IllegalArgumentException: Property name must not be null So what is going on here?
 Setup I configured a queue persons on Azure service bus and in my spring boot application I defined a QueueListener using the @JmsListener annotation
 @Component public class PersonQueueListener { private static final String QUEUENAME=&amp;#34;persons&amp;#34;; @JmsListener(destination = QUEUENAME) public void receiveMessage(Person person) throws JsonProcessingException { log.</description><content type="html"><![CDATA[<p>While looking into Azure Service bus with Spring Boot, I stumbled upon a nasty stacktrace caused by an IllegalArgumentException:</p>
-<pre><code>java.lang.IllegalArgumentException: Property name must not be null
+<pre tabindex="0"><code>java.lang.IllegalArgumentException: Property name must not be null
 </code></pre><p>So what is going on here?</p>
 <h2 id="setup">Setup</h2>
 <p>I configured a queue <code>persons</code> on Azure service bus and in my spring boot application I defined a QueueListener using the <code>@JmsListener</code> annotation</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Component</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Component</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PersonQueueListener</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">QUEUENAME</span><span class="o">=</span><span class="s">&#34;persons&#34;</span><span class="o">;</span>
 
@@ -17,7 +17,7 @@ Setup I configured a queue persons on Azure service bus and in my spring boot ap
 <span class="o">}</span>
 </code></pre></div><p>Somehow I expected this to work - after all the <code>Person</code> class was filled with Jackson annotations. However, exceptions were flying around with the only clue <code>Property name must not be null</code>.</p>
 <h2 id="root-cause">Root cause</h2>
-<pre><code>org.springframework.jms.listener.adapter.ListenerExecutionFailedException: Listener method 'public void com.example.demo.PersonQueueListener.receiveMessage(com.example.demo.Person) throws com.fasterxml.jackson.core.JsonProcessingException' threw exception; nested exception is java.lang.IllegalArgumentException: Property name must not be null
+<pre tabindex="0"><code>org.springframework.jms.listener.adapter.ListenerExecutionFailedException: Listener method 'public void com.example.demo.PersonQueueListener.receiveMessage(com.example.demo.Person) throws com.fasterxml.jackson.core.JsonProcessingException' threw exception; nested exception is java.lang.IllegalArgumentException: Property name must not be null
 	at org.springframework.jms.listener.adapter.MessagingMessageListenerAdapter.invokeHandler(MessagingMessageListenerAdapter.java:122) ~[spring-jms-5.3.20.jar:5.3.20]
 	at org.springframework.jms.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:77) ~[spring-jms-5.3.20.jar:5.3.20]
 	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:736) ~[spring-jms-5.3.20.jar:5.3.20]
@@ -38,7 +38,7 @@ Caused by: java.lang.IllegalArgumentException: Property name must not be null
 	at org.springframework.jms.support.converter.MappingJackson2MessageConverter.fromMessage(MappingJackson2MessageConverter.java:233) ~[spring-jms-5.3.20.jar:5.3.20]
 
 </code></pre><p>Let&rsquo;s take a side-step. When deserialising a JSON string with objectMapper, you explicitly provide the type to deserialise to. For instance:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span> <span class="n">json</span><span class="o">=</span><span class="s">&#34;&#34;&#34;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span> <span class="n">json</span><span class="o">=</span><span class="s">&#34;&#34;&#34;
 </span><span class="s">{
 </span><span class="s">  &#34;</span><span class="n">firstName</span><span class="s">&#34;: &#34;</span><span class="n">Byram</span><span class="s">&#34;,
 </span><span class="s">  &#34;</span><span class="n">lastName</span><span class="s">&#34;: &#34;</span><span class="n">Aguirrezabal</span><span class="s">&#34;
@@ -57,7 +57,7 @@ Caused by: java.lang.IllegalArgumentException: Property name must not be null
 <p>Default is none. <strong>NOTE: This property needs to be set in order to allow for converting from an incoming message to a Java object.</strong></p>
 </blockquote>
 <p>Now we are ready to define a custom bean:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"> <span class="nd">@Bean</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"> <span class="nd">@Bean</span>
 <span class="kd">public</span> <span class="n">MessageConverter</span> <span class="nf">jsonJmsConverter</span><span class="o">()</span> <span class="o">{</span>
   <span class="n">MappingJackson2MessageConverter</span> <span class="n">jackson</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MappingJackson2MessageConverter</span><span class="o">();</span>
   <span class="c1">//json is just text
@@ -75,10 +75,10 @@ Things to note:</p>
 <li>add a custom property so the converter can find out what class to deserialize to.</li>
 </ol>
 <p>Restarting the Spring Boot app, and on the logs I now see this nice message without any stack traces.</p>
-<pre><code>2022-06-15 20:17:30.749  INFO 50892 --- [ntContainer#0-1] com.example.demo.PersonQueueListener     : Received Person com.example.demo.Person@7f445293 on Service Bus
+<pre tabindex="0"><code>2022-06-15 20:17:30.749  INFO 50892 --- [ntContainer#0-1] com.example.demo.PersonQueueListener     : Received Person com.example.demo.Person@7f445293 on Service Bus
 </code></pre>]]></content></item><item><title>Reduce docker ps Output Clutter with AWK</title><link>https://www.pieterjd.be/posts/reduce-docker-ps-clutter-with-awk/</link><pubDate>Thu, 08 Jul 2021 10:45:00 +0200</pubDate><guid>https://www.pieterjd.be/posts/reduce-docker-ps-clutter-with-awk/</guid><description>I&amp;rsquo;m a fan of docker, especially with my brand new macbook - spinning up loads of containers is always fun 😀. However when listing the containers, things get a bit unclear. Check the following output:
 CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES d52c11b67cfe docker.elastic.co/elasticsearch/elasticsearch:7.13.2 &amp;quot;/bin/tini -- /usr/l…&amp;quot; 2 hours ago Up 2 hours 0.0.0.0:9200-&amp;gt;9200/tcp, :::9200-&amp;gt;9200/tcp, 0.0.0.0:9300-&amp;gt;9300/tcp, :::9300-&amp;gt;9300/tcp vb-bo_elasticsearch_1 76fee05889f0 logstash:7.13.2 &amp;quot;/usr/local/bin/dock…&amp;quot; 2 hours ago Up 50 minutes 0.0.0.0:5044-&amp;gt;5044/tcp, :::5044-&amp;gt;5044/tcp, 0.</description><content type="html"><![CDATA[<p>I&rsquo;m a fan of docker, especially with my brand new macbook - spinning up loads of containers is always fun 😀. However when listing the containers, things get a bit unclear. Check the following output:</p>
-<pre><code>CONTAINER ID   IMAGE                                                  COMMAND                  CREATED       STATUS             
+<pre tabindex="0"><code>CONTAINER ID   IMAGE                                                  COMMAND                  CREATED       STATUS             
     PORTS                                                                                  NAMES
 d52c11b67cfe   docker.elastic.co/elasticsearch/elasticsearch:7.13.2   &quot;/bin/tini -- /usr/l…&quot;   2 hours ago   Up 2 hours         
   0.0.0.0:9200-&gt;9200/tcp, :::9200-&gt;9200/tcp, 0.0.0.0:9300-&gt;9300/tcp, :::9300-&gt;9300/tcp   vb-bo_elasticsearch_1
@@ -88,21 +88,21 @@ e18d279ed438   mysql/mysql-server:latest                              &quot;/ent
   0.0.0.0:3306-&gt;3306/tcp, :::3306-&gt;3306/tcp, 33060-33061/tcp                             vb-bo_mysql_1
 </code></pre><p>See what I mean? Columnnames floating to the next line, a lot of white space making it not so readable.</p>
 <p>Recently I got more invested with AWK, and wanted to give this a try and I came up with this little gem.</p>
-<div class="highlight"><pre class="chroma"><code class="language-awk" data-lang="awk"><span class="p">{</span><span class="kr">print</span> <span class="o">$</span><span class="mi">2</span><span class="p">,</span> <span class="o">$</span><span class="mi">5</span><span class="p">}</span> 
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-awk" data-lang="awk"><span class="p">{</span><span class="kr">print</span> <span class="o">$</span><span class="mi">2</span><span class="p">,</span> <span class="o">$</span><span class="mi">5</span><span class="p">}</span> 
 <span class="nb">END</span><span class="p">{</span>
  <span class="kr">print</span> <span class="s2">&#34;\n&#34;</span><span class="p">,</span><span class="nb">NR</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;up and running&#34;</span>
 <span class="p">}</span>
 </code></pre></div><p>This actually means: print the second and fifth column (Mind you: this is not zero-index based). Also you need a special delimiter, so tying everthing together you get:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">docker ps <span class="p">|</span> awk -F <span class="s1">&#39;(   )+&#39;</span> <span class="s1">&#39;{print $2, $5} END{print &#34;\n&#34;,NR-1, &#34;up and running&#34;}&#39;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker ps <span class="p">|</span> awk -F <span class="s1">&#39;(   )+&#39;</span> <span class="s1">&#39;{print $2, $5} END{print &#34;\n&#34;,NR-1, &#34;up and running&#34;}&#39;</span>
 </code></pre></div><p>Now you get this cleaner output with the final line being the summary of the number of running containers</p>
-<pre><code>IMAGE  STATUS
+<pre tabindex="0"><code>IMAGE  STATUS
 docker.elastic.co/elasticsearch/elasticsearch:7.13.2 Up 2 hours
 logstash:7.13.2 Up 58 minutes
 mysql/mysql-server:latest Up 2 hours (healthy)
 
  3 up and running
 </code></pre><p>Of course, if you don&rsquo;t want to dip your toe in AWK, <code>docker ps</code> now also supports the <a href="https://docs.docker.com/engine/reference/commandline/ps/#formatting"><code>--format</code></a> switch.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">docker ps --format <span class="s2">&#34;table {{.Names}} {{.Status}}&#34;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker ps --format <span class="s2">&#34;table {{.Names}} {{.Status}}&#34;</span>
 </code></pre></div>]]></content></item><item><title>Summarize Latest Changes In Your Codebase</title><link>https://www.pieterjd.be/posts/summarize-latest-changes-in-your-codebase/</link><pubDate>Sun, 27 Jun 2021 12:33:00 +0200</pubDate><guid>https://www.pieterjd.be/posts/summarize-latest-changes-in-your-codebase/</guid><description>You are probably familiar with this workflow
 work on different stories pull requests are approved and merged deploy changes inform the team For the last part, you check your todo list to get a nice description instead of some mysterious ID. You could do this manually, but this is very time-consuming, not to mention mind-numbing. Scripts to the rescue!
 High level approach Fetch the version information of the environment you want to deploy to.</description><content type="html"><![CDATA[<p>You are probably familiar with this workflow</p>
@@ -120,7 +120,7 @@ High level approach Fetch the version information of the environment you want to
 </li>
 <li>
 <p>Get all information from all commits starting from the commit id, retrieved from the version id up till the last one. Assuming you use git (and you should!) then you can use the following command</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"> git log &lt;commitIdFromVersionEndpoint&gt;..HEAD --format<span class="o">=</span>format:<span class="s2">&#34;%s&#34;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"> git log &lt;commitIdFromVersionEndpoint&gt;..HEAD --format<span class="o">=</span>format:<span class="s2">&#34;%s&#34;</span>
 </code></pre></div></li>
 <li>
 <p>Do some regex magic to extract the story id, task id, &hellip;.</p>
@@ -134,7 +134,7 @@ High level approach Fetch the version information of the environment you want to
 </ol>
 <h2 id="example-script">Example script</h2>
 <p>As I am a fan of powershell, this was my go to language to implement this workflow.</p>
-<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="c"># --- helper functions ---</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="c"># --- helper functions ---</span>
 <span class="c"># get all commit messages starting from the given hash</span>
 <span class="k">function</span> <span class="nb">get-commits</span><span class="p">(</span><span class="nv">$fromHash</span><span class="p">){</span>
   <span class="nv">$commits</span> <span class="p">=</span> <span class="p">&amp;</span> <span class="s2">&#34;git&#34;</span> <span class="p">@(</span><span class="s2">&#34;log&#34;</span><span class="p">,</span><span class="s2">&#34;$fromHash..HEAD&#34;</span><span class="p">,</span> <span class="s2">&#34;--format=format:&#34;&#34;%s&#34;&#34;&#34;</span><span class="p">)</span>
@@ -189,20 +189,20 @@ As part of the integration, I write down the API calls in Typora, a very nice ma
 <h2 id="environment-variables">Environment Variables</h2>
 <p>While working on integrating an API, I had to authenticate with a Bearer token in the authentication header. These tokens are typically short-lived, so they change multiple times a day.</p>
 <p>As part of the integration, I write down the API calls in <code>Typora</code>, a very nice markdown editor. I really like I can add code snippets that are being highlighted, it&rsquo;s easy to work with, so it&rsquo;s an ideal tool for taking notes that I can later refer to. A typical entry would be like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">http <span class="s1">&#39;Authentication: Bearer 123456789...XYZ&#39;</span> http: //www.example.com
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">http <span class="s1">&#39;Authentication: Bearer 123456789...XYZ&#39;</span> http: //www.example.com
 </code></pre></div><p>A typical workflow is copying the call from my markdown notes and execute them in the shell. Off course the bearer token has expired in the meantime, so I have to request a new token, update my notes and copy again.</p>
 <p>And then it hit me: why not replace the bearer token in my notes with environment variables? That way I can just copy and paste the command, and if the token is expired, I can just update it without changing my notes.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">TOKEN</span><span class="o">=</span>123456789...XYZ <span class="c1"># update the bearer token if expired</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">TOKEN</span><span class="o">=</span>123456789...XYZ <span class="c1"># update the bearer token if expired</span>
 http <span class="s2">&#34;Authentication: Bearer </span><span class="nv">$TOKEN</span><span class="s2">&#34;</span> http://www.example.com
 </code></pre></div><h2 id="sql-statement-generation">SQL statement generation</h2>
 <p>Currently working on a new Java application with typical user roles.</p>
 <p>For developing and testing purposes it is useful to have a dedicated user for each role. In this particular case this requires a row to be added to the <code>user</code> and <code>user_roles</code> tables. Not that hard, but there are 5 roles, for each role 2 queries meaning a total of 10 queries that differ on only a few places, being the <code>email</code> address and the <code>credential</code> value.</p>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">sql</span> <span class="k">insert</span> <span class="k">into</span> <span class="o">`</span><span class="k">user</span><span class="o">`</span> <span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">is_active</span><span class="p">,</span> <span class="n">created_at</span><span class="p">,</span> <span class="n">updated_at</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="s1">&#39;admin@example.com&#39;</span><span class="p">,</span> <span class="n">sha1</span><span class="p">(</span><span class="s1">&#39;pass&#39;</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">now</span><span class="p">(),</span> <span class="n">now</span><span class="p">()</span> <span class="p">);</span>
-
-<span class="k">insert</span> <span class="k">into</span> <span class="n">user_credential</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">credential</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">created_at</span><span class="p">,</span><span class="n">updated_at</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="n">LAST_INSERT_ID</span><span class="p">(),</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">now</span><span class="p">(),</span><span class="n">now</span><span class="p">());</span>
-</code></pre></div><p>So it is Powershell to the rescue, more specific the templating functionality.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">sql</span><span class="w"> </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="o">`</span><span class="k">user</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">,</span><span class="w"> </span><span class="n">is_active</span><span class="p">,</span><span class="w"> </span><span class="n">created_at</span><span class="p">,</span><span class="w"> </span><span class="n">updated_at</span><span class="p">)</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;admin@example.com&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">sha1</span><span class="p">(</span><span class="s1">&#39;pass&#39;</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span><span class="w"> </span><span class="n">now</span><span class="p">()</span><span class="w"> </span><span class="p">);</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">user_credential</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="n">credential</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">created_at</span><span class="p">,</span><span class="n">updated_at</span><span class="p">)</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="n">LAST_INSERT_ID</span><span class="p">(),</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">now</span><span class="p">(),</span><span class="n">now</span><span class="p">());</span><span class="w">
+</span></code></pre></div><p>So it is Powershell to the rescue, more specific the templating functionality.</p>
 <p>In powershell you can define placeholders between curly brackets around an index (zero-based). Next you can format the template while providing the values for each placeholder - the <code>-f</code> is shorthand for <code>format</code> and then you provide all values separated by commas. This <code>$_</code> is a special variable in powershell, it is the currently processed value of the array. In the first iteration, it will have the value <code>admin</code>, the next iteration the value <code>press</code>, and so on.</p>
-<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nv">$sql_template</span> <span class="p">=</span> <span class="sh">@&#34;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nv">$sql_template</span> <span class="p">=</span> <span class="sh">@&#34;
 </span><span class="sh">insert into `user`
 </span><span class="sh">(email, password, is_active, created_at, updated_at)
 </span><span class="sh">values(&#39;{0}@example.com&#39;, sha1(&#39;pass&#39;), 1, now(), now() );
@@ -216,22 +216,22 @@ http <span class="s2">&#34;Authentication: Bearer </span><span class="nv">$TOKEN
 <span class="p">@(</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span><span class="s1">&#39;press&#39;</span><span class="p">,</span><span class="s1">&#39;super-admin&#39;</span><span class="p">,</span><span class="s1">&#39;mice&#39;</span><span class="p">,</span><span class="s1">&#39;spot&#39;</span><span class="p">)</span>
   <span class="p">|%{</span><span class="nv">$sql_template</span> <span class="o">-f</span> <span class="nv">$_</span><span class="p">}</span>
 </code></pre></div><p>Of course this does not work on all environments because the list of user roles is different for each environment. So you can rewrite this Powershell template with an actual SQL statement, using the <code>CONCAT</code>function. It does not look pretty, but it gets the job done.</p>
-<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="k">distinct</span> <span class="n">uc</span><span class="p">.</span><span class="n">credential</span> <span class="k">as</span> <span class="k">c</span><span class="p">,</span>
-<span class="n">CONCAT</span><span class="p">(</span><span class="s2">&#34;insert into `user` ( email, password,
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">uc</span><span class="p">.</span><span class="n">credential</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">c</span><span class="p">,</span><span class="w">
+</span><span class="w"></span><span class="n">CONCAT</span><span class="p">(</span><span class="s2">&#34;insert into `user` ( email, password,
 </span><span class="s2">is_active, created_at, updated_at)
-</span><span class="s2">values(&#39;&#34;</span><span class="p">,</span>  <span class="n">credential</span><span class="p">,</span> <span class="s2">&#34;@emakina.com&#39;, sha1(&#39;pass&#39;),
-</span><span class="s2">1, now(), now());&#34;</span><span class="p">)</span>
-<span class="k">as</span> <span class="n">command</span>
-<span class="k">from</span> <span class="n">user_credential</span> <span class="n">uc</span>
-<span class="k">UNION</span>
-<span class="k">SELECT</span> <span class="k">distinct</span> <span class="n">uc</span><span class="p">.</span><span class="n">credential</span> <span class="k">as</span> <span class="k">c</span><span class="p">,</span>
-<span class="n">CONCAT</span><span class="p">(</span><span class="s2">&#34;insert into user_credential (user_id, credential,
+</span><span class="s2">values(&#39;&#34;</span><span class="p">,</span><span class="w">  </span><span class="n">credential</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;@emakina.com&#39;, sha1(&#39;pass&#39;),
+</span><span class="s2">1, now(), now());&#34;</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="k">as</span><span class="w"> </span><span class="n">command</span><span class="w">
+</span><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">user_credential</span><span class="w"> </span><span class="n">uc</span><span class="w">
+</span><span class="w"></span><span class="k">UNION</span><span class="w">
+</span><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">uc</span><span class="p">.</span><span class="n">credential</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">c</span><span class="p">,</span><span class="w">
+</span><span class="w"></span><span class="n">CONCAT</span><span class="p">(</span><span class="s2">&#34;insert into user_credential (user_id, credential,
 </span><span class="s2">value, created_at, updated_at)
-</span><span class="s2">values (LAST_INSERT_ID(), &#39;&#34;</span><span class="p">,</span>  <span class="n">credential</span><span class="p">,</span><span class="s2">&#34;&#39;, 1, now(), now());&#34;</span><span class="p">)</span>
-<span class="k">as</span> <span class="n">command</span>
-<span class="k">from</span> <span class="n">user_credential</span> <span class="n">uc</span>
-<span class="k">order</span> <span class="k">by</span> <span class="k">c</span><span class="p">;</span>
-</code></pre></div><h2 id="conclusion">Conclusion</h2>
+</span><span class="s2">values (LAST_INSERT_ID(), &#39;&#34;</span><span class="p">,</span><span class="w">  </span><span class="n">credential</span><span class="p">,</span><span class="s2">&#34;&#39;, 1, now(), now());&#34;</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="k">as</span><span class="w"> </span><span class="n">command</span><span class="w">
+</span><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">user_credential</span><span class="w"> </span><span class="n">uc</span><span class="w">
+</span><span class="w"></span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="k">c</span><span class="p">;</span><span class="w">
+</span></code></pre></div><h2 id="conclusion">Conclusion</h2>
 <p>Templating can help a lot with reducing annoying tasks. Powershell (or any language/tool that supports some kind of templating) is a great help, if not available, CONCAT functions go a long way as well</p>
 <h2 id="references">References</h2>
 <ul>
@@ -251,7 +251,7 @@ Why not use Jackson datetime module? The codebase I was working on, did not supp
 <p>So I wrote a simple deserializer. It was actually quite easy: datetime&rsquo;s wer in the following format: <code>2020-05-09T23:24:13Z</code></p>
 <p>Luckily the ZonedDateTime offers a <a href="https://docs.oracle.com/javase/8/docs/api/java/time/ZonedDateTime.html#parse-java.lang.CharSequence-">static parse method</a>.</p>
 <p>So it all comes down to this simple class:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">com.fasterxml.jackson.core.JsonParser</span><span class="o">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">com.fasterxml.jackson.core.JsonParser</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.core.JsonProcessingException</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.DeserializationContext</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.deser.std.StdDeserializer</span><span class="o">;</span>
@@ -274,7 +274,7 @@ Why not use Jackson datetime module? The codebase I was working on, did not supp
 <span class="o">}</span>
 </code></pre></div><h2 id="using-the-deserializer">Using the Deserializer</h2>
 <p>The field I want to deserialize into, needs an additional annotation:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@JsonDeserialize</span><span class="o">(</span><span class="n">using</span> <span class="o">=</span> <span class="n">ZonedDateTimeDeserializer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="nd">@JsonDeserialize</span><span class="o">(</span><span class="n">using</span> <span class="o">=</span> <span class="n">ZonedDateTimeDeserializer</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
 <span class="kd">private</span> <span class="n">ZonedDateTime</span> <span class="n">date</span><span class="o">;</span>
 </code></pre></div><p>That&rsquo;s it! In summary:</p>
 <ul>
@@ -342,7 +342,7 @@ generate a table component, using the material table schematic create a service 
 <p>When calling <code>externalSchematic</code>, there is also an <code>options</code> parameter - this corresponds to the parameters you can provide using the CLI. Check the <a href="https://github.com/amcdnl/material-schematics/blob/master/src/table/schema.json">schema.json on github</a>. At the bottom of the file, there is the <code>required</code> entry, an array with the mandatory parameters. You should at least add these to the option parameter you provide to <code>externalSchematic</code>.</p>
 <h2 id="issue---cannot-find-module-errors">issue - cannot find module errors</h2>
 <p>When trying to run my schematic, I ended up having this kind of error:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Cannot find module <span class="s1">&#39;@schematics/angular/utility/change&#39;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">Cannot find module <span class="s1">&#39;@schematics/angular/utility/change&#39;</span>
 Require stack:
 - /Users/pieterjd/Documents/table-service/node_modules/@angular/cdk/schematics/utils/ast.js
 - /Users/pieterjd/Documents/table-service/node_modules/@angular/cdk/schematics/utils/index.js
@@ -354,9 +354,9 @@ Require stack:
 - /Users/pieterjd/Documents/test-project/node_modules/@angular/cli/models/command-runner.js
 - /Users/pieterjd/Documents/test-project/node_modules/@angular/cli/lib/cli/index.js
 </code></pre></div><p>It took some time to figure out, but my project was missing dependencies on <code>@angular/cdk</code>, <code>@angular/material</code>, <code>@angular-devkit</code>, and so on. After fixing this with the necessary <code>npm install --save</code>, my package.json file now contained all these dependencies:</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-<span class="err">//skip</span> <span class="err">other</span> <span class="err">stuff</span>
-<span class="nt">&#34;dependencies&#34;</span><span class="p">:{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+<span class="c1">//skip other stuff
+</span><span class="c1"></span><span class="nt">&#34;dependencies&#34;</span><span class="p">:{</span>
     <span class="nt">&#34;@angular/animations&#34;</span><span class="p">:</span> <span class="s2">&#34;^11.0.5&#34;</span><span class="p">,</span>
     <span class="nt">&#34;@angular/cdk&#34;</span><span class="p">:</span> <span class="s2">&#34;^11.0.3&#34;</span><span class="p">,</span>
     <span class="nt">&#34;@angular/cli&#34;</span><span class="p">:</span> <span class="s2">&#34;^11.0.5&#34;</span><span class="p">,</span>
@@ -385,7 +385,7 @@ Require stack:
 </ul>
 <p>So if <code>name</code>  has the value <code>actionHero</code>, a file called <code>action-hero.service.ts</code>is generated.</p>
 <p>It&rsquo;s rather easy to define this - check following snippet:</p>
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="kr">const</span> <span class="nx">templateSource</span> <span class="o">=</span> <span class="nx">apply</span><span class="p">(</span><span class="nx">url</span><span class="p">(</span><span class="s1">&#39;./files&#39;</span><span class="p">),</span> <span class="p">[</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="kr">const</span> <span class="nx">templateSource</span> <span class="o">=</span> <span class="nx">apply</span><span class="p">(</span><span class="nx">url</span><span class="p">(</span><span class="s1">&#39;./files&#39;</span><span class="p">),</span> <span class="p">[</span>
       <span class="nx">applyTemplates</span><span class="p">({</span>
         <span class="nx">classify</span>: <span class="kt">strings.classify</span><span class="p">,</span>
         <span class="nx">dasherize</span>: <span class="kt">strings.dasherize</span><span class="p">,</span>
@@ -408,7 +408,7 @@ Require stack:
 <p>make sure the <code>normalize</code> function is imported from <code>path</code>, not <code>@angular-devkit/core</code>!</p>
 <h2 id="service-template">Service Template</h2>
 <p>Writing the service <a href="https://angular.io/guide/schematics-for-libraries#add-template-files">template</a> is now straightforward - note the mix of the code of an actual service and the templating variables and functions as mentioned in a previous section.</p>
-<div class="highlight"><pre class="chroma"><code class="language-typescript" data-lang="typescript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">HttpClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
 
 <span class="c1">//dummy &lt;%= classify(name) %&gt; interface so everything compiles
@@ -466,7 +466,7 @@ UPDATE: this did not work at all! I resorted to trying out a lot of push Github 
 <p>Some refactoring was required - I moved the command related to pushing the generating site to a separate script, <del>and this script is called from github actions</del>.</p>
 <p><strong>UPDATE</strong>: this did not work at all! I resorted to trying out a lot of push Github Actions but none worked. Then I stumbled on this specific &lsquo;Deploy to GH Pages&rsquo; action and this one did the trick. Only downside now is the commit message - every commit message is suffixed with the name of my hugo repo and the commit hash.</p>
 <p>Below is the complete action. Enjoy!</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build and Deploy</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build and Deploy</span><span class="w">
 </span><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
 </span><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
 </span><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">master]</span><span class="w">
@@ -477,29 +477,29 @@ UPDATE: this did not work at all! I resorted to trying out a lot of push Github 
 </span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
 </span><span class="w">      </span>- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v2</span><span class="w">
 </span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">setup git submodules</span><span class="w">
-</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="sd">|
+</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
 </span><span class="sd">          git submodule init
-</span><span class="sd">          git submodule update
-</span><span class="sd">      - name: setup hugo
-</span><span class="sd">        uses: peaceiris/actions-hugo@v2
-</span><span class="sd">        with:
-</span><span class="sd">          hugo-version: &#39;0.75.1&#39;
-</span><span class="sd">      - name: build hugo website
-</span><span class="sd">        run: hugo --minify
-</span><span class="sd">      - name: dump information
-</span><span class="sd">        env:
-</span><span class="sd">          TO_DUMP: ${{ toJson(github.event) }}
-</span><span class="sd">        run: echo &#34;$TO_DUMP&#34;
-</span><span class="sd">      - name: deploy to github Pages
-</span><span class="sd">        uses: peaceiris/actions-gh-pages@v3
-</span><span class="sd">        with:
-</span><span class="sd">          publish_dir: ./pieterjd.github.io
-</span><span class="sd">          external_repository: pieterjd/pieterjd.github.io
-</span><span class="sd">          publish_branch: master
-</span><span class="sd">          personal_token: ${{ secrets.GH_PAGES_ACCESS_TOKEN }}
-</span><span class="sd">          user_name: &#39;github-actions[bot]&#39;
-</span><span class="sd">          user_email: &#39;github-actions[bot]@users.noreply.github.com&#39;
-</span><span class="sd">          full_commit_message: ${{ github.event.head_commit.message }}
+</span><span class="sd">          git submodule update</span><span class="w">          
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">setup hugo</span><span class="w">
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/actions-hugo@v2</span><span class="w">
+</span><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">hugo-version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;0.75.1&#39;</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">build hugo website</span><span class="w">
+</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">hugo --minify</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">dump information</span><span class="w">
+</span><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">TO_DUMP</span><span class="p">:</span><span class="w"> </span><span class="l">${{ toJson(github.event) }}</span><span class="w">
+</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">echo &#34;$TO_DUMP&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">deploy to github Pages</span><span class="w">
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/actions-gh-pages@v3</span><span class="w">
+</span><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">publish_dir</span><span class="p">:</span><span class="w"> </span><span class="l">./pieterjd.github.io</span><span class="w">
+</span><span class="w">          </span><span class="nt">external_repository</span><span class="p">:</span><span class="w"> </span><span class="l">pieterjd/pieterjd.github.io</span><span class="w">
+</span><span class="w">          </span><span class="nt">publish_branch</span><span class="p">:</span><span class="w"> </span><span class="l">master</span><span class="w">
+</span><span class="w">          </span><span class="nt">personal_token</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.GH_PAGES_ACCESS_TOKEN }}</span><span class="w">
+</span><span class="w">          </span><span class="nt">user_name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-actions[bot]&#39;</span><span class="w">
+</span><span class="w">          </span><span class="nt">user_email</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-actions[bot]@users.noreply.github.com&#39;</span><span class="w">
+</span><span class="w">          </span><span class="nt">full_commit_message</span><span class="p">:</span><span class="w"> </span><span class="l">${{ github.event.head_commit.message }}</span><span class="w">
 </span></code></pre></div><h2 id="references">References</h2>
 <ul>
 <li><a href="https://pages.github.com/">Github Pages</a></li>
@@ -516,7 +516,7 @@ Take-aways Something nowhere mentioned is that you get a Eureka Discover compati
 <li>Something nowhere mentioned is that you get a Eureka Discover compatible server OOTB :) You just need to add the <code>Eureka Discovery Client</code> dependency.</li>
 <li>The Cloud gateway works great with the discovery service. Without any configurations, it queries the discover service to get a list of services and it creates automatically endpoints for each service. For instance I had a running <code>todo-service</code>, with <code>@GetMapping(&quot;/todos&quot;)</code>returning all todos. Using the gateway, you get all todos by sending a request to  <code>&lt;GATEWAY-URI&gt;/TODO-SERVICE/</code></li>
 <li>Since the discovery is nowhere to be found in the Azure dashboard - at least <strong>I</strong> was unable to do so - I added an endpoint in the gateway service
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@RestController</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="nd">@RestController</span>
 <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;/eureka&#34;</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">EurekaController</span> <span class="o">{</span>
     <span class="nd">@Autowired</span>
@@ -588,7 +588,7 @@ datetime-service: returns the current datetime salutation-service: returns at ra
 </ul>
 <h2 id="spinning-up-multiple-instances">Spinning up multiple instances</h2>
 <p>Kick of the jar and set the <code>spring.port</code> property with the <code>java</code>  command. However it&rsquo;s quite tedious if you want 4 instances of each of the three microservices. Below an powershell snippet on how to kick things off quickly. It generates the commands that you then can paste in the bash terminal</p>
-<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nv">$template</span> <span class="p">=</span> <span class="s1">&#39;java -Dserver.port={0} -jar {1} &amp;&#39;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nv">$template</span> <span class="p">=</span> <span class="s1">&#39;java -Dserver.port={0} -jar {1} &amp;&#39;</span>
 <span class="nv">$startPort</span><span class="p">=</span><span class="n">50000</span>
 <span class="nv">$increment</span> <span class="p">=</span> <span class="n">100</span>
 <span class="c">#get jars except eureka-server</span>
@@ -598,7 +598,7 @@ datetime-service: returns the current datetime salutation-service: returns at ra
  <span class="nv">$startPort</span><span class="p">+=</span><span class="nv">$increment</span>
 <span class="p">}</span>
 </code></pre></div><p>Sample output:</p>
-<pre><code>java -Dserver.port=50000 -jar /Users/pjd/_dev/springcloud-helloworld/datetime-service/target/datetime-service-0.0.1-SNAPSHOT.jar &amp;
+<pre tabindex="0"><code>java -Dserver.port=50000 -jar /Users/pjd/_dev/springcloud-helloworld/datetime-service/target/datetime-service-0.0.1-SNAPSHOT.jar &amp;
 java -Dserver.port=50001 -jar /Users/pjd/_dev/springcloud-helloworld/datetime-service/target/datetime-service-0.0.1-SNAPSHOT.jar &amp;
 java -Dserver.port=50002 -jar /Users/pjd/_dev/springcloud-helloworld/datetime-service/target/datetime-service-0.0.1-SNAPSHOT.jar &amp;
 java -Dserver.port=50003 -jar /Users/pjd/_dev/springcloud-helloworld/datetime-service/target/datetime-service-0.0.1-SNAPSHOT.jar &amp;
@@ -653,7 +653,7 @@ Then I stumbled on the heroku-maven-plugin. This plugin allows to build your pro
 ]]></content></item><item><title>IntelliJ Find and Replace with regular expressions</title><link>https://www.pieterjd.be/posts/intellij-replace-regex/</link><pubDate>Sun, 10 May 2020 12:16:00 +0200</pubDate><guid>https://www.pieterjd.be/posts/intellij-replace-regex/</guid><description>Regular expressions are not my forte, but never the less very useful. Recently I faced this fictional code snippet:
 var a = someFunc(b, c); //..... var d = someFunc(b, d); Almost a gazillion of calls to someFunc needed to be replaced with otherFunc. Cue big gasp! As always, IntelliJ is your go-to companion you always can rely on.
 I already noticed the regex checkbox in the Find/Replace dialog. Now it&amp;rsquo;s time to put this thing into practice.</description><content type="html"><![CDATA[<p>Regular expressions are not my forte, but never the less very useful. Recently I faced this fictional code snippet:</p>
-<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">someFunc</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">);</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">someFunc</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">);</span>
 <span class="c1">//.....
 </span><span class="c1"></span><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">someFunc</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span> <span class="nx">d</span><span class="p">);</span>
 </code></pre></div><p>Almost a gazillion of calls to <code>someFunc</code> needed to be replaced with <code>otherFunc</code>. Cue big gasp! As always, IntelliJ is your go-to companion you always can rely on.</p>
@@ -670,7 +670,7 @@ I already noticed the regex checkbox in the Find/Replace dialog. Now it&amp;rsqu
 ]]></content></item><item><title>Deploy Hugo generated site to Github Pages</title><link>https://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages/</link><pubDate>Sat, 02 May 2020 20:48:17 +0200</pubDate><guid>https://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages/</guid><description>Deploying to github pages is not as easy as I thought. I tried several things for building a Github Action workflow, however this is only meant for actions related to the repository in question.
 In the end, I follow the approach as mentioned on the Hugo website with a local script. I have pimped it by fetching the latest commit message and the use this message for committing the changes in the generated site.</description><content type="html"><![CDATA[<p>Deploying to github pages is not as easy as I thought. I tried several things for building a Github Action workflow, however this is only meant for actions related to the repository in question.</p>
 <p>In the end, I follow the <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">approach as mentioned on the Hugo website</a> with a local script. I have pimped it by fetching the latest commit message and the use this message for committing the changes in the generated site.</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/sh
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/sh
 </span><span class="cp"></span>
 <span class="c1"># If a command fails then the deploy stops</span>
 <span class="nb">set</span> -e
@@ -779,7 +779,7 @@ I did have some past experiences with PHP (and to some extend Drupal), so I face
 <li>Create your log file, eg <code>touch /tmp/mysql.log</code></li>
 <li>Open the configuration file, usually called <code>my.cnf</code></li>
 <li>Add the following lines to the <code>[mysqld]</code> section
-<pre><code>general_log = on
+<pre tabindex="0"><code>general_log = on
 general_log_file = /tmp/mysql.log
 </code></pre></li>
 <li>Restart MySQL</li>
@@ -787,12 +787,12 @@ general_log_file = /tmp/mysql.log
 ]]></content></item><item><title>Custom property naming strategy with Jackson</title><link>https://www.pieterjd.be/posts/2019-08-11-property-naming-strategy-with-jackson/</link><pubDate>Sun, 11 Aug 2019 14:41:12 +0000</pubDate><guid>https://www.pieterjd.be/posts/2019-08-11-property-naming-strategy-with-jackson/</guid><description>For a pet project of mine, I&amp;rsquo;m consuming a REST API. Unfortunately it&amp;rsquo;s probably not written with Spring (Boot), as the body of requests and response are not according to what you&amp;rsquo;re used to, UpperCamelCase instead of lowerCamelCase.
 {&amp;#34;SessionKey&amp;#34;:&amp;#34;7d38ec29-d1f3-42e9-b35f-91b505bf3206&amp;#34;, &amp;#34;Status&amp;#34;:&amp;#34;UpdatesComplete&amp;#34; } At first, I thought I could solve it with a @JsonProperty(&amp;quot;...&amp;quot;) annotation on every field, but there are so many of them :o
 This can easily be fixed with the property naming class annotation:</description><content type="html"><![CDATA[<p>For a pet project of mine, I&rsquo;m consuming a REST API. Unfortunately it&rsquo;s probably not written with Spring (Boot), as the body of requests and response are not according to what you&rsquo;re used to, UpperCamelCase instead of lowerCamelCase.</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span><span class="nt">&#34;SessionKey&#34;</span><span class="p">:</span><span class="s2">&#34;7d38ec29-d1f3-42e9-b35f-91b505bf3206&#34;</span><span class="p">,</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span><span class="nt">&#34;SessionKey&#34;</span><span class="p">:</span><span class="s2">&#34;7d38ec29-d1f3-42e9-b35f-91b505bf3206&#34;</span><span class="p">,</span>
 <span class="nt">&#34;Status&#34;</span><span class="p">:</span><span class="s2">&#34;UpdatesComplete&#34;</span>
 <span class="p">}</span>
 </code></pre></div><p>At first, I thought I could solve it with a <code>@JsonProperty(&quot;...&quot;)</code> annotation on every field, but there are so many of them :o</p>
 <p>This can easily be fixed with the property naming class annotation:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@JsonNaming</span><span class="o">(</span><span class="n">PropertyNamingStrategy</span><span class="o">.</span><span class="na">UpperCamelCaseStrategy</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="nd">@JsonNaming</span><span class="o">(</span><span class="n">PropertyNamingStrategy</span><span class="o">.</span><span class="na">UpperCamelCaseStrategy</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeClassName</span> <span class="o">{}</span>
 </code></pre></div>]]></content></item><item><title>Spring boot without a web container</title><link>https://www.pieterjd.be/posts/2019-07-31-springboot-without-tomcat/</link><pubDate>Wed, 31 Jul 2019 18:34:12 +0000</pubDate><guid>https://www.pieterjd.be/posts/2019-07-31-springboot-without-tomcat/</guid><description>I really like spring boot a lot - just throw in some dependencies and BAM it&amp;rsquo;s configured right out of the box.
 For a pet project of mine, I&amp;rsquo;m consuming a REST API. So I included the spring-boot-starter-web artificact.
@@ -815,7 +815,7 @@ I don&rsquo;t need tomcat or any other web container for that matter. So how to 
 <li>Logging</li>
 </ul>
 <p>So disabling Tomcat comes down to excluding it in the pom file:</p>
-<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
   <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
   <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
   <span class="nt">&lt;exclusions&gt;</span>
@@ -829,17 +829,17 @@ I don&rsquo;t need tomcat or any other web container for that matter. So how to 
 public interface PersonRepository extends JpaRepository&amp;lt;Person,Long&amp;gt;{ List&amp;lt;Person&amp;gt; findByEmail(String email); } Spring derives the query based on the method name, in this case a query to retrieve all persons with a given value for the email field.
 As you can see, the method returns a List.</description><content type="html"><![CDATA[<p>Spring Data has a great declarative way of defining queries, called derived queries. Suppose you have a Person class with an email field. Then you can define the following method in a
 Repository interface:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PersonRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">,</span><span class="n">Long</span><span class="o">&gt;{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PersonRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">,</span><span class="n">Long</span><span class="o">&gt;{</span>
   <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="nf">findByEmail</span><span class="o">(</span><span class="n">String</span> <span class="n">email</span><span class="o">);</span>
 <span class="o">}</span>
 </code></pre></div><p>Spring derives the query based on the method name, in this case a query to retrieve all persons with a given value for the email field.</p>
 <p>As you can see, the method returns a <code>List</code>. If you want to process all Persons, that is ok. But sometimes you want to know &lsquo;does a row with this particular value exist?&rsquo;.</p>
 <p>One way to do this is as follows:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">if</span><span class="o">(!</span><span class="n">personRepository</span><span class="o">.</span><span class="na">findByEmail</span><span class="o">(</span><span class="s">&#34;test@mail.com&#34;</span><span class="o">).</span><span class="na">isEmpty</span><span class="o">()){</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="k">if</span><span class="o">(!</span><span class="n">personRepository</span><span class="o">.</span><span class="na">findByEmail</span><span class="o">(</span><span class="s">&#34;test@mail.com&#34;</span><span class="o">).</span><span class="na">isEmpty</span><span class="o">()){</span>
   <span class="c1">//do something if a person with the test email already exists in the repository
 </span><span class="c1"></span><span class="o">}</span>
 </code></pre></div><p>Personally, the additional call to the <code>isEmpty()</code> method is a bit too much for me. This can be solved as follows:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PersonRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">,</span><span class="n">Long</span><span class="o">&gt;{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PersonRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">,</span><span class="n">Long</span><span class="o">&gt;{</span>
   <span class="nd">@Query</span><span class="o">(</span><span class="s">&#34;SELECT CASE WHEN COUNT(c) &gt; 0 THEN true ELSE false END FROM Person p WHERE p.email = :email&#34;</span><span class="o">)</span>
     <span class="kt">boolean</span> <span class="nf">existsByEmail</span><span class="o">(</span><span class="nd">@Param</span><span class="o">(</span><span class="s">&#34;email&#34;</span><span class="o">)</span> <span class="n">String</span> <span class="n">email</span><span class="o">);</span>
 <span class="o">}</span>
@@ -850,7 +850,7 @@ there is a disclaimer stating</p>
 <p>consult the store-specific documentation for the exact list of supported return types, because some types listed here might not be supported in a particular store.</p>
 </blockquote>
 <p>So we can just update the very first code snippet to:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PersonRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">,</span><span class="n">Long</span><span class="o">&gt;{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">PersonRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">,</span><span class="n">Long</span><span class="o">&gt;{</span>
   <span class="kt">boolean</span> <span class="nf">findByEmail</span><span class="o">(</span><span class="n">String</span> <span class="n">email</span><span class="o">);</span> <span class="c1">//now returns a boolean instead of a List&lt;Person&gt;
 </span><span class="c1"></span><span class="o">}</span>
 </code></pre></div>]]></content></item><item><title>Postgraduate Studies in Big Data &amp; Analytics in Business and Management</title><link>https://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</link><pubDate>Tue, 30 Apr 2019 18:34:12 +0000</pubDate><guid>https://www.pieterjd.be/posts/2019-04-30-pg-big-data-analytics-project/</guid><description>A year ago, In enrolled in the &amp;ldquo;Postgraduate Studies in Big Data &amp;amp; Analytics in Business and Management&amp;rdquo; at KU Leuven. And today, the project I&amp;rsquo;ve been working on for the past 3 months came to a conclusion with the final presentation.
@@ -868,7 +868,7 @@ Map&amp;lt;String, String&amp;gt; firstToLastMap = persons.</description><conten
 <h1 id="collect-to-a-map">Collect to a map</h1>
 <p>When you want to collect to a Map, you need a function for the key and a function for the value.</p>
 <p>Suppose you have a list of Person objects with a firstname and last name. If you want to map the firstname to the lastname, you would write something like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">firstToLastMap</span> <span class="o">=</span> <span class="n">persons</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">firstToLastMap</span> <span class="o">=</span> <span class="n">persons</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
 <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toMap</span><span class="o">(</span>
   <span class="n">p</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">.</span><span class="na">getFirstname</span><span class="o">(),</span> <span class="c1">//key mapper function
 </span><span class="c1"></span>  <span class="n">p</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">.</span><span class="na">getLastname</span><span class="o">()</span>   <span class="c1">// value mapper function
@@ -877,12 +877,12 @@ Map&amp;lt;String, String&amp;gt; firstToLastMap = persons.</description><conten
 </code></pre></div><h1 id="grouping">Grouping</h1>
 <p>Suppose you have a List of strings. Per possible length, you want to know which Strings have
 this particular length. Then you would group all Strings in the list by their length.</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">&#34;one&#34;</span><span class="o">,</span><span class="s">&#34;two&#34;</span><span class="o">,</span><span class="s">&#34;three&#34;</span><span class="o">,</span><span class="s">&#34;four&#34;</span><span class="o">,</span><span class="s">&#34;five&#34;</span><span class="o">,</span><span class="s">&#34;six&#34;</span><span class="o">);</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">&#34;one&#34;</span><span class="o">,</span><span class="s">&#34;two&#34;</span><span class="o">,</span><span class="s">&#34;three&#34;</span><span class="o">,</span><span class="s">&#34;four&#34;</span><span class="o">,</span><span class="s">&#34;five&#34;</span><span class="o">,</span><span class="s">&#34;six&#34;</span><span class="o">);</span>
 <span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">groupingBy</span><span class="o">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()));</span>
 <span class="c1">//output: {3=[one, two, six], 4=[four, five], 5=[three]}
 </span></code></pre></div><h1 id="sum-and-average">Sum and Average</h1>
 <p>You can also easily do different kinds of count, for instance sum (summingInt) and average (averageInt). In this example, the sum and average of string lengths are computed.</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">&#34;one&#34;</span><span class="o">,</span><span class="s">&#34;two&#34;</span><span class="o">,</span><span class="s">&#34;three&#34;</span><span class="o">,</span><span class="s">&#34;four&#34;</span><span class="o">,</span><span class="s">&#34;five&#34;</span><span class="o">,</span><span class="s">&#34;six&#34;</span><span class="o">);</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">&#34;one&#34;</span><span class="o">,</span><span class="s">&#34;two&#34;</span><span class="o">,</span><span class="s">&#34;three&#34;</span><span class="o">,</span><span class="s">&#34;four&#34;</span><span class="o">,</span><span class="s">&#34;five&#34;</span><span class="o">,</span><span class="s">&#34;six&#34;</span><span class="o">);</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">summingInt</span><span class="o">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">())));</span>
 <span class="c1">//output: 22
 </span><span class="c1"></span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">averagingInt</span><span class="o">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">())));</span>
@@ -891,27 +891,27 @@ this particular length. Then you would group all Strings in the list by their le
 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html#summarizingInt-java.util.function.ToIntFunction-"><code>summarizingInt</code></a></p>
 <h1 id="partitioning">Partitioning</h1>
 <p>Partioning is also quite easy - in this case you are limited to a bi-partition, based on a predicate that is either <code>true</code> or <code>false</code>. In this example, String with length bigger than 3 are considered long Strings.</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">&#34;one&#34;</span><span class="o">,</span><span class="s">&#34;two&#34;</span><span class="o">,</span><span class="s">&#34;three&#34;</span><span class="o">,</span><span class="s">&#34;four&#34;</span><span class="o">,</span><span class="s">&#34;five&#34;</span><span class="o">,</span><span class="s">&#34;six&#34;</span><span class="o">);</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">strings</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">&#34;one&#34;</span><span class="o">,</span><span class="s">&#34;two&#34;</span><span class="o">,</span><span class="s">&#34;three&#34;</span><span class="o">,</span><span class="s">&#34;four&#34;</span><span class="o">,</span><span class="s">&#34;five&#34;</span><span class="o">,</span><span class="s">&#34;six&#34;</span><span class="o">);</span>
 <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">partitioningBy</span><span class="o">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()&gt;</span><span class="n">3</span><span class="o">)));</span>
 <span class="c1">//{false=[one, two, six], true=[three, four, five]}
 </span><span class="c1"></span>
 </code></pre></div>]]></content></item><item><title>Stream examples Part 2 - Reducers</title><link>https://www.pieterjd.be/posts/2019-04-01-streams-part2-reducers/</link><pubDate>Mon, 01 Apr 2019 17:30:53 +0000</pubDate><guid>https://www.pieterjd.be/posts/2019-04-01-streams-part2-reducers/</guid><description>Next to collectors, Streams offer reducers as well. You can consider it as building a result, starting from a partial solution and building on top of that. It is actually comparable to how the result is built up when using recursion.
 As an example, let&amp;rsquo;s take the sum of all integers starting from 1 up until n. The trivial solution is 0 for the &amp;lsquo;empty case&amp;rsquo;, this is the value before you start looping.</description><content type="html"><![CDATA[<p>Next to collectors, Streams offer reducers as well. You can consider it as building a result, starting from a partial solution and building on top of that. It is actually comparable to how the result is built up when using recursion.</p>
 <p>As an example, let&rsquo;s take the sum of all integers starting from 1 up until n. The trivial solution is 0 for the &lsquo;empty case&rsquo;, this is the value before you start looping. This will be the initial value or IdentityValue in stream speak. We move to the next value in the range (1). We combine our intial value and current value by taking the sum. Now we have the sum of all integers 1 up until 1. Now take 2, and add it to the partial solution that we already have, and now we have the partial solution for all integers starting from 1 up until 2.</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Integer</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">IntStream</span><span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="n">1</span><span class="o">,</span><span class="n">n</span><span class="o">+</span><span class="n">1</span><span class="o">)</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">Integer</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">IntStream</span><span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="n">1</span><span class="o">,</span><span class="n">n</span><span class="o">+</span><span class="n">1</span><span class="o">)</span>
 <span class="o">.</span><span class="na">reduce</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="o">(</span><span class="n">partial_solution</span><span class="o">,</span> <span class="n">next</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">partial_solution</span> <span class="o">+</span> <span class="n">next</span><span class="o">);</span>
 </code></pre></div><p>Here we use the <code>reduce</code> method taking 2 arguments: the first one is the value of the &lsquo;empty case&rsquo;, the second is a function taking 2 inputs: the partial solution so far, and the next value of the stream you can use to extend the partial solution.</p>
 <p>Off course this reducer is over the top as you can use the <code>sum</code> method on an Integer Stream.</p>
 <p>A second example is joining a List of Strings by separating them by a comma.</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span> <span class="n">commaSeparated</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span> <span class="n">commaSeparated</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
 <span class="o">.</span><span class="na">reduce</span><span class="o">(</span><span class="s">&#34;&#34;</span><span class="o">,</span> <span class="o">(</span><span class="n">partial_solution</span><span class="o">,</span> <span class="n">nextString</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">partial_solution</span> <span class="o">+</span><span class="s">&#34;, &#34;</span> <span class="o">+</span> <span class="n">next</span><span class="o">);</span>
 </code></pre></div><p>An alternative is the collector variant:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span> <span class="n">commaSeparated</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">String</span> <span class="n">commaSeparated</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
 <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">joining</span><span class="o">(</span><span class="s">&#34;,&#34;</span><span class="o">));</span>
 </code></pre></div><p>At first, streams can appear difficult to grasp, but once you get the hang of it, you&rsquo;ll really enjoy it!</p>
 ]]></content></item><item><title>Stream examples Part 1 - Collectors</title><link>https://www.pieterjd.be/posts/2019-03-31-streams-part1-collectors/</link><pubDate>Sun, 31 Mar 2019 12:34:19 +0000</pubDate><guid>https://www.pieterjd.be/posts/2019-03-31-streams-part1-collectors/</guid><description>Streams are quite fun - in short: it&amp;rsquo;s a different approach to writing loops. Suppose you have a List of Strings and you want to filter out the String starting with an &amp;rsquo;s' and put them in a new List.
 List&amp;lt;String&amp;gt; sStrings = new ArrayList&amp;lt;&amp;gt;(); for(int i = 0; i &amp;lt; strings.size(); i++){ if(strings.get(i).startsWith(&amp;#39;s&amp;#39;)){ //do something with strings starting with s sStrings.add(strings.get(i)); } } Although still readable, there is a lot of redundant code: the for loop itself with the counter and condition, the if statement.</description><content type="html"><![CDATA[<p>Streams are quite fun - in short: it&rsquo;s a different approach to writing loops. Suppose you have a List of Strings and you want to filter out the String starting with an &rsquo;s' and put them in a new List.</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">sStrings</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">sStrings</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
 <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">strings</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++){</span>
     <span class="k">if</span><span class="o">(</span><span class="n">strings</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">startsWith</span><span class="o">(</span><span class="sc">&#39;s&#39;</span><span class="o">)){</span>
       <span class="c1">//do something with strings starting with s
@@ -919,13 +919,13 @@ List&amp;lt;String&amp;gt; sStrings = new ArrayList&amp;lt;&amp;gt;(); for(int i
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div><p>Although still readable, there is a lot of redundant code: the for loop itself with the counter and condition, the if statement. With streams, it looks more readable.</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">sStrings</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">sStrings</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
   <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="sc">&#39;s&#39;</span><span class="o">))</span>
   <span class="n">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
 </code></pre></div><p>Inside the filter method, you have a function - this has the same meaning as in mathematics: you have some inputs, the functions does it magic and something different comes out. In this case, the function takes a String and outputs true when the String starts with an &rsquo;s'.</p>
 <p>This filter generates a stream on its own, in this case a stream of Strings all starting with an &rsquo;s'. You can collect the results, in this case a List.</p>
 <p>Besides filter you also have map, suppose you want the length of all Strings starting with an &rsquo;s'. You can just add a map after the filter statement. map also takes a function, in this case a String as input, and it outputs a number, the length of the strings. You can string filter and map calls as much as you want. There is a second map, turning an in into an Integer. It is not mandatory as such with <a href="https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html">autoboxing</a> available, but it shows you can have as much maps as you want.</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stringLengths</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stringLengths</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
   <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="sc">&#39;s&#39;</span><span class="o">))</span>
   <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">())</span>
   <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
@@ -941,7 +941,7 @@ Off course you can add additional properties in the additionalProperties element
 <li>the <code>build-info</code>goal</li>
 <li>additional properties such as application name and application description. You can add as many as you like</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;build&gt;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;build&gt;</span>
    <span class="nt">&lt;plugins&gt;</span>
       <span class="nt">&lt;plugin&gt;</span>
          <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
@@ -968,7 +968,7 @@ Off course you can add additional properties in the additionalProperties element
 <p>Only downside is that this class is not related to the default <code>java.util.Properties</code>class. So you have to create an intermediate <code>Properties</code>object and copy all (key,value) pairs from the buildProperties to the property object you want to return. This is required as the <code>BuildProperties</code>class does not define getters for custom properties</p>
 <p>The <code>time</code>property had to be transformed to a String as the default <code>Instant</code>does not map properly to json.</p>
 <p>If you put all things together, you get the following controller.</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@RestController</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="nd">@RestController</span>
 <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;/version&#34;</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">BuildInfoController</span> <span class="o">{</span>
     <span class="nd">@Autowired</span>
@@ -985,7 +985,7 @@ Off course you can add additional properties in the additionalProperties element
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div><p>Now you can run the application and do a request for <code>localhost:8080/version</code>, and this results in the following json:</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>  
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>  
    <span class="nt">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;ta&#34;</span><span class="p">,</span>
    <span class="nt">&#34;java.version&#34;</span><span class="p">:</span><span class="s2">&#34;1.8&#34;</span><span class="p">,</span>
    <span class="nt">&#34;time&#34;</span><span class="p">:</span><span class="s2">&#34;2019-02-05T13:13:48.282Z&#34;</span><span class="p">,</span>
@@ -1007,7 +1007,7 @@ Out of the box, only some icons are available for your angular front-end. And it
 In this particular use-case, I need to add the shopping basket icon.</description><content type="html"><![CDATA[<p><a href="https://fontawesome.com/">Font Awesome</a> offers vector icons and social logos. As it is one of the most popular icon sets, it is included with JHipster.</p>
 <p>Out of the box, only some icons are available for your angular front-end. And it&rsquo;s a bit tricky to find out how these icons are loaded as all Angular components use the <code>fa-icon</code> directive, available in JHipster.</p>
 <p>In this particular use-case, I need to add the shopping basket icon. After some searching around, I found out all <del>Font</del> <a href="https://fortawesome.com/">Fort Awesome</a> icons are loaded in <code>src/main/webapp/app/vendor.ts</code>. So you just load in the icon of your choice:</p>
-<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">import</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">import</span> <span class="p">{</span>
     <span class="nx">faUser</span><span class="p">,</span>
     <span class="nx">faSort</span><span class="p">,</span>
     <span class="c1">//snip
@@ -1022,7 +1022,7 @@ One of the questions of the wizard guiding you through the generation of your ap
 <p>But what about <em>your</em> labels in <em>your</em> custom developed component? Let&rsquo;s have a look.</p>
 <p>First you need the actual translations. They are located in <code>src/main/webapp/i18n</code>. For each language you selected in the wizard, there is a subfolder named according to a <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO standard</a>: English translations are stored in the <code>en</code>folder, Dutch in <code>nl</code>, &hellip;</p>
 <p>These folder contain json files - one for each JHipster entity, and some utility files (login screen, settings, error messages, &hellip;). Next are the labels for error messages in Dutch:</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&#34;error&#34;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&#34;title&#34;</span><span class="p">:</span> <span class="s2">&#34;Foutpagina!&#34;</span><span class="p">,</span>
         <span class="nt">&#34;http&#34;</span><span class="p">:</span> <span class="p">{</span>
@@ -1037,10 +1037,10 @@ One of the questions of the wizard guiding you through the generation of your ap
 <span class="p">}</span>
 </code></pre></div><p>So if you want to display the message for an unauthorized access, you use the label <code>error.http.403</code>.</p>
 <p>But how do you actually display the translated message in your angular component? With a directive off course, courtesy of JHipster. In the next snippet only the relevant parts remain (so no <code>[hidden]</code> to only display in case of a 403 error)</p>
-<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;alert alert-danger&#34;</span> <span class="na">jhiTranslate</span><span class="o">=</span><span class="s">&#34;error.http.403&#34;</span><span class="p">&gt;</span>You are not authorized to access this page.<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;alert alert-danger&#34;</span> <span class="na">jhiTranslate</span><span class="o">=</span><span class="s">&#34;error.http.403&#34;</span><span class="p">&gt;</span>You are not authorized to access this page.<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div><p>So you use the <code>jhiTranslate</code> directive, assign it the label key, as you defined it in the huge json object in the translation file. The actual value of the div is the fallback message in case no translation is available.</p>
 <p>Final question to answer: how do I configure to include my custom translation files? You don&rsquo;t :) Just check <code>webpack/webpack.common.js</code>.</p>
-<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">new</span> <span class="nx">MergeJsonWebpackPlugin</span><span class="p">({</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">new</span> <span class="nx">MergeJsonWebpackPlugin</span><span class="p">({</span>
             <span class="nx">output</span><span class="o">:</span> <span class="p">{</span>
                 <span class="nx">groupBy</span><span class="o">:</span> <span class="p">[</span>
                     <span class="p">{</span> <span class="nx">pattern</span><span class="o">:</span> <span class="s2">&#34;./src/main/webapp/i18n/nl/*.json&#34;</span><span class="p">,</span> <span class="nx">fileName</span><span class="o">:</span> <span class="s2">&#34;./i18n/nl.json&#34;</span> <span class="p">}</span>
