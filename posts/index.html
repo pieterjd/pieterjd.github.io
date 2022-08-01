@@ -78,7 +78,7 @@ java.lang.IllegalArgumentException: Property name must not be null So what is go
 Setup I configured a queue persons on Azure service bus and in my spring boot application I defined a QueueListener using the @JmsListener annotation
 @Component public class PersonQueueListener { private static final String QUEUENAME="persons"; @JmsListener(destination = QUEUENAME) public void receiveMessage(Person person) throws JsonProcessingException { log....</p>
 </div>
-<footer class=entry-footer><span title="2022-06-14 20:17:40 +0000 UTC">June 14, 2022</span></footer>
+<footer class=entry-footer><span title="2022-06-14 20:17:40 +0000 UTC">June 14, 2022</span>&nbsp;·&nbsp;3 min</footer>
 <a class=entry-link aria-label="post link to Proper JMS conversion to POJOs" href=https://www.pieterjd.be/posts/jms-property-name-must-not-be-null/></a>
 </article>
 <article class=post-entry>
@@ -90,7 +90,7 @@ Setup I configured a queue persons on Azure service bus and in my spring boot ap
 <p>I’m a fan of docker, especially with my brand new macbook - spinning up loads of containers is always fun 😀. However when listing the containers, things get a bit unclear. Check the following output:
 CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES d52c11b67cfe docker.elastic.co/elasticsearch/elasticsearch:7.13.2 "/bin/tini -- /usr/l…" 2 hours ago Up 2 hours 0.0.0.0:9200->9200/tcp, :::9200->9200/tcp, 0.0.0.0:9300->9300/tcp, :::9300->9300/tcp vb-bo_elasticsearch_1 76fee05889f0 logstash:7.13.2 "/usr/local/bin/dock…" 2 hours ago Up 50 minutes 0.0.0.0:5044->5044/tcp, :::5044->5044/tcp, 0....</p>
 </div>
-<footer class=entry-footer><span title="2021-07-08 10:45:00 +0200 +0200">July 8, 2021</span></footer>
+<footer class=entry-footer><span title="2021-07-08 10:45:00 +0200 +0200">July 8, 2021</span>&nbsp;·&nbsp;2 min</footer>
 <a class=entry-link aria-label="post link to Reduce docker ps Output Clutter with AWK" href=https://www.pieterjd.be/posts/reduce-docker-ps-clutter-with-awk/></a>
 </article>
 <article class=post-entry>
@@ -103,7 +103,7 @@ CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES d52c11b67cfe docker.elasti
 work on different stories pull requests are approved and merged deploy changes inform the team For the last part, you check your todo list to get a nice description instead of some mysterious ID. You could do this manually, but this is very time-consuming, not to mention mind-numbing. Scripts to the rescue!
 High level approach Fetch the version information of the environment you want to deploy to....</p>
 </div>
-<footer class=entry-footer><span title="2021-06-27 12:33:00 +0200 +0200">June 27, 2021</span></footer>
+<footer class=entry-footer><span title="2021-06-27 12:33:00 +0200 +0200">June 27, 2021</span>&nbsp;·&nbsp;3 min</footer>
 <a class=entry-link aria-label="post link to Summarize Latest Changes In Your Codebase" href=https://www.pieterjd.be/posts/summarize-latest-changes-in-your-codebase/></a>
 </article>
 <article class=post-entry>
@@ -116,7 +116,7 @@ High level approach Fetch the version information of the environment you want to
 Environment Variables While working on integrating an API, I had to authenticate with a Bearer token in the authentication header. These tokens are typically short-lived, so they change multiple times a day.
 As part of the integration, I write down the API calls in Typora, a very nice markdown editor....</p>
 </div>
-<footer class=entry-footer><span title="2021-04-17 19:33:17 +0200 +0200">April 17, 2021</span></footer>
+<footer class=entry-footer><span title="2021-04-17 19:33:17 +0200 +0200">April 17, 2021</span>&nbsp;·&nbsp;3 min</footer>
 <a class=entry-link aria-label="post link to Templating as Automation" href=https://www.pieterjd.be/posts/templating/></a>
 </article>
 <article class=post-entry>
@@ -128,7 +128,7 @@ As part of the integration, I write down the API calls in Typora, a very nice ma
 <p>As I was working on some random data with a ZonedDateTime, it turned out Jackson was unable to deserialize it. How come?
 Why not use Jackson datetime module? The codebase I was working on, did not support the Jackson datetime module. It was also not possible to add this module as all Jackson related code was provided and the vendor stressed very clearly ‘not to mess things up with other versions’....</p>
 </div>
-<footer class=entry-footer><span title="2021-03-17 19:51:17 +0200 +0200">March 17, 2021</span></footer>
+<footer class=entry-footer><span title="2021-03-17 19:51:17 +0200 +0200">March 17, 2021</span>&nbsp;·&nbsp;1 min</footer>
 <a class=entry-link aria-label="post link to Simple Jackson Deserializer" href=https://www.pieterjd.be/posts/simple-jackson-deserializer/></a>
 </article>
 <article class=post-entry>
@@ -142,7 +142,7 @@ Enter your favorite code generator Yeoman, “the Web’s Scaffolding ToolFor Mo
 It’s very easy to define generator (eg. generate an AEM component) using templates (renderscript, dialog, ….)
 I’ve put things together in the AEM Generator Repo....</p>
 </div>
-<footer class=entry-footer><span title="2021-02-08 19:31:00 +0200 +0200">February 8, 2021</span></footer>
+<footer class=entry-footer><span title="2021-02-08 19:31:00 +0200 +0200">February 8, 2021</span>&nbsp;·&nbsp;1 min</footer>
 <a class=entry-link aria-label="post link to Automate AEM development" href=https://www.pieterjd.be/posts/automate-aem-development/></a>
 </article>
 <article class=post-entry>
@@ -154,7 +154,7 @@ I’ve put things together in the AEM Generator Repo....</p>
 <p>Recently we had to integrate third-party minified javascript and css in an AEM client library. Unfortunatly this broke the build on Adobe Cloud. How did we solve this?
 What’s the problem? Minification! From our client, we received already minified javascript and styling we needed to integrate in the AEM website. Nothing too difficult, but the build on AEM Cloud finished with errors. On top of that, we could not download the logs, so we really were in the dark here....</p>
 </div>
-<footer class=entry-footer><span title="2021-01-30 21:25:00 +0200 +0200">January 30, 2021</span></footer>
+<footer class=entry-footer><span title="2021-01-30 21:25:00 +0200 +0200">January 30, 2021</span>&nbsp;·&nbsp;2 min</footer>
 <a class=entry-link aria-label="post link to Minified Javascript in AEM Clientlibs breaks the build" href=https://www.pieterjd.be/posts/minified-javascript-in-aem-clientlib/></a>
 </article>
 <article class=post-entry>
@@ -167,7 +167,7 @@ What’s the problem? Minification! From our client, we received already minifie
 I found myself doing the same thing over and over again:
 generate a table component, using the material table schematic create a service with Angular CLI connecting to a SpringBoot backend to retrieve objects, using the typical CRUD methods (getAll, save, delete, …) create an interface matching the json obtained from the backend Then I suddenly realized:...</p>
 </div>
-<footer class=entry-footer><span title="2021-01-02 12:22:00 +0200 +0200">January 2, 2021</span></footer>
+<footer class=entry-footer><span title="2021-01-02 12:22:00 +0200 +0200">January 2, 2021</span>&nbsp;·&nbsp;5 min</footer>
 <a class=entry-link aria-label="post link to Automate Angular Material Workflow using Schematics" href=https://www.pieterjd.be/posts/automate-angular-material-workflow-with-schematics/></a>
 </article>
 <article class=post-entry>
@@ -179,7 +179,7 @@ generate a table component, using the material table schematic create a service 
 <p>With every job come boring tasks. Number one, by far, is filling out timesheets. And if you are unlucky, as I was in case of the yellow telco, you’re dealing with an old dud.
 What old dud? I’m talking about fusion by Oracle. It has a horrible interface - even entering a single digit is annoying. On top of that, it was an exotic, buggy, beta version - no one wanted to touch it , including Oracle....</p>
 </div>
-<footer class=entry-footer><span title="2020-12-13 20:54:17 +0200 +0200">December 13, 2020</span></footer>
+<footer class=entry-footer><span title="2020-12-13 20:54:17 +0200 +0200">December 13, 2020</span>&nbsp;·&nbsp;2 min</footer>
 <a class=entry-link aria-label="post link to Automate Timesheeting" href=https://www.pieterjd.be/posts/automate-timesheeting/></a>
 </article>
 <article class=post-entry>
@@ -192,7 +192,7 @@ What old dud? I’m talking about fusion by Oracle. It has a horrible interface 
 Some refactoring was required - I moved the command related to pushing the generating site to a separate script, and this script is called from github actions.
 UPDATE: this did not work at all! I resorted to trying out a lot of push Github Actions but none worked....</p>
 </div>
-<footer class=entry-footer><span title="2020-11-18 19:18:00 +0200 +0200">November 18, 2020</span></footer>
+<footer class=entry-footer><span title="2020-11-18 19:18:00 +0200 +0200">November 18, 2020</span>&nbsp;·&nbsp;1 min</footer>
 <a class=entry-link aria-label="post link to Deploy Hugo generated site to Github Pages - Part 2" href=https://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages-part2/></a>
 </article>
 <footer class=page-footer>
