@@ -69,6 +69,19 @@ Posts
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>Custom property naming strategy with Jackson
+</h2>
+</header>
+<div class=entry-content>
+<p>For a pet project of mine, I’m consuming a REST API. Unfortunately it’s probably not written with Spring (Boot), as the body of requests and response are not according to what you’re used to, UpperCamelCase instead of lowerCamelCase.
+{"SessionKey":"7d38ec29-d1f3-42e9-b35f-91b505bf3206", "Status":"UpdatesComplete" } At first, I thought I could solve it with a @JsonProperty("...") annotation on every field, but there are so many of them :o
+This can easily be fixed with the property naming class annotation:...</p>
+</div>
+<footer class=entry-footer><span title="2019-08-11 14:41:12 +0000 UTC">August 11, 2019</span>&nbsp;·&nbsp;1 min</footer>
+<a class=entry-link aria-label="post link to Custom property naming strategy with Jackson" href=https://www.pieterjd.be/posts/2019-08-11-property-naming-strategy-with-jackson/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>Spring boot without a web container
 </h2>
 </header>
