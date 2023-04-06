@@ -6,7 +6,7 @@
 <title>Authenticated Azure Function App | pieterjd.be</title>
 <meta name=keywords content="Azure,Function App,Authentication,OAuth">
 <meta name=description content="It&rsquo;s really easy to create simple APIs on Azure with App Functions. In some cases, you want to protect them using Authentication. This usually done with an App Registration, that has permissions to access the API. Pretty simple, but not that easy to accomplish. These are the steps how to configure this.
-Create Azure function  Create Function App Add a function to the newly created Function app - select the HttpTrigger template  Check Test/Run and get the function url for further testing.">
+ Disclaimer  I have very little to no experience with Azure, so I might be stating the obvious.">
 <meta name=author content>
 <link rel=canonical href=https://www.pieterjd.be/posts/azure-authenticated-function-app/>
 <meta name=google-site-verification content="MN3Sf5TrdFo5j8qHAiXG2_gF0P1tXmClJN0JX8TvqgU">
@@ -25,17 +25,17 @@ Create Azure function  Create Function App Add a function to the newly created F
 </noscript>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-132459675-1','auto'),ga('send','pageview'))</script><meta property="og:title" content="Authenticated Azure Function App">
 <meta property="og:description" content="It&rsquo;s really easy to create simple APIs on Azure with App Functions. In some cases, you want to protect them using Authentication. This usually done with an App Registration, that has permissions to access the API. Pretty simple, but not that easy to accomplish. These are the steps how to configure this.
-Create Azure function  Create Function App Add a function to the newly created Function app - select the HttpTrigger template  Check Test/Run and get the function url for further testing.">
+ Disclaimer  I have very little to no experience with Azure, so I might be stating the obvious.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.pieterjd.be/posts/azure-authenticated-function-app/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2022-11-29T21:57:34+00:00">
-<meta property="article:modified_time" content="2023-03-21T09:01:40+01:00">
+<meta property="article:published_time" content="2022-12-01T21:57:34+00:00">
+<meta property="article:modified_time" content="2023-04-06T08:14:39+02:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Authenticated Azure Function App">
 <meta name=twitter:description content="It&rsquo;s really easy to create simple APIs on Azure with App Functions. In some cases, you want to protect them using Authentication. This usually done with an App Registration, that has permissions to access the API. Pretty simple, but not that easy to accomplish. These are the steps how to configure this.
-Create Azure function  Create Function App Add a function to the newly created Function app - select the HttpTrigger template  Check Test/Run and get the function url for further testing.">
+ Disclaimer  I have very little to no experience with Azure, so I might be stating the obvious.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://www.pieterjd.be/posts/"},{"@type":"ListItem","position":3,"name":"Authenticated Azure Function App","item":"https://www.pieterjd.be/posts/azure-authenticated-function-app/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Authenticated Azure Function App","name":"Authenticated Azure Function App","description":"It\u0026rsquo;s really easy to create simple APIs on Azure with App Functions. In some cases, you want to protect them using Authentication. This usually done with an App Registration, that has permissions to access the API. Pretty simple, but not that easy to accomplish. These are the steps how to configure this.\nCreate Azure function  Create Function App Add a function to the newly created Function app - select the HttpTrigger template  Check Test/Run and get the function url for further testing.","keywords":["Azure","Function App","Authentication","OAuth"],"articleBody":"It’s really easy to create simple APIs on Azure with App Functions. In some cases, you want to protect them using Authentication. This usually done with an App Registration, that has permissions to access the API. Pretty simple, but not that easy to accomplish. These are the steps how to configure this.\nCreate Azure function  Create Function App Add a function to the newly created Function app - select the HttpTrigger template  Check Test/Run and get the function url for further testing. Customize the code and test it Check if it’s working and you get the desired response  Add Authentication Authentication is added on the Function App, not the function itself; so it is all or nothing\n  go to the function app, select Authentication on the left menu\n  Click the ‘Add identity provider’ button. In my case, I added the Active Directory resource, so I’m using the Microsoft Identity provider. You can go for the default setting, except for the unauthenticated request part: I changed it to HTTP 401, as the function I build previously is a Rest API. Click the ‘Add’ button   Reset the client secret. It is automatically generated but you did not get the actual value and there is no way to retrieve it. I think this is a bug - a workaround is to delete the existing one, and generate a new one.   Write down the value and secret id that has been generated!\n  Go to Authentication detailpage of the provider you have added, and write down the Application (client ID), tenant ID and the Application ID URI as you will need it later on\n  Now let’s define the API permissions (select your Function App  Authentication in the left column  select on the identity provider you added). Click on Edit (next to quickstart)   Click the Permissions tab, next click on the ‘Click here to access API permissions’ link\n  Click the ‘Add a permission’ button. In the right hand side, click on ‘My APIs’ - your function apps should be in the list. Click on it\n  Check the box for the only permission that will appear (access )   Now we have everything we need to fetch a token. Open postman\n endpoint is https://login.microsoftonline.com//oauth2/v2.0/token grant_type is a hardcoded value, we want client_credentials client_id is the Application(client) ID client_secret is the secret linked to the Application(client) ID response_type is a hardcoded value, token scope is the application ID URI, suffixed with /.default tenant is the tenant id, the same that is part of the endpoint    The bearer token you get back can then be used to call the Function endpoint in the Authentication header\n  ","wordCount":"441","inLanguage":"en","datePublished":"2022-11-29T21:57:34Z","dateModified":"2023-03-21T09:01:40+01:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.pieterjd.be/posts/azure-authenticated-function-app/"},"publisher":{"@type":"Organization","name":"pieterjd.be","logo":{"@type":"ImageObject","url":"https://www.pieterjd.be/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Authenticated Azure Function App","name":"Authenticated Azure Function App","description":"It\u0026rsquo;s really easy to create simple APIs on Azure with App Functions. In some cases, you want to protect them using Authentication. This usually done with an App Registration, that has permissions to access the API. Pretty simple, but not that easy to accomplish. These are the steps how to configure this.\n Disclaimer  I have very little to no experience with Azure, so I might be stating the obvious.","keywords":["Azure","Function App","Authentication","OAuth"],"articleBody":"It’s really easy to create simple APIs on Azure with App Functions. In some cases, you want to protect them using Authentication. This usually done with an App Registration, that has permissions to access the API. Pretty simple, but not that easy to accomplish. These are the steps how to configure this.\n Disclaimer  I have very little to no experience with Azure, so I might be stating the obvious. I wrote these steps down when I was doing research, reading documentation and just trying things out. It’s very well possible that is actually straight forward, but it wasn’t for me and I did not find any step by step procedure. This post was written in December 2022. It is possible the layout or menu items have been renamed and/or moved in the UI. I assume the general steps will still be applicable in the future.   Create Azure function  Create Function App Add a function to the newly created Function app - select the HttpTrigger template for building a REST endpoint  Check Test/Run and get the function url for further testing Customize the code and test it Check if it’s working and you get the desired response  Add Authentication Authentication is added on the Function App, not the function itself; so it is all or nothing\n  go to the function app, select Authentication on the left menu\n  Click the ‘Add identity provider’ button. In my case, I added the Active Directory resource, so I’m using the Microsoft Identity provider. You can go for the default setting, except for the unauthenticated request part: I changed it to HTTP 401, as the function I build previously is a Rest API. Click the ‘Add’ button   Reset the client secret. It is automatically generated but you did not get the actual value and there is no way to retrieve it. I think this is a bug - a workaround is to delete the existing one, and generate a new one.   Write down the value and secret id that has been generated!   Go to Authentication detailpage of the provider you have added, and write down the Application (client ID), tenant ID and the Application ID URI as you will need it later on   Now let’s define the API permissions (select your Function App  Authentication in the left column  select on the identity provider you added). Click on Edit (next to quickstart)   Click the Permissions tab, next click on the ‘Click here to access API permissions’ link   Click the ‘Add a permission’ button. In the right hand side, click on ‘My APIs’ - your function apps should be in the list. Click on it   Check the box for the only permission that will appear (access )   Now we have everything we need to fetch a token. Open postman and fill out the following info:\n endpoint is https://login.microsoftonline.com//oauth2/v2.0/token grant_type is a hardcoded value, we want client_credentials client_id is the Application(client) ID client_secret is the secret linked to the Application(client) ID response_type is a hardcoded value, token scope is the application ID URI, suffixed with /.default tenant is the tenant id, the same that is part of the endpoint    The bearer token you get back can then be used to call the Function endpoint in the Authentication header\n  Bonus: request headers Out of curiosity, I wanted to know what headers were being added to the request that hits the function. So I’ve updated the script as follows:\n set the Content-Type of the response to application/json updated the body to an actual JSON object  module.exports = async function (context, req) { context.log('JavaScript HTTP trigger function processed a request.'); const name = (req.query.name || (req.body \u0026\u0026 req.body.name)); const responseMessage = name ? \"Hello, \" + name + \". This HTTP triggered function executed successfully.\" : \"This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.\"; context.res = { body: { msg: responseMessage, reqHeaders: req.headers }, headers:{ 'Content-Type': 'application/json' } }; } Below is an example of the response I got - I replaced sensitive information with :\n{ \"msg\": \"This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.\", \"reqHeaders\": { \"accept\": \"*/*\", \"accept-encoding\": \"gzip, deflate, br\", \"authorization\": \"Bearer \", \"host\": \"helloworld-pjd.azurewebsites.net\", \"max-forwards\": \"9\", \"user-agent\": \"PostmanRuntime/7.29.2\", \"postman-token\": \"ffa9045a-4a58-4aed-8742-a4c532802c30\", \"x-arr-log-id\": \"1cc22798-ae88-4671-a34a-83df04ad9d30\", \"client-ip\": \"\", \"x-site-deployment-id\": \"helloworld-pjd\", \"was-default-hostname\": \"helloworld-pjd.azurewebsites.net\", \"x-forwarded-proto\": \"https\", \"x-appservice-proto\": \"https\", \"x-arr-ssl\": \"2048|256|CN=Microsoft Azure TLS Issuing CA 01, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US\", \"x-forwarded-tlsversion\": \"1.2\", \"x-forwarded-for\": \"\", \"x-original-url\": \"/api/HelloHttpTrigger?code=\", \"x-waws-unencoded-url\": \"/api/HelloHttpTrigger?code=\", \"disguised-host\": \"helloworld-pjd.azurewebsites.net\", \"x-ms-client-principal-name\": \"\", \"x-ms-client-principal-id\": \"\", \"x-ms-client-principal-idp\": \"aad\", \"x-ms-client-principal\": \"\" } } ","wordCount":"778","inLanguage":"en","datePublished":"2022-12-01T21:57:34Z","dateModified":"2023-04-06T08:14:39+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.pieterjd.be/posts/azure-authenticated-function-app/"},"publisher":{"@type":"Organization","name":"pieterjd.be","logo":{"@type":"ImageObject","url":"https://www.pieterjd.be/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -73,17 +73,42 @@ Create Azure function  Create Function App Add a function to the newly created F
 <h1 class=post-title>
 Authenticated Azure Function App
 </h1>
-<div class=post-meta><span title="2022-11-29 21:57:34 +0000 UTC">November 29, 2022</span>&nbsp;·&nbsp;3 min
+<div class=post-meta><span title="2022-12-01 21:57:34 +0000 UTC">December 1, 2022</span>&nbsp;·&nbsp;4 min
 </div>
-</header>
+</header> <div class=toc>
+<details open>
+<summary accesskey=c title="(Alt + C)">
+<span class=details>Table of Contents</span>
+</summary>
+<div class=inner><ul>
+<li>
+<a href=#disclaimer aria-label=Disclaimer>Disclaimer</a></li>
+<li>
+<a href=#create-azure-function aria-label="Create Azure function">Create Azure function</a></li>
+<li>
+<a href=#add-authentication aria-label="Add Authentication">Add Authentication</a></li>
+<li>
+<a href=#bonus-request-headers aria-label="Bonus: request headers">Bonus: request headers</a>
+</li>
+</ul>
+</div>
+</details>
+</div>
 <div class=post-content><p>It&rsquo;s really easy to create simple APIs on Azure with App Functions. In some cases, you want to protect them using Authentication. This usually done with an App Registration, that has permissions to access the API. Pretty simple, but not that easy to accomplish. These are the steps how to configure this.</p>
+<blockquote>
+<h2 id=disclaimer>Disclaimer<a hidden class=anchor aria-hidden=true href=#disclaimer>#</a></h2>
+<ul>
+<li>I have very little to no experience with Azure, so I might be stating the obvious. I wrote these steps down when I was doing research, reading documentation and just trying things out. It&rsquo;s very well possible that is actually straight forward, but it wasn&rsquo;t for me and I did not find any step by step procedure.</li>
+<li>This post was written in December 2022. It is possible the layout or menu items have been renamed and/or moved in the UI. I assume the general steps will still be applicable in the future.</li>
+</ul>
+</blockquote>
 <h2 id=create-azure-function>Create Azure function<a hidden class=anchor aria-hidden=true href=#create-azure-function>#</a></h2>
 <ol>
 <li>Create Function App</li>
-<li>Add a function to the newly created Function app - select the <code>HttpTrigger</code> template
+<li>Add a function to the newly created Function app - select the <code>HttpTrigger</code> template for building a REST endpoint
 <img loading=lazy src=images/image-20221130134728688.png alt=image-20221130134728688>
 </li>
-<li>Check <code>Test/Run</code> and get the function url for further testing.</li>
+<li>Check <code>Test/Run</code> and get the function url for further testing</li>
 <li>Customize the code and test it</li>
 <li>Check if it&rsquo;s working and you get the desired response</li>
 </ol>
@@ -106,12 +131,13 @@ Authenticated Azure Function App
 </p>
 </li>
 <li>
-<p><img loading=lazy src=images/image-20221130135757757.png alt=image-20221130135757757>
-Write down the value and secret id that has been generated!</p>
+<p>Write down the value and secret id that has been generated!
+<img loading=lazy src=images/image-20221130135757757.png alt=image-20221130135757757>
+</p>
 </li>
 <li>
-<p>Go to Authentication detailpage of the provider you have added, and write down the Application (client ID), tenant ID and the Application ID URI as you will need it later on</p>
-<p><img loading=lazy src=images/image-20221130140933618.png alt=image-20221130140933618>
+<p>Go to Authentication detailpage of the provider you have added, and write down the Application (client ID), tenant ID and the Application ID URI as you will need it later on
+<img loading=lazy src=images/image-20221130140933618.png alt=image-20221130140933618>
 </p>
 </li>
 <li>
@@ -120,13 +146,13 @@ Write down the value and secret id that has been generated!</p>
 </p>
 </li>
 <li>
-<p>Click the Permissions tab, next click on the &lsquo;Click here to access API permissions&rsquo; link</p>
-<p><img loading=lazy src=images/image-20221130141248007.png alt=image-20221130141248007>
+<p>Click the Permissions tab, next click on the &lsquo;Click here to access API permissions&rsquo; link
+<img loading=lazy src=images/image-20221130141248007.png alt=image-20221130141248007>
 </p>
 </li>
 <li>
-<p>Click the &lsquo;Add a permission&rsquo; button. In the right hand side, click on &lsquo;My APIs&rsquo; - your function apps should be in the list. Click on it</p>
-<p><img loading=lazy src=images/image-20221130141405710.png alt=image-20221130141405710>
+<p>Click the &lsquo;Add a permission&rsquo; button. In the right hand side, click on &lsquo;My APIs&rsquo; - your function apps should be in the list. Click on it
+<img loading=lazy src=images/image-20221130141405710.png alt=image-20221130141405710>
 </p>
 </li>
 <li>
@@ -135,7 +161,7 @@ Write down the value and secret id that has been generated!</p>
 </p>
 </li>
 <li>
-<p>Now we have everything we need to fetch a token. Open postman</p>
+<p>Now we have everything we need to fetch a token. Open postman and fill out the following info:</p>
 <ul>
 <li>endpoint is <code>https://login.microsoftonline.com/&lt;tenantId>/oauth2/v2.0/token</code></li>
 <li><code>grant_type</code> is a hardcoded value, we want <code>client_credentials</code></li>
@@ -154,6 +180,60 @@ Write down the value and secret id that has been generated!</p>
 </p>
 </li>
 </ol>
+<h2 id=bonus-request-headers>Bonus: request headers<a hidden class=anchor aria-hidden=true href=#bonus-request-headers>#</a></h2>
+<p>Out of curiosity, I wanted to know what headers were being added to the request that hits the function. So I&rsquo;ve updated the script as follows:</p>
+<ul>
+<li>set the <code>Content-Type</code> of the response to <code>application/json</code></li>
+<li>updated the body to an actual JSON object</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=nx>module</span><span class=p>.</span><span class=nx>exports</span> <span class=o>=</span> <span class=kr>async</span> <span class=kd>function</span> <span class=p>(</span><span class=nx>context</span><span class=p>,</span> <span class=nx>req</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>context</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;JavaScript HTTP trigger function processed a request.&#39;</span><span class=p>);</span>
+
+    <span class=kr>const</span> <span class=nx>name</span> <span class=o>=</span> <span class=p>(</span><span class=nx>req</span><span class=p>.</span><span class=nx>query</span><span class=p>.</span><span class=nx>name</span> <span class=o>||</span> <span class=p>(</span><span class=nx>req</span><span class=p>.</span><span class=nx>body</span> <span class=o>&amp;&amp;</span> <span class=nx>req</span><span class=p>.</span><span class=nx>body</span><span class=p>.</span><span class=nx>name</span><span class=p>));</span>
+    <span class=kr>const</span> <span class=nx>responseMessage</span> <span class=o>=</span> <span class=nx>name</span>
+        <span class=o>?</span> <span class=s2>&#34;Hello, &#34;</span> <span class=o>+</span> <span class=nx>name</span> <span class=o>+</span> <span class=s2>&#34;. This HTTP triggered function executed successfully.&#34;</span>
+        <span class=o>:</span> <span class=s2>&#34;This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.&#34;</span><span class=p>;</span>
+
+    <span class=nx>context</span><span class=p>.</span><span class=nx>res</span> <span class=o>=</span> <span class=p>{</span>
+        <span class=nx>body</span><span class=o>:</span> <span class=p>{</span>
+            <span class=nx>msg</span><span class=o>:</span> <span class=nx>responseMessage</span><span class=p>,</span>
+            <span class=nx>reqHeaders</span><span class=o>:</span> <span class=nx>req</span><span class=p>.</span><span class=nx>headers</span>
+        <span class=p>},</span>
+        <span class=nx>headers</span><span class=o>:</span><span class=p>{</span>
+            <span class=s1>&#39;Content-Type&#39;</span><span class=o>:</span> <span class=s1>&#39;application/json&#39;</span>
+        <span class=p>}</span>
+    <span class=p>};</span>
+<span class=p>}</span>
+</code></pre></div><p>Below is an example of the response I got - I replaced sensitive information with <code>&lt;removed></code>:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>{</span>
+    <span class=nt>&#34;msg&#34;</span><span class=p>:</span> <span class=s2>&#34;This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.&#34;</span><span class=p>,</span>
+    <span class=nt>&#34;reqHeaders&#34;</span><span class=p>:</span> <span class=p>{</span>
+        <span class=nt>&#34;accept&#34;</span><span class=p>:</span> <span class=s2>&#34;*/*&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;accept-encoding&#34;</span><span class=p>:</span> <span class=s2>&#34;gzip, deflate, br&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;authorization&#34;</span><span class=p>:</span> <span class=s2>&#34;Bearer &lt;removed&gt;&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;host&#34;</span><span class=p>:</span> <span class=s2>&#34;helloworld-pjd.azurewebsites.net&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;max-forwards&#34;</span><span class=p>:</span> <span class=s2>&#34;9&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;user-agent&#34;</span><span class=p>:</span> <span class=s2>&#34;PostmanRuntime/7.29.2&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;postman-token&#34;</span><span class=p>:</span> <span class=s2>&#34;ffa9045a-4a58-4aed-8742-a4c532802c30&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;x-arr-log-id&#34;</span><span class=p>:</span> <span class=s2>&#34;1cc22798-ae88-4671-a34a-83df04ad9d30&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;client-ip&#34;</span><span class=p>:</span> <span class=s2>&#34;&lt;ip with port&gt;&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;x-site-deployment-id&#34;</span><span class=p>:</span> <span class=s2>&#34;helloworld-pjd&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;was-default-hostname&#34;</span><span class=p>:</span> <span class=s2>&#34;helloworld-pjd.azurewebsites.net&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;x-forwarded-proto&#34;</span><span class=p>:</span> <span class=s2>&#34;https&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;x-appservice-proto&#34;</span><span class=p>:</span> <span class=s2>&#34;https&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;x-arr-ssl&#34;</span><span class=p>:</span> <span class=s2>&#34;2048|256|CN=Microsoft Azure TLS Issuing CA 01, O=Microsoft Corporation, C=US|CN=*.azurewebsites.net, O=Microsoft Corporation, L=Redmond, S=WA, C=US&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;x-forwarded-tlsversion&#34;</span><span class=p>:</span> <span class=s2>&#34;1.2&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;x-forwarded-for&#34;</span><span class=p>:</span> <span class=s2>&#34;&lt;ip with port&gt;&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;x-original-url&#34;</span><span class=p>:</span> <span class=s2>&#34;/api/HelloHttpTrigger?code=&lt;removed&gt;&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;x-waws-unencoded-url&#34;</span><span class=p>:</span> <span class=s2>&#34;/api/HelloHttpTrigger?code=&lt;removed&gt;&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;disguised-host&#34;</span><span class=p>:</span> <span class=s2>&#34;helloworld-pjd.azurewebsites.net&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;x-ms-client-principal-name&#34;</span><span class=p>:</span> <span class=s2>&#34;&lt;removed&gt;&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;x-ms-client-principal-id&#34;</span><span class=p>:</span> <span class=s2>&#34;&lt;removed&gt;&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;x-ms-client-principal-idp&#34;</span><span class=p>:</span> <span class=s2>&#34;aad&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;x-ms-client-principal&#34;</span><span class=p>:</span> <span class=s2>&#34;&lt;removed&gt;&#34;</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div>
 </div>
 <footer class=post-footer>
 <ul class=post-tags>
@@ -163,6 +243,11 @@ Write down the value and secret id that has been generated!</p>
 <li><a href=https://www.pieterjd.be/tags/oauth/>OAuth</a></li>
 </ul>
 <nav class=paginav>
+<a class=prev href=https://www.pieterjd.be/posts/aem-disable-cache-for-some-components/>
+<span class=title>« Prev</span>
+<br>
+<span>Disable Cache for Some Components in AEM</span>
+</a>
 <a class=next href=https://www.pieterjd.be/posts/sling-model-inject-page-via-path/>
 <span class=title>Next »</span>
 <br>

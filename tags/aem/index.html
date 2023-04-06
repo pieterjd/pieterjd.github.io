@@ -68,6 +68,19 @@ AEM
 </header>
 <article class="post-entry tag-entry">
 <header class=entry-header>
+<h2>Disable Cache for Some Components in AEM
+</h2>
+</header>
+<div class=entry-content>
+<p>In a current project, components show information for an authenticated user, meaning this content is dynamic. As a page is cached on the first render, this means that content is no longer dynamic as it always shows the information of the authenticated user at the time of caching.
+Possible Solutions The dispatcher support authentication, however we were dealing with authentication that was not integrated into AEM.
+Listing all the pages that contains this component and exclude them from caching by the dispatcher is also not the way the go because you then need an exhaustive list of pages containing this component....</p>
+</div>
+<footer class=entry-footer><span title="2023-04-01 07:46:21 +0200 +0200">April 1, 2023</span>&nbsp;·&nbsp;2 min</footer>
+<a class=entry-link aria-label="post link to Disable Cache for Some Components in AEM" href=https://www.pieterjd.be/posts/aem-disable-cache-for-some-components/></a>
+</article>
+<article class="post-entry tag-entry">
+<header class=entry-header>
 <h2>Automate AEM development
 </h2>
 </header>
