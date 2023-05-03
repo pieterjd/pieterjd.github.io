@@ -69,6 +69,19 @@ Posts
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>How to check if a row with a specific column value exists in Spring Data
+</h2>
+</header>
+<div class=entry-content>
+<p>Spring Data has a great declarative way of defining queries, called derived queries. Suppose you have a Person class with an email field. Then you can define the following method in a Repository interface:
+public interface PersonRepository extends JpaRepository&lt;Person,Long>{ List&lt;Person> findByEmail(String email); } Spring derives the query based on the method name, in this case a query to retrieve all persons with a given value for the email field.
+As you can see, the method returns a List....</p>
+</div>
+<footer class=entry-footer><span title="2019-06-11 19:16:00 +0000 UTC">June 11, 2019</span>&nbsp;·&nbsp;2 min</footer>
+<a class=entry-link aria-label="post link to How to check if a row with a specific column value exists in Spring Data" href=https://www.pieterjd.be/posts/2019-06-11-jpa-check-if-row-exists-with-property-value/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>Postgraduate Studies in Big Data & Analytics in Business and Management
 </h2>
 </header>
@@ -157,7 +170,9 @@ One of the questions of the wizard guiding you through the generation of your ap
 </article>
 <footer class=page-footer>
 <nav class=pagination>
-<a class=prev href=https://www.pieterjd.be/posts/page/3/>« Prev</a>
+<a class=prev href=https://www.pieterjd.be/posts/page/3/>
+«&nbsp;Prev&nbsp;
+</a>
 </nav>
 </footer>
 </main>
