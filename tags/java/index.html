@@ -68,6 +68,21 @@ Java
 </header>
 <article class="post-entry tag-entry">
 <header class=entry-header>
+<h2>Advanced Grouping with Java streams
+</h2>
+</header>
+<div class=entry-content>
+<p>The problem I have a list of Person objects. I would like to group them per birth month, and only keep a List of lastnames.
+I came up with this code from memory
+Map&lt;String, List&lt;Person>> personsByMonth = persons.stream() .collect(Collectors.groupingBy(Person::getBirthMonth)); System.out.println(personsByMonth); And you get the following output (truncated for readability):
+{JUNE=[Person{lastName='Doe 11', birthDate=2022-06-07}], JANUARY=[Person{lastName='Doe 10', birthDate=2023-01-26}]} But how do I get rid of the redundant information?
+The solution The Collectors class provides quite a lot of variation of the groupingBy method....</p>
+</div>
+<footer class=entry-footer><span title="2023-05-22 17:02:49 +0200 +0200">May 22, 2023</span>&nbsp;·&nbsp;2 min</footer>
+<a class=entry-link aria-label="post link to Advanced Grouping with Java streams" href=https://www.pieterjd.be/posts/java-stream-advanced-grouping/></a>
+</article>
+<article class="post-entry tag-entry">
+<header class=entry-header>
 <h2>Comparator and Null
 </h2>
 </header>

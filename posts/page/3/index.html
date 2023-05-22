@@ -69,6 +69,19 @@ Posts
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>Deploy Hugo generated site to Github Pages - Part 2
+</h2>
+</header>
+<div class=entry-content>
+<p>I still had to run the ./deploy.sh script after committing changes. Not anymore - I’m calling this script in a github action being run after a push to master!
+Some refactoring was required - I moved the command related to pushing the generating site to a separate script, and this script is called from github actions.
+UPDATE: this did not work at all! I resorted to trying out a lot of push Github Actions but none worked....</p>
+</div>
+<footer class=entry-footer><span title="2020-11-18 19:18:00 +0200 +0200">November 18, 2020</span>&nbsp;·&nbsp;1 min</footer>
+<a class=entry-link aria-label="post link to Deploy Hugo generated site to Github Pages - Part 2" href=https://www.pieterjd.be/posts/deploy-hugo-site-to-ghpages-part2/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>Adventures with Microsoft Azure
 </h2>
 </header>
@@ -182,19 +195,6 @@ I did have some past experiences with PHP (and to some extend Drupal), so I face
 </div>
 <footer class=entry-footer><span title="2019-09-21 10:33:12 +0000 UTC">September 21, 2019</span>&nbsp;·&nbsp;2 min</footer>
 <a class=entry-link aria-label="post link to Writing SQL for an unfamiliar PHP application" href=https://www.pieterjd.be/posts/2019-09-21-writing-sql-for-unfamiliar-php-application/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Custom property naming strategy with Jackson
-</h2>
-</header>
-<div class=entry-content>
-<p>For a pet project of mine, I’m consuming a REST API. Unfortunately it’s probably not written with Spring (Boot), as the body of requests and response are not according to what you’re used to, UpperCamelCase instead of lowerCamelCase.
-{"SessionKey":"7d38ec29-d1f3-42e9-b35f-91b505bf3206", "Status":"UpdatesComplete" } At first, I thought I could solve it with a @JsonProperty("...") annotation on every field, but there are so many of them :o
-This can easily be fixed with the property naming class annotation:...</p>
-</div>
-<footer class=entry-footer><span title="2019-08-11 14:41:12 +0000 UTC">August 11, 2019</span>&nbsp;·&nbsp;1 min</footer>
-<a class=entry-link aria-label="post link to Custom property naming strategy with Jackson" href=https://www.pieterjd.be/posts/2019-08-11-property-naming-strategy-with-jackson/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
