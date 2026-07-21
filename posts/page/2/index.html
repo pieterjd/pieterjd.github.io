@@ -69,6 +69,19 @@ Posts
 </header>
 <article class=post-entry>
 <header class=entry-header>
+<h2>Disable Cache for Some Components in AEM
+</h2>
+</header>
+<div class=entry-content>
+<p>In a current project, components show information for an authenticated user, meaning this content is dynamic. As a page is cached on the first render, this means that content is no longer dynamic as it always shows the information of the authenticated user at the time of caching.
+Possible Solutions The dispatcher support authentication, however we were dealing with authentication that was not integrated into AEM.
+Listing all the pages that contains this component and exclude them from caching by the dispatcher is also not the way the go because you then need an exhaustive list of pages containing this component....</p>
+</div>
+<footer class=entry-footer><span title="2023-04-01 07:46:21 +0200 +0200">April 1, 2023</span>&nbsp;·&nbsp;2 min</footer>
+<a class=entry-link aria-label="post link to Disable Cache for Some Components in AEM" href=https://www.pieterjd.be/posts/aem-disable-cache-for-some-components/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>Detect duplicates with JQ
 </h2>
 </header>
@@ -178,19 +191,6 @@ High level approach Fetch the version information of the environment you want to
 <footer class=entry-footer><span title="2021-06-27 12:33:00 +0200 +0200">June 27, 2021</span>&nbsp;·&nbsp;3 min</footer>
 <a class=entry-link aria-label="post link to Summarize Latest Changes In Your Codebase" href=https://www.pieterjd.be/posts/summarize-latest-changes-in-your-codebase/></a>
 </article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Templating as Automation
-</h2>
-</header>
-<div class=entry-content>
-<p>In this post, I’ll cover different examples of what I like to call templating. Doing the same over and over again, but only few parts change each iteration.
-Environment Variables While working on integrating an API, I had to authenticate with a Bearer token in the authentication header. These tokens are typically short-lived, so they change multiple times a day.
-As part of the integration, I write down the API calls in Typora, a very nice markdown editor....</p>
-</div>
-<footer class=entry-footer><span title="2021-04-17 19:33:17 +0200 +0200">April 17, 2021</span>&nbsp;·&nbsp;3 min</footer>
-<a class=entry-link aria-label="post link to Templating as Automation" href=https://www.pieterjd.be/posts/templating/></a>
-</article>
 <footer class=page-footer>
 <nav class=pagination>
 <a class=prev href=https://www.pieterjd.be/posts/>
@@ -202,7 +202,7 @@ As part of the integration, I write down the API calls in Typora, a very nice ma
 </footer>
 </main>
 <footer class=footer>
-<span>&copy; 2024 <a href=https://www.pieterjd.be>Pieter-Jan Drouillon</a></span>
+<span>&copy; 2026 <a href=https://www.pieterjd.be>Pieter-Jan Drouillon</a></span>
 <span> . </span>
 <span>
 Powered by
